@@ -71,7 +71,7 @@ public class StopwatchManager : MonoBehaviour
 
 
 
-        //Will be chnaged later for multiplayer
+        //Will be changed later for multiplayer
         //If time hasnät run out yet and player hasn't stopped time. Space to stop the time.
         if (!TimeRanOut && !player1Stopped && Input.GetKeyDown(KeyCode.Space) )
         {
