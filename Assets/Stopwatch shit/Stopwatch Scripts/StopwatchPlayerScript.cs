@@ -19,11 +19,22 @@ public class StopwatchPlayerScript : MonoBehaviour
     float _stoppedTime = Mathf.Infinity;
     public float GetStoppedTime { get => _stoppedTime; set => _stoppedTime = value; }
 
+    public bool PlayerIsReady;
+    public GameObject ReadyUpUI;
 
     public void OnStopTime(InputAction.CallbackContext context)
     {
         StopTime = context.ReadValueAsButton();
         StopTime = context.action.triggered;
+        
+    }
+
+    public void OnPlayerIsReady(InputAction.CallbackContext context)
+    {
+        PlayerIsReady = true;
+        
+        ReadyUpUI.gameObject.GetComponent<ReadyUpScript>().IsReady();
+       
         
     }
 
@@ -44,7 +55,7 @@ public class StopwatchPlayerScript : MonoBehaviour
 
             this.name = "Player 2";
             _playerNameText.color = Color.blue;
-            _playerNameText.GetComponent<RectTransform>().position = new Vector3(780, 137, this.transform.position.z);
+            _playerNameText.GetComponent<RectTransform>().position = new Vector3(750, 264, this.transform.position.z);
 
         }
 
@@ -57,9 +68,9 @@ public class StopwatchPlayerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
 
-
-        if (StopTime && !_hasStoppedTime)
+        if ( StopwatchManager.Instance.StartTheGame && StopTime && !_hasStoppedTime ) //Game must be started to ba able to stop time
         {
             _hasStoppedTime = true;
             Debug.LogError("hej från " + this.name);

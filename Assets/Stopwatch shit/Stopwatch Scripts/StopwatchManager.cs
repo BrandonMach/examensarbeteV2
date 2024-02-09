@@ -38,6 +38,20 @@ public class StopwatchManager : MonoBehaviour
 
     [SerializeField] StopwatchPlayerScript[] _playerArray;
 
+   
+
+    
+
+    public bool StartTheGame; //Only start the game when all player have joined
+
+    bool _gameIsFinished = false;
+    bool _announceWinner;
+
+
+    [SerializeField] Animator _textAnim;
+    bool _startTextFade;
+
+
     private void Awake()
     {
         if (Instance != null)
@@ -49,16 +63,10 @@ public class StopwatchManager : MonoBehaviour
 
     }
 
-    [SerializeField] bool _startTheGame; //Only start the game when all player have joined
 
-    bool _gameIsFinished = false;
-    bool _announceWinner;
-
-    // Start is called before the first frame update
     void Start()
     {
         _stopwatch = _startTime;
-       // _playerArray = FindObjectsOfType<StopwatchPlayerScript>();
 
 
     }
@@ -72,46 +80,64 @@ public class StopwatchManager : MonoBehaviour
     void Update()
     {
 
-        
-        _timerHUDElement.text = _stopwatch.ToString("0.0");
-
-
-        // As long as Time hasn't run out reduce the stopwatch
-        if(!TimeRanOut)
+        if(_playerArray.Length >= 2 && _playerArray.All(go => go.PlayerIsReady == true)) //Start the game once all player are ready 
         {
-            _stopwatch -= Time.deltaTime;
+            StartTheGame = true;
+            foreach (var players in _playerArray)
+            {
+                StartCoroutine(players.ReadyUpUI.GetComponent<ReadyUpScript>().AllPlayersReady()); //Should be fade text instead of set active false
+                
+            }
         }
 
-
-        AddMoreTime();
-
-        //Check if stopwatch time has run out
-        if (_stopwatch <= 0 && !TimeRanOut)
+        if (StartTheGame)     
         {
-            _gameIsFinished = true;
-            TimeRanOut = true;
-            Debug.Log("Timer is done");
-            Debug.Log("Stopwatch game is finished");
+
+            if (!_startTextFade)
+            {
+                _startTextFade = true;
+                _textAnim.SetTrigger("StartFade");
+            }
+
+            _timerHUDElement.text = _stopwatch.ToString("0.0");
+
+
+            // As long as Time hasn't run out reduce the stopwatch
+            if (!TimeRanOut)
+            {
+                _stopwatch -= Time.deltaTime;
+            }
+
+
+            AddMoreTime();
+
+            //Check if stopwatch time has run out
+            if (_stopwatch <= 0 && !TimeRanOut)
+            {
+                _gameIsFinished = true;
+                TimeRanOut = true;
+                Debug.Log("Timer is done");
+                Debug.Log("Stopwatch game is finished");
+
+            }
+
+            //Check if all players have topped time
+            if (_playerArray.All(go => go.PlayerHasStoppedTime == true) && _playerArray.Length >= 2 && !_gameIsFinished) //Has to be atleast 2 players in the game
+            {
+                _gameIsFinished = true;
+            }
+
+
+
+
+            if (_gameIsFinished && !_announceWinner)
+            {
+                _announceWinner = true;
+                CheckWinner();
+            }
+
 
         }
-
-        //Check if all players have topped time
-        if (_playerArray.All(go => go.PlayerHasStoppedTime == true) && _playerArray.Length >= 2 && !_gameIsFinished) //Has to be atleast 2 players in the game
-        {
-            _gameIsFinished = true;
-        }
-
-
-        
-
-        if (_gameIsFinished && !_announceWinner)
-        {
-            _announceWinner = true;
-            CheckWinner();
-        }
-
-
-        
 
     }
 
@@ -130,17 +156,10 @@ public class StopwatchManager : MonoBehaviour
         if (!TimeRanOut)
         {
 
-           
-
             float playerStopTime = _stopwatch;
   
-
             playerText.text = playerStopTime.ToString("0.00");
-            player.GetStoppedTime = playerStopTime;
-
-            
-
-            
+            player.GetStoppedTime = playerStopTime; //Assign the player with teh stopped time
         }
         
         
