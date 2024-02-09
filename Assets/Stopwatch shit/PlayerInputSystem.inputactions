@@ -1,0 +1,62 @@
+{
+    "name": "PlayerInputSystem",
+    "maps": [
+        {
+            "name": "Player 1",
+            "id": "a4fb41ad-b334-4f5f-9b67-c9cede15c272",
+            "actions": [
+                {
+                    "name": "StopTime",
+                    "type": "Button",
+                    "id": "9f525fc3-81cd-4248-ba5c-6759d7627a05",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "921e4571-a7be-4b6a-b721-d9669b6266b9",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "StopTime",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Player 2",
+            "id": "f53b28da-afd3-42bc-8f07-6ec0d6be62f0",
+            "actions": [
+                {
+                    "name": "StopTime",
+                    "type": "Button",
+                    "id": "f1fd8576-4d2d-4b31-96f7-0d29f33417b5",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "c8b5517f-386f-41fd-a62e-891bf4a0d4db",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "StopTime",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

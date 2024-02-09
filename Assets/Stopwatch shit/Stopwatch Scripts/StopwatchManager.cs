@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.InputSystem;
+using System.Linq;
 
 public class StopwatchManager : MonoBehaviour
 {
@@ -27,17 +29,37 @@ public class StopwatchManager : MonoBehaviour
 
 
 
-    #region Player 1 
-    [SerializeField] TextMeshProUGUI _player1TimerText;
-    bool player1Stopped;
+    #region Singelton
+    static StopwatchManager _instance;
+    public static StopwatchManager Instance { get => _instance; set => _instance = value; }
     #endregion
 
+
+
+    [SerializeField] StopwatchPlayerScript[] _playerArray;
+
+    private void Awake()
+    {
+        if (Instance != null)
+        {
+            Debug.LogWarning("More than one instance of GameManager found");
+            return;
+        }
+        Instance = this;
+
+    }
+
+
+    bool _gameIsFinished;
+    bool _announceWinner;
 
     // Start is called before the first frame update
     void Start()
     {
         _stopwatch = _startTime;
-        
+        _playerArray = FindObjectsOfType<StopwatchPlayerScript>();
+
+
     }
 
     // Update is called once per frame
@@ -57,34 +79,62 @@ public class StopwatchManager : MonoBehaviour
 
         AddMoreTime();
 
-
         //Check if stopwatch time is done 
         if (_stopwatch <= 0 && !TimeRanOut)
         {
+            _gameIsFinished = true;
             TimeRanOut = true;
             Debug.Log("Timer is done");
+            Debug.Log("Stopwatch game is finished");
+            //CheckWinner();
 
         }
 
+        //Check if all players have topped time
+        if (_playerArray.All(go => go.PlayerHasStoppedTime == true) && !_gameIsFinished)
+        {
+            _gameIsFinished = true;
+        }
 
-       
+
+        
+
+        if (_gameIsFinished && !_announceWinner)
+        {
+            _announceWinner = true;
+            CheckWinner();
+        }
 
 
+        
 
-        //Will be changed later for multiplayer
-        //If time hasnät run out yet and player hasn't stopped time. Space to stop the time.
-        if (!TimeRanOut && !player1Stopped && Input.GetKeyDown(KeyCode.Space) )
+    }
+
+    public void CheckWinner()
+    {
+        System.Array.Sort(_playerArray, (a, b) => { return a.GetStoppedTime.CompareTo(b.GetStoppedTime); });
+        foreach (var item in _playerArray)
+        {
+            Debug.LogWarning(item.GetStoppedTime);
+        }
+        Debug.LogWarning(_playerArray[0].gameObject.name);
+    }
+
+    public void PlayerStopTime(TextMeshProUGUI playerText, StopwatchPlayerScript player)
+    {
+        if (!TimeRanOut)
         {
 
-            player1Stopped = true;
+           
 
             float playerStopTime = _stopwatch;
-            //Debug.LogWarning(playerStopTime);
+  
 
-            _player1TimerText.text = playerStopTime.ToString("0.00");
-            
+            playerText.text = playerStopTime.ToString("0.00");
+            player.GetStoppedTime = playerStopTime;
+
             //For testing, in real game its the player that is the closest to 0 that wins
-            if (playerStopTime < 2 && playerStopTime > 0) 
+            if (playerStopTime < 2 && playerStopTime > 0)
             {
                 Debug.LogError("You Won");
             }
@@ -92,9 +142,11 @@ public class StopwatchManager : MonoBehaviour
             {
                 Debug.LogError("You Lose Too Early!");
             }
-        }
-       
 
+            
+        }
+        
+        
     }
 
     void AddMoreTime()
