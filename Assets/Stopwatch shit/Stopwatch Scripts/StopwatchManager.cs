@@ -49,17 +49,23 @@ public class StopwatchManager : MonoBehaviour
 
     }
 
+    [SerializeField] bool _startTheGame; //Only start the game when all player have joined
 
-    bool _gameIsFinished;
+    bool _gameIsFinished = false;
     bool _announceWinner;
 
     // Start is called before the first frame update
     void Start()
     {
         _stopwatch = _startTime;
+       // _playerArray = FindObjectsOfType<StopwatchPlayerScript>();
+
+
+    }
+
+    public void UpdatePlayerArray()
+    {
         _playerArray = FindObjectsOfType<StopwatchPlayerScript>();
-
-
     }
 
     // Update is called once per frame
@@ -79,19 +85,18 @@ public class StopwatchManager : MonoBehaviour
 
         AddMoreTime();
 
-        //Check if stopwatch time is done 
+        //Check if stopwatch time has run out
         if (_stopwatch <= 0 && !TimeRanOut)
         {
             _gameIsFinished = true;
             TimeRanOut = true;
             Debug.Log("Timer is done");
             Debug.Log("Stopwatch game is finished");
-            //CheckWinner();
 
         }
 
         //Check if all players have topped time
-        if (_playerArray.All(go => go.PlayerHasStoppedTime == true) && !_gameIsFinished)
+        if (_playerArray.All(go => go.PlayerHasStoppedTime == true) && _playerArray.Length >= 2 && !_gameIsFinished) //Has to be atleast 2 players in the game
         {
             _gameIsFinished = true;
         }
@@ -117,7 +122,7 @@ public class StopwatchManager : MonoBehaviour
         {
             Debug.LogWarning(item.GetStoppedTime);
         }
-        Debug.LogWarning(_playerArray[0].gameObject.name);
+        Debug.LogWarning(_playerArray[0].gameObject.name + " is the winner");
     }
 
     public void PlayerStopTime(TextMeshProUGUI playerText, StopwatchPlayerScript player)
@@ -133,15 +138,7 @@ public class StopwatchManager : MonoBehaviour
             playerText.text = playerStopTime.ToString("0.00");
             player.GetStoppedTime = playerStopTime;
 
-            //For testing, in real game its the player that is the closest to 0 that wins
-            if (playerStopTime < 2 && playerStopTime > 0)
-            {
-                Debug.LogError("You Won");
-            }
-            else
-            {
-                Debug.LogError("You Lose Too Early!");
-            }
+            
 
             
         }

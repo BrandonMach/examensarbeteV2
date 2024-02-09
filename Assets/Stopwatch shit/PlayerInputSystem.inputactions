@@ -2,7 +2,7 @@
     "name": "PlayerInputSystem",
     "maps": [
         {
-            "name": "Player 1",
+            "name": "Stopwatch Game",
             "id": "a4fb41ad-b334-4f5f-9b67-c9cede15c272",
             "actions": [
                 {
@@ -22,35 +22,18 @@
                     "path": "<Keyboard>/q",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Keyboard",
                     "action": "StopTime",
                     "isComposite": false,
                     "isPartOfComposite": false
-                }
-            ]
-        },
-        {
-            "name": "Player 2",
-            "id": "f53b28da-afd3-42bc-8f07-6ec0d6be62f0",
-            "actions": [
-                {
-                    "name": "StopTime",
-                    "type": "Button",
-                    "id": "f1fd8576-4d2d-4b31-96f7-0d29f33417b5",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                }
-            ],
-            "bindings": [
+                },
                 {
                     "name": "",
-                    "id": "c8b5517f-386f-41fd-a62e-891bf4a0d4db",
-                    "path": "<Keyboard>/r",
+                    "id": "80d60f3a-9364-4f53-884c-3df2efcbcfeb",
+                    "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Controller",
                     "action": "StopTime",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -58,5 +41,28 @@
             ]
         }
     ],
-    "controlSchemes": []
+    "controlSchemes": [
+        {
+            "name": "Keyboard",
+            "bindingGroup": "Keyboard",
+            "devices": [
+                {
+                    "devicePath": "<Keyboard>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        },
+        {
+            "name": "Controller",
+            "bindingGroup": "Controller",
+            "devices": [
+                {
+                    "devicePath": "<Gamepad>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        }
+    ]
 }
