@@ -20,17 +20,20 @@ public class CrossEnemies : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(new Vector3 (dir,0, 0));
+        if (CrossyroadsManager.Instance.StartTheGame)
+        {
+            transform.Translate(new Vector3(dir, 0, 0));
 
-        if (transform.position.x >= (13))
-        {
-            lastDir = dir;
-            dir = -lastDir;
-        }
-        if (transform.position.x <= (-13))
-        {
-            lastDir = dir;
-            dir = -lastDir;
+            if (transform.position.x >= (24))
+            {
+                lastDir = dir;
+                dir = -lastDir;
+            }
+            if (transform.position.x <= (-24))
+            {
+                lastDir = dir;
+                dir = -lastDir;
+            }
         }
     }
 }
