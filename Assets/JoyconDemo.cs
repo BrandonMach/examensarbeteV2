@@ -81,4 +81,10 @@ public class JoyconDemo : MonoBehaviour {
             gameObject.transform.rotation = orientation;
         }
     }
+
+	public void AssignPlayerNumber()
+    {
+		jc_ind = RLGLBananaManager.Instance._playerCount;
+		RLGLBananaManager.Instance._playerCount++;
+    }
 }

@@ -59,6 +59,24 @@ public class StopwatchPlayerScript : MonoBehaviour
 
         }
 
+
+        switch (GetComponent<PlayerInput>().playerIndex)
+        {
+            case 0:
+                this.name = "Player 1";
+                _playerNameText.color = Color.red;
+                break;
+
+            case 1:
+                this.name = "Player 2";
+                _playerNameText.color = Color.blue;
+                _playerNameText.GetComponent<RectTransform>().position = new Vector3(750, 264, this.transform.position.z);
+                break;
+
+            default:
+                break;
+        }
+
         _playerNameText.text = name;
 
     }
