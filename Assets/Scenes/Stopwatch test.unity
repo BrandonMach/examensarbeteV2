@@ -332,6 +332,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnableIMU: 1
   EnableLocalize: 1
+  PlayerPrefab: {fileID: 2869425913531479746, guid: 15fb006db513c5f46853e4e15201a58d, type: 3}
 --- !u!4 &647809606
 Transform:
   m_ObjectHideFlags: 0
@@ -768,7 +769,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1329381049
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -940,7 +941,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1570619552
 MonoBehaviour:
   m_ObjectHideFlags: 0

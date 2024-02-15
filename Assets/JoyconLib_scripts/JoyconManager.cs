@@ -20,6 +20,9 @@ public class JoyconManager: MonoBehaviour
     public List<Joycon> j; // Array of all connected Joy-Cons
     static JoyconManager instance;
 
+	//gvhhjjsdjlksajklkjlsdjkds
+	public GameObject PlayerPrefab;
+
     public static JoyconManager Instance
     {
         get { return instance; }
@@ -56,9 +59,11 @@ public class JoyconManager: MonoBehaviour
 					if (enumerate.product_id == product_l) {
 						isLeft = true;
 						Debug.Log ("Left Joy-Con connected.");
+						GameObject temp = Instantiate(PlayerPrefab);
 					} else if (enumerate.product_id == product_r) {
 						isLeft = false;
 						Debug.Log ("Right Joy-Con connected.");
+						GameObject temp = Instantiate(PlayerPrefab);
 					} else {
 						Debug.Log ("Non Joy-Con input device skipped.");
 					}
