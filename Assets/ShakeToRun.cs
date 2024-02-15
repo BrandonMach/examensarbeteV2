@@ -24,18 +24,13 @@ public class ShakeToRun : MonoBehaviour
     {
         jcDemo = GetComponent<JoyconDemo>();
 
-        if(jcDemo.jc_ind == 0)
-        {
-            _playerNameIndicator.text = "Player 1";
-            _PlayerHUDInfo.localPosition = new Vector3(-285, 76, 0);
-        }
 
         switch (jcDemo.jc_ind)
         {
             case 0:
                 _playerNameIndicator.text = "Player 1";
                 _playerNameIndicator.color = Color.red;
-                _PlayerHUDInfo.position = new Vector3(-0, 0, 0);
+                _PlayerHUDInfo.position = new Vector3(0, 264, this.transform.position.z);
 
                 name = "Player 1";
                 break;
@@ -43,7 +38,7 @@ public class ShakeToRun : MonoBehaviour
             case 1:
                 _playerNameIndicator.text = "Player 2";
                 _playerNameIndicator.color = Color.blue;
-                _PlayerHUDInfo.position = new Vector3(100, 200, 0);
+                _PlayerHUDInfo.position = new Vector3(700, 264, this.transform.position.z);
 
                 name = "Player 2";
                 break;

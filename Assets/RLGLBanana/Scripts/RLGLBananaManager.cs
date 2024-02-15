@@ -39,8 +39,6 @@ public class RLGLBananaManager : MonoBehaviour
         Instance = this;
         _playerInputManager = GetComponent<PlayerInputManager>();
 
-        
-
       
     }
 
@@ -54,6 +52,7 @@ public class RLGLBananaManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //_playerCount = Mathf.Clamp(_playerCount, _playerInputManager.maxPlayerCount);
         if(_waitTimer <= 1f) //Warning sing when Guard will trun around
         {
             _warningSign.SetActive(true);
