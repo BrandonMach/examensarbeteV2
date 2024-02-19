@@ -59,19 +59,24 @@ public class JoyconManager: MonoBehaviour
 					if (enumerate.product_id == product_l) {
 						isLeft = true;
 						Debug.Log ("Left Joy-Con connected.");
-						GameObject temp = Instantiate(PlayerPrefab);
+
+
 					} else if (enumerate.product_id == product_r) {
 						isLeft = false;
 						Debug.Log ("Right Joy-Con connected.");
-						GameObject temp = Instantiate(PlayerPrefab);
+
+
 					} else {
 						Debug.Log ("Non Joy-Con input device skipped.");
 					}
 					IntPtr handle = HIDapi.hid_open_path (enumerate.path);
 					HIDapi.hid_set_nonblocking (handle, 1);
 					j.Add (new Joycon (handle, EnableIMU, EnableLocalize & EnableIMU, 0.05f, isLeft));
+					GameObject temp = Instantiate(PlayerPrefab);
+					temp.GetComponent<JoyconStopwatchPlayer>().AssignPlayerNumber(i);
 					++i;
-				}
+					
+			}
 				ptr = enumerate.next;
 			}
 		HIDapi.hid_free_enumeration (top_ptr);

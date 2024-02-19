@@ -36,7 +36,7 @@ public class StopwatchManager : MonoBehaviour
 
 
 
-    [SerializeField] StopwatchPlayerScript[] _playerArray;
+    [SerializeField] JoyconStopwatchPlayer[] _playerArray;
 
    
 
@@ -67,13 +67,14 @@ public class StopwatchManager : MonoBehaviour
     void Start()
     {
         _stopwatch = _startTime;
+        _playerArray = FindObjectsOfType<JoyconStopwatchPlayer>();
 
 
     }
 
     public void UpdatePlayerArray()
     {
-        _playerArray = FindObjectsOfType<StopwatchPlayerScript>();
+        _playerArray = FindObjectsOfType<JoyconStopwatchPlayer>();
     }
 
     // Update is called once per frame
@@ -163,6 +164,20 @@ public class StopwatchManager : MonoBehaviour
         }
         
         
+    }
+
+    public void JoyconPlayerStopTime(TextMeshProUGUI playerText, JoyconStopwatchPlayer player)
+    {
+        if (!TimeRanOut)
+        {
+
+            float playerStopTime = _stopwatch;
+
+            playerText.text = playerStopTime.ToString("0.00");
+            player.GetStoppedTime = playerStopTime; //Assign the player with teh stopped time
+        }
+
+
     }
 
     void AddMoreTime()
