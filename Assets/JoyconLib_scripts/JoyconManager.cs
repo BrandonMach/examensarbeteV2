@@ -20,10 +20,11 @@ public class JoyconManager: MonoBehaviour
     public List<Joycon> j; // Array of all connected Joy-Cons
     static JoyconManager instance;
 
-	//gvhhjjsdjlksajklkjlsdjkds
+	[SerializeField] GameObject[] MinigamePlayerPrefabs;
 	public GameObject PlayerPrefab;
 
-    public static JoyconManager Instance
+
+	public static JoyconManager Instance
     {
         get { return instance; }
     }
@@ -32,6 +33,8 @@ public class JoyconManager: MonoBehaviour
     {
         if (instance != null) Destroy(gameObject);
         instance = this;
+
+
 		int i = 0;
 
 		j = new List<Joycon>();
@@ -51,7 +54,25 @@ public class JoyconManager: MonoBehaviour
 			}
 		}
 		hid_device_info enumerate;
-		while (ptr != IntPtr.Zero) {
+
+
+        switch (MinigamesManagers.Instance.CurrentMinigame)
+        {
+            case MinigamesManagers.MiniGameType.Stopwatch:
+                PlayerPrefab = MinigamePlayerPrefabs[0];
+                break;
+            case MinigamesManagers.MiniGameType.Crossyroad:
+                break;
+            case MinigamesManagers.MiniGameType.ShakeAndRun:
+                break;
+            default:
+                break;
+        }
+
+
+
+
+        while (ptr != IntPtr.Zero) {
 			enumerate = (hid_device_info)Marshal.PtrToStructure (ptr, typeof(hid_device_info));
 
 			Debug.Log (enumerate.product_id);
@@ -72,8 +93,10 @@ public class JoyconManager: MonoBehaviour
 					IntPtr handle = HIDapi.hid_open_path (enumerate.path);
 					HIDapi.hid_set_nonblocking (handle, 1);
 					j.Add (new Joycon (handle, EnableIMU, EnableLocalize & EnableIMU, 0.05f, isLeft));
+
+					 //Template
 					GameObject temp = Instantiate(PlayerPrefab);
-					temp.GetComponent<JoyconStopwatchPlayer>().AssignPlayerNumber(i);
+					temp.GetComponent<JoyconPlayerBase>().AssignPlayerNumber(i);
 					++i;
 					
 			}

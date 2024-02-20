@@ -169,6 +169,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnableIMU: 1
   EnableLocalize: 1
+  PlayerPrefab: {fileID: 2181820132000647500, guid: 7ba1a286909ec934a80dfa241000797e, type: 3}
 --- !u!1 &195250745
 GameObject:
   m_ObjectHideFlags: 0
@@ -513,7 +514,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _shakeInput: 0
   _stepsTaken: 0
+  _PlayerHUDInfo: {fileID: 0}
+  _stepsText: {fileID: 0}
+  _playerNameIndicator: {fileID: 0}
   _stoppedRunning: 0
+  _gotCought: 0
 --- !u!850595691 &587510554
 LightingSettings:
   m_ObjectHideFlags: 0

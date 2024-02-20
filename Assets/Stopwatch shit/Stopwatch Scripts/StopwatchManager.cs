@@ -152,23 +152,26 @@ public class StopwatchManager : MonoBehaviour
         Debug.LogWarning(_playerArray[0].gameObject.name + " is the winner");
     }
 
-    public void PlayerStopTime(TextMeshProUGUI playerText, StopwatchPlayerScript player)
+
+
+    public void JoyconPlayerStopTime(TextMeshProUGUI playerText, JoyconStopwatchPlayer player)
     {
         if (!TimeRanOut)
         {
 
             float playerStopTime = _stopwatch;
-  
+
             playerText.text = playerStopTime.ToString("0.00");
             player.GetStoppedTime = playerStopTime; //Assign the player with teh stopped time
         }
-        
-        
+
+
     }
 
-    public void JoyconPlayerStopTime(TextMeshProUGUI playerText, JoyconStopwatchPlayer player)
+    //Set for JoyconPlayer script if we will use the switch case method
+    public void JoyconPlayerTester(TextMeshProUGUI playerText, JoyconPlayer player)
     {
-        if (!TimeRanOut)
+        if (!TimeRanOut) 
         {
 
             float playerStopTime = _stopwatch;
