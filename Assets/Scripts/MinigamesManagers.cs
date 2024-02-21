@@ -27,7 +27,7 @@ public class MinigamesManagers : MonoBehaviour
         if (instance != null) Destroy(gameObject);
         instance = this;
 
-        CurrentMinigame = MiniGameType.Stopwatch;
+        
     }
 
     void Start()

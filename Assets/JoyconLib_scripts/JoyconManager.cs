@@ -62,6 +62,7 @@ public class JoyconManager: MonoBehaviour
                 PlayerPrefab = MinigamePlayerPrefabs[0];
                 break;
             case MinigamesManagers.MiniGameType.Crossyroad:
+				PlayerPrefab = MinigamePlayerPrefabs[1];
                 break;
             case MinigamesManagers.MiniGameType.ShakeAndRun:
                 break;

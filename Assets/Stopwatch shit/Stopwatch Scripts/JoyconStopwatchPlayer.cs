@@ -33,7 +33,7 @@ public class JoyconStopwatchPlayer : JoyconPlayerBase
 		}
 
 		this.name = "Player " + (1 + jc_ind);
-		_playerNameText.color = Color.red;
+		
 		_playerNameText.GetComponent<RectTransform>().position = new Vector3(250 + (500 * jc_ind), 260, this.transform.position.z);
 
 		switch (jc_ind)
@@ -76,15 +76,7 @@ public class JoyconStopwatchPlayer : JoyconPlayerBase
 
 	private void StopwatchGameControls(Joycon j)
     {
-		//if (j.GetButtonDown(Joycon.Button.MINUS) || j.GetButtonDown(Joycon.Button.PLUS))
-		//{
-		//	PlayerIsReady = true;
-
-		//	ReadyUpUI.gameObject.GetComponent<ReadyUpScript>().IsReady();
-		//}
-
 		
-
 
 
 		if (!PlayerIsReady && j.GetButtonDown(Joycon.Button.DPAD_DOWN))

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using UnityEngine.InputSystem;
 using System.Linq;
 
 public class StopwatchManager : MonoBehaviour
@@ -72,10 +71,10 @@ public class StopwatchManager : MonoBehaviour
 
     }
 
-    public void UpdatePlayerArray()
-    {
-        _playerArray = FindObjectsOfType<JoyconStopwatchPlayer>();
-    }
+    //public void UpdatePlayerArray()
+    //{
+    //    _playerArray = FindObjectsOfType<JoyconStopwatchPlayer>();
+    //}
 
     // Update is called once per frame
     void Update()
