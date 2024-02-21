@@ -17,8 +17,7 @@ public class JoyconStopwatchPlayer : JoyconPlayerBase
 	float _stoppedTime = Mathf.Infinity;
 	public float GetStoppedTime { get => _stoppedTime; set => _stoppedTime = value; }
 
-	public bool PlayerIsReady;
-	public GameObject ReadyUpUI;
+	
 
 
 	void Start()
@@ -62,11 +61,13 @@ public class JoyconStopwatchPlayer : JoyconPlayerBase
 	// Update is called once per frame
 	void Update()
 	{
+		
 		// make sure the Joycon only gets checked if attached
 		if (joycons.Count > 0)
 		{
 			Joycon j = joycons[jc_ind];
 
+			base.ReadyUp(j);
 			//If game type så kan vi återanvända skriptet
 			StopwatchGameControls(j);
 
@@ -75,28 +76,30 @@ public class JoyconStopwatchPlayer : JoyconPlayerBase
 
 	private void StopwatchGameControls(Joycon j)
     {
-		if (j.GetButtonDown(Joycon.Button.DPAD_DOWN))
-		{
-			PlayerIsReady = true;
+		//if (j.GetButtonDown(Joycon.Button.MINUS) || j.GetButtonDown(Joycon.Button.PLUS))
+		//{
+		//	PlayerIsReady = true;
 
-			ReadyUpUI.gameObject.GetComponent<ReadyUpScript>().IsReady();
-		}
+		//	ReadyUpUI.gameObject.GetComponent<ReadyUpScript>().IsReady();
+		//}
 
-		stick = j.GetStick();
+		
 
 
 
-		if (!PlayerIsReady && j.GetButton(Joycon.Button.DPAD_UP))
+		if (!PlayerIsReady && j.GetButtonDown(Joycon.Button.DPAD_DOWN))
 		{
 			Debug.Log("Rumble because not ready");
 			j.SetRumble(160, 320, 0.6f, 200);
 		}
-		else if (StopwatchManager.Instance.StartTheGame && !_hasStoppedTime && j.GetButton(Joycon.Button.DPAD_UP))
+		else if (StopwatchManager.Instance.StartTheGame && !_hasStoppedTime && j.GetButtonDown(Joycon.Button.DPAD_DOWN))
 		{
 			_hasStoppedTime = true;
 			Debug.LogError("hej från " + this.name);
 			StopwatchManager.Instance.JoyconPlayerStopTime(_playerTimeText, this);
 		}
+
+		
 
 	}
 
