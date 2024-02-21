@@ -65,6 +65,10 @@ public class RLGLBananaManager : MonoBehaviour
     void Update()
     {
 
+
+
+
+
         if (_playerArray.Length >= 2 && _playerArray.All(go => go.PlayerIsReady == true)) //Start the game once all player are ready 
         {
             StartTheGame = true;
@@ -78,13 +82,20 @@ public class RLGLBananaManager : MonoBehaviour
 
         if (StartTheGame)
         {
+
+
+         
+
             if (_waitTimer <= 1f) //Warning sing when Guard will trun around
             {
                 _warningSign.SetActive(true);
 
-            }
 
-            if (_waitTimer > 0)
+
+            }
+            
+
+            if (_waitTimer > 0 )
             {
                 _waitTimer -= Time.deltaTime;
 
@@ -120,7 +131,7 @@ public class RLGLBananaManager : MonoBehaviour
     {
         GreenLight = false;
         _warningSign.SetActive(false);
-        yield return new WaitForSeconds(Random.Range(1,3.5f));
+        yield return new WaitForSeconds(Random.Range(1.3f,3.5f));
         _waitTimer = Random.Range(3, 6);
         
 
