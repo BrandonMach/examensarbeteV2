@@ -10,8 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2181820132000647501}
   - component: {fileID: 2181820132000647498}
+  - component: {fileID: 2094805014189265892}
   m_Layer: 0
-  m_Name: new Joycon inputs
+  m_Name: Stopwatch Player Prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -50,11 +51,25 @@ MonoBehaviour:
   accel: {x: 0, y: 0, z: 0}
   jc_ind: 0
   orientation: {x: 0, y: 0, z: 0, w: 0}
+  PlayerIsReady: 0
+  ReadyUpUI: {fileID: 4211651673833462452}
   StopTime: 0
   _playerNameText: {fileID: 331003606968289757}
   _playerTimeText: {fileID: 331003605965550330}
-  PlayerIsReady: 0
-  ReadyUpUI: {fileID: 4211651673833462452}
+--- !u!114 &2094805014189265892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2181820132000647500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f618ef5737177641bc487f4b4a8458d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _readyUpIndicator: {fileID: 0}
+  _readyText: {fileID: 0}
 --- !u!1001 &2181820132853884827
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -62,22 +77,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2181820132000647501}
     m_Modifications:
-    - target: {fileID: 1932211224212860481, guid: eb1e3a7c353b4f241b1042856e19f39b, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 188.79987
-      objectReference: {fileID: 0}
-    - target: {fileID: 1932211224212860486, guid: eb1e3a7c353b4f241b1042856e19f39b, type: 3}
-      propertyPath: m_text
-      value: Player 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1932211225966932826, guid: eb1e3a7c353b4f241b1042856e19f39b, type: 3}
-      propertyPath: m_RenderMode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1932211225966932826, guid: eb1e3a7c353b4f241b1042856e19f39b, type: 3}
-      propertyPath: m_SortingOrder
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1932211225966932838, guid: eb1e3a7c353b4f241b1042856e19f39b, type: 3}
       propertyPath: m_Name
       value: Canvas

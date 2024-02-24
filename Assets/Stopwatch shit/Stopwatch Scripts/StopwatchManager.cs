@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using UnityEngine.InputSystem;
 using System.Linq;
 
 public class StopwatchManager : MonoBehaviour
@@ -72,10 +71,10 @@ public class StopwatchManager : MonoBehaviour
 
     }
 
-    public void UpdatePlayerArray()
-    {
-        _playerArray = FindObjectsOfType<JoyconStopwatchPlayer>();
-    }
+    //public void UpdatePlayerArray()
+    //{
+    //    _playerArray = FindObjectsOfType<JoyconStopwatchPlayer>();
+    //}
 
     // Update is called once per frame
     void Update()
@@ -152,19 +151,7 @@ public class StopwatchManager : MonoBehaviour
         Debug.LogWarning(_playerArray[0].gameObject.name + " is the winner");
     }
 
-    public void PlayerStopTime(TextMeshProUGUI playerText, StopwatchPlayerScript player)
-    {
-        if (!TimeRanOut)
-        {
 
-            float playerStopTime = _stopwatch;
-  
-            playerText.text = playerStopTime.ToString("0.00");
-            player.GetStoppedTime = playerStopTime; //Assign the player with teh stopped time
-        }
-        
-        
-    }
 
     public void JoyconPlayerStopTime(TextMeshProUGUI playerText, JoyconStopwatchPlayer player)
     {
@@ -179,6 +166,7 @@ public class StopwatchManager : MonoBehaviour
 
 
     }
+
 
     void AddMoreTime()
     {

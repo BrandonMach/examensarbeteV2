@@ -82,9 +82,4 @@ public class JoyconDemo : MonoBehaviour {
         }
     }
 
-	public void AssignPlayerNumber()
-    {
-		jc_ind = RLGLBananaManager.Instance._playerCount;
-		RLGLBananaManager.Instance._playerCount++;
-    }
 }
