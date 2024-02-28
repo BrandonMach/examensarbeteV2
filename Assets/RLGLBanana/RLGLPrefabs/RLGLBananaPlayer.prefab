@@ -504,6 +504,7 @@ MonoBehaviour:
   PlayerIsReady: 0
   ReadyUpUI: {fileID: 7233399600323250091}
   _shakeInput: 0
+  _accelerometerThreshold: 2
   _stepsTaken: 0
   _PlayerHUDInfo: {fileID: 506748409}
   _stepsText: {fileID: 1159230257}

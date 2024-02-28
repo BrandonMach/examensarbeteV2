@@ -8,7 +8,7 @@ public class ShakeToRun : JoyconPlayerBase
 {
     //JoyconDemo jcDemo;
     [SerializeField] float _shakeInput = 0;
-    private float _accelerometerThreshold = 4;
+    [SerializeField]private float _accelerometerThreshold = 2;
 
     [SerializeField] float _stepsTaken = 0;
     private float _shakeInputToStepThreshold = 15;
