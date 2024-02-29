@@ -6,7 +6,7 @@ public class HoldBananaPlayerScript : JoyconPlayerBase
 {
 
 	[Header("Hold Banana Player")]
-	public int yo;
+	public int points;
 
 
 	void Start()
@@ -34,5 +34,11 @@ public class HoldBananaPlayerScript : JoyconPlayerBase
 		
 
 		}
+	}
+
+	public void AddPoints()
+    {
+   		points += 1;
+
 	}
 }

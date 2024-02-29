@@ -40,7 +40,24 @@ public class JoyconPlayerBase : MonoBehaviour
 			Destroy(gameObject);
 		}
 
+		SetUpPlayerName();
+		
+	}
 
+
+
+    public virtual void ReadyUp(Joycon j)
+    {
+		if (j.GetButtonDown(Joycon.Button.MINUS) || j.GetButtonDown(Joycon.Button.PLUS)) // if player has pressed Ready up
+		{
+			PlayerIsReady = true;
+
+			ReadyUpUI.gameObject.GetComponent<ReadyUpScript>().IsReady();
+		}
+	}
+
+	void SetUpPlayerName()
+    {
 		this.name = "Player " + (1 + jc_ind);
 
 		_playerNameText.GetComponent<RectTransform>().position = new Vector3(250 + (500 * jc_ind), 260, this.transform.position.z);
@@ -64,17 +81,5 @@ public class JoyconPlayerBase : MonoBehaviour
 		}
 
 		_playerNameText.text = name;
-	}
-
-
-
-    public virtual void ReadyUp(Joycon j)
-    {
-		if (j.GetButtonDown(Joycon.Button.MINUS) || j.GetButtonDown(Joycon.Button.PLUS)) // if player has pressed Ready up
-		{
-			PlayerIsReady = true;
-
-			ReadyUpUI.gameObject.GetComponent<ReadyUpScript>().IsReady();
-		}
 	}
 }

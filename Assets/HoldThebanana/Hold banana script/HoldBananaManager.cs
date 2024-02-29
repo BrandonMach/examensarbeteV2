@@ -8,8 +8,6 @@ using System.Linq;
 
 public class HoldBananaManager : MonoBehaviour
 {
-    //public int _playerCount = 0;
-
 
     #region Singelton
     static HoldBananaManager _instance;
@@ -19,12 +17,12 @@ public class HoldBananaManager : MonoBehaviour
 
 
 
-    PlayerInputManager _playerInputManager;
+   
 
     [SerializeField] HoldBananaPlayerScript[] _playerArray;
     public bool StartTheGame; //Only start the game when all player have joined
 
-
+    public bool AddPlayerPoints;
 
 
 
@@ -63,9 +61,29 @@ public class HoldBananaManager : MonoBehaviour
             foreach (var players in _playerArray)
             {
                 StartCoroutine(players.ReadyUpUI.GetComponent<ReadyUpScript>().AllPlayersReady()); //Should be fade text instead of set active false
-
+                AddPlayerPoints = true;
             }
         }
+
+        if (AddPlayerPoints)
+        {
+
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                foreach (var player in _playerArray)
+                {
+                    if(player.GetComponent<JoyconPlayerBase>().jc_ind == 0 && Input.GetKey(KeyCode.Space))
+                    {
+                        player.GetComponent<HoldBananaPlayerScript>().AddPoints();
+                        //If key stops gettig hold down go to nect player
+                    }
+                    
+                }
+            }
+            
+        }
+
+        
 
 
 
