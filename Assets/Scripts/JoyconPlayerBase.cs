@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
-[RequireComponent(typeof(ReadyUpScript))]
+
 public class JoyconPlayerBase : MonoBehaviour
 {
 	[Header("Joycon values")]
@@ -15,6 +16,11 @@ public class JoyconPlayerBase : MonoBehaviour
 	public int jc_ind = 0;
 	public Quaternion orientation;
 
+
+	[SerializeField] TextMeshProUGUI _playerNameText;
+
+
+
 	[Header("Player Ready Up")]
 	public bool PlayerIsReady;
 	public GameObject ReadyUpUI;
@@ -25,11 +31,46 @@ public class JoyconPlayerBase : MonoBehaviour
 
 	}
 
+	// get the public Joycon array attached to the JoyconManager in scene
+	public void Start()     
+	{
+		joycons = JoyconManager.Instance.j;
+		if (joycons.Count < jc_ind + 1)
+		{
+			Destroy(gameObject);
+		}
+
+
+		this.name = "Player " + (1 + jc_ind);
+
+		_playerNameText.GetComponent<RectTransform>().position = new Vector3(250 + (500 * jc_ind), 260, this.transform.position.z);
+
+		switch (jc_ind)
+		{
+			case 0:
+				_playerNameText.color = Color.red;
+				break;
+			case 1:
+				_playerNameText.color = Color.blue;
+				break;
+			case 2:
+				_playerNameText.color = Color.yellow;
+				break;
+			case 3:
+				_playerNameText.color = Color.yellow;
+				break;
+			default:
+				break;
+		}
+
+		_playerNameText.text = name;
+	}
+
 
 
     public virtual void ReadyUp(Joycon j)
     {
-		if (j.GetButtonDown(Joycon.Button.MINUS) || j.GetButtonDown(Joycon.Button.PLUS))
+		if (j.GetButtonDown(Joycon.Button.MINUS) || j.GetButtonDown(Joycon.Button.PLUS)) // if player has pressed Ready up
 		{
 			PlayerIsReady = true;
 

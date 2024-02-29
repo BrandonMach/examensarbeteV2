@@ -470,6 +470,7 @@ MonoBehaviour:
   MinigamePlayerPrefabs:
   - {fileID: 2181820132000647500, guid: 7ba1a286909ec934a80dfa241000797e, type: 3}
   - {fileID: 2350363821690020333, guid: 2d9771af7d6343e489fa5fd313e8c991, type: 3}
+  - {fileID: 2350363821690020333, guid: 2d9771af7d6343e489fa5fd313e8c991, type: 3}
   PlayerPrefab: {fileID: 2350363821690020333, guid: 2d9771af7d6343e489fa5fd313e8c991, type: 3}
 --- !u!4 &771653030
 Transform:

@@ -22,16 +22,15 @@ public class JoyconStopwatchPlayer : JoyconPlayerBase
 
 	void Start()
 	{
+
+
+
+		base.Start();
+
+
 		gyro = new Vector3(0, 0, 0);
 		accel = new Vector3(0, 0, 0);
-		// get the public Joycon array attached to the JoyconManager in scene
 		
-		joycons = JoyconManager.Instance.j;
-		if (joycons.Count < jc_ind + 1)
-		{
-			Destroy(gameObject);
-		}
-
 		this.name = "Player " + (1 + jc_ind);
 		
 		_playerNameText.GetComponent<RectTransform>().position = new Vector3(250 + (500 * jc_ind), 260, this.transform.position.z);

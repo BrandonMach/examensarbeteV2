@@ -6,74 +6,32 @@ using TMPro;
 //[RequireComponent(typeof(JoyconDemo))]
 public class ShakeToRun : JoyconPlayerBase
 {
-    //JoyconDemo jcDemo;
+    [Header("Red Light Green Light Player")]
     [SerializeField] float _shakeInput = 0;
     [SerializeField]private float _accelerometerThreshold = 2;
 
     [SerializeField] float _stepsTaken = 0;
     private float _shakeInputToStepThreshold = 15;
-    [SerializeField] RectTransform _PlayerHUDInfo;
+
     [SerializeField] TextMeshProUGUI _stepsText;
-    [SerializeField] TextMeshProUGUI _playerNameIndicator;
+
 
     [SerializeField] bool _stoppedRunning;
     float _stopWindow = 0.2f;
 
     [SerializeField] bool _gotCought;
+
+
+
     void Start()
     {
+        base.Start();
+
         gyro = new Vector3(0, 0, 0);
         accel = new Vector3(0, 0, 0);
-        // get the public Joycon array attached to the JoyconManager in scene
-
-        joycons = JoyconManager.Instance.j;
-        if (joycons.Count < jc_ind + 1)
-        {
-            Destroy(gameObject);
-        }
-
-
-        //switch (jc_ind)
-        //{
-        //    case 0:
-        //        _PlayerHUDInfo.position = new Vector3(300, 264, this.transform.position.z);
-        //        break;
-
-        //    case 1:
-        //        _PlayerHUDInfo.position = new Vector3(750, 264, this.transform.position.z);
-        //        break;
-
-
-        //    default:
-        //        break;
-        //}
 
 
 
-        this.name = "Player " + (1 + jc_ind);
-        _PlayerHUDInfo.position = new Vector3(300 + (jc_ind*450), 264, this.transform.position.z);
-
-        switch (jc_ind)
-        {
-            case 0:
-                _playerNameIndicator.color = Color.red;
-                break;
-            case 1:
-                _playerNameIndicator.color = Color.blue;
-                break;
-            case 2:
-                _playerNameIndicator.color = Color.yellow;
-                break;
-            case 3:
-                _playerNameIndicator.color = Color.yellow;
-                break;
-            default:
-                break;
-        }
-
-        _playerNameIndicator.text = name;
-
-       
     }
 
     // Update is called once per frame
