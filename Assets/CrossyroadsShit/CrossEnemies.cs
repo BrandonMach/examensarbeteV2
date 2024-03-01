@@ -8,17 +8,17 @@ public class CrossEnemies : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        dir = Random.Range(-1, 2);
+        dir = Random.Range(-2, 3);
         if (dir == 0)
         {
             dir = 1;
         }
-        dir /= 30;
+        dir /= 4;
         lastDir = dir;
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (CrossyroadsManager.Instance.StartTheGame)
         {

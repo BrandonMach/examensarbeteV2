@@ -15,13 +15,14 @@ public class CrossyroadsManager : MonoBehaviour
     public static CrossyroadsManager Instance { get => _instance; set => _instance = value; }
     #endregion
 
-    [SerializeField] CrossyroadsPlayer[] _playerArray;
+    [SerializeField] JoyConCrossyroads[] _playerArray;
 
     bool declaredWinner;
     string winnerName;
     public bool StartTheGame; //Only start the game when all player have joined
     public bool GameOver;
     public GameObject GOPanel;
+    public GameObject readyUpPanel;
     public TMP_Text winnerNameText;
 
     private void Awake()
@@ -41,7 +42,7 @@ public class CrossyroadsManager : MonoBehaviour
 
     public void UpdatePlayerArray()
     {
-        _playerArray = FindObjectsOfType<CrossyroadsPlayer>();
+        _playerArray = FindObjectsOfType<JoyConCrossyroads>();
     }
 
 
@@ -52,7 +53,7 @@ public class CrossyroadsManager : MonoBehaviour
             StartTheGame = true;
             foreach (var players in _playerArray)
             {
-                //StartCoroutine(players.ReadyUpUI.GetComponent<ReadyUpScript>().AllPlayersReady()); //Should be fade text instead of set active false
+                StartCoroutine(players.ReadyUpUI.GetComponent<ReadyUpScript>().AllPlayersReady()); //Should be fade text instead of set active false
 
             }
         }
@@ -61,6 +62,10 @@ public class CrossyroadsManager : MonoBehaviour
         {
             GOPanel.SetActive(true);
             winnerNameText.SetText(winnerName);
+        }
+        if (StartTheGame)
+        {
+            readyUpPanel.SetActive(false);
         }
     }
 

@@ -7,12 +7,10 @@ using TMPro;
 [RequireComponent(typeof(PlayerInput))]
 
 
-public class CrossyroadsPlayer : MonoBehaviour
+public class CrossyroadsPlayer : JoyconPlayerBase
 {
     [SerializeField] TextMeshProUGUI _playerNameText;
-    public bool PlayerIsReady;
     public bool winner;
-    public GameObject ReadyUpUI;
 
     Vector3 spawn;
 
