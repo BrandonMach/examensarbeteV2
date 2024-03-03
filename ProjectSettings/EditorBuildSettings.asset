@@ -11,5 +11,11 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Menus/SelectMinigameScene.unity
     guid: bf53a460a6e1f7d43b90bfe9ba7c4ac0
+  - enabled: 1
+    path: Assets/Scenes/Stopwatch Game.unity
+    guid: f1bb5c76c23403f4d9d22185ea7dabaf
+  - enabled: 1
+    path: Assets/Scenes/Red Light Green Light.unity
+    guid: 47324e06ccd25ab49ac90fb09aa0f76e
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: ba86d200c71cf7049b38b219fdf12982, type: 2}

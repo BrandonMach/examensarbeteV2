@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89a32505054e79c4aaccc498483c4fe8, type: 3}
   m_Name: Game 2
   m_EditorClassIdentifier: 
-  MinigameName: Minigame 2
+  MinigameName: Red Light Green Light
   Texture: {fileID: 8400000, guid: 06fe2868be6902745a33b05c08d21678, type: 2}
   VideoClip: {fileID: 32900000, guid: 28c249845e1dccb40a3cbae29374fb44, type: 3}
