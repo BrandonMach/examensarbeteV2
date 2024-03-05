@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class CrossEnemies : MonoBehaviour
 {
-    float dir, lastDir;
+    float lastDir;
+    public float dir, originalDir;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,6 +16,7 @@ public class CrossEnemies : MonoBehaviour
         }
         dir /= 4;
         lastDir = dir;
+        originalDir = dir;
     }
 
     // Update is called once per frame
