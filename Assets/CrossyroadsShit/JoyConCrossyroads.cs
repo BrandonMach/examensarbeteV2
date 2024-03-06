@@ -48,10 +48,20 @@ public class JoyConCrossyroads : JoyconPlayerBase
 				transform.position = spawn;
 				break;
 			case 2:
-				_playerNameText.color = Color.yellow;
+				this.name = "Player 3";
+                _playerNameText.color = Color.yellow;
+				playerInfoObj.GetComponent<RectTransform>().localPosition = new Vector3(playerInfoObj.transform.localPosition.x + (400 * jc_ind), playerInfoObj.transform.localPosition.y, playerInfoObj.transform.localPosition.z);
+				this.gameObject.GetComponent<Renderer>().material.SetColor("_Color", Color.yellow);
+				spawn = new Vector3(1, 1, -5);
+				transform.position = spawn;
 				break;
 			case 3:
-				_playerNameText.color = Color.magenta;
+				this.name = "Player 4";
+                _playerNameText.color = Color.magenta;
+				playerInfoObj.GetComponent<RectTransform>().localPosition = new Vector3(playerInfoObj.transform.localPosition.x + (400 * jc_ind), playerInfoObj.transform.localPosition.y, playerInfoObj.transform.localPosition.z);
+                this.gameObject.GetComponent<Renderer>().material.SetColor("_Color", Color.magenta);
+				spawn = new Vector3(3, 1, -5);
+                transform.position = spawn;
 				break;
 			default:
 				break;
@@ -71,12 +81,12 @@ public class JoyConCrossyroads : JoyconPlayerBase
 			Joycon j = joycons[jc_ind];
 
 
-			if (j.GetButtonDown(Joycon.Button.DPAD_DOWN))
-			{
-				PlayerIsReady = true;
+			//if (j.GetButtonDown(Joycon.Button.DPAD_DOWN))
+			//{
+			//	PlayerIsReady = true;
 
-				ReadyUpUI.gameObject.GetComponent<ReadyUpScript>().IsReady();
-			}
+			//	ReadyUpUI.gameObject.GetComponent<ReadyUpScript>().IsReady();
+			//}
 
 			stick = j.GetStick();
 

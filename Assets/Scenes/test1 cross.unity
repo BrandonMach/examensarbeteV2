@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.17276807, g: 0.21589197, b: 0.29782572, a: 1}
+  m_IndirectSpecularColor: {r: 0.17276844, g: 0.21589246, b: 0.2978263, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -170,6 +170,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b246fb891ad2de84b8205d83f6c9c140, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dir: 0
+  originalDir: 0
 --- !u!65 &29231296
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -280,6 +282,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b246fb891ad2de84b8205d83f6c9c140, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dir: 0
+  originalDir: 0
 --- !u!65 &66124087
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -390,6 +394,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b246fb891ad2de84b8205d83f6c9c140, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dir: 0
+  originalDir: 0
 --- !u!65 &119330516
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -981,6 +987,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b246fb891ad2de84b8205d83f6c9c140, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dir: 0
+  originalDir: 0
 --- !u!65 &328189793
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1315,6 +1323,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b246fb891ad2de84b8205d83f6c9c140, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dir: 0
+  originalDir: 0
 --- !u!65 &498835348
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1940,6 +1950,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b246fb891ad2de84b8205d83f6c9c140, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dir: 0
+  originalDir: 0
 --- !u!65 &716692549
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2185,6 +2197,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b246fb891ad2de84b8205d83f6c9c140, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dir: 0
+  originalDir: 0
 --- !u!65 &775554451
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2295,6 +2309,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b246fb891ad2de84b8205d83f6c9c140, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dir: 0
+  originalDir: 0
 --- !u!65 &870473572
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2405,6 +2421,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b246fb891ad2de84b8205d83f6c9c140, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dir: 0
+  originalDir: 0
 --- !u!65 &938808783
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2642,6 +2660,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b246fb891ad2de84b8205d83f6c9c140, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dir: 0
+  originalDir: 0
 --- !u!65 &1056451690
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2899,6 +2919,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b246fb891ad2de84b8205d83f6c9c140, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dir: 0
+  originalDir: 0
 --- !u!65 &1198793597
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3009,6 +3031,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b246fb891ad2de84b8205d83f6c9c140, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dir: 0
+  originalDir: 0
 --- !u!65 &1228655501
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3320,6 +3344,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1270560691}
+  - component: {fileID: 1270560692}
   m_Layer: 0
   m_Name: Hazards
   m_TagString: Untagged
@@ -3362,6 +3387,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1270560692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1270560690}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18aee9e0f60abb3498b6ce91464e6135, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemies: []
 --- !u!1 &1304307329
 GameObject:
   m_ObjectHideFlags: 0
@@ -3409,6 +3447,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b246fb891ad2de84b8205d83f6c9c140, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dir: 0
+  originalDir: 0
 --- !u!65 &1304307332
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3972,6 +4012,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b246fb891ad2de84b8205d83f6c9c140, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dir: 0
+  originalDir: 0
 --- !u!65 &1399361791
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4539,6 +4581,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b246fb891ad2de84b8205d83f6c9c140, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dir: 0
+  originalDir: 0
 --- !u!65 &1655822735
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4763,6 +4807,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b246fb891ad2de84b8205d83f6c9c140, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dir: 0
+  originalDir: 0
 --- !u!65 &1818969507
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5248,6 +5294,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b246fb891ad2de84b8205d83f6c9c140, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dir: 0
+  originalDir: 0
 --- !u!65 &1932056344
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5358,6 +5406,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b246fb891ad2de84b8205d83f6c9c140, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dir: 0
+  originalDir: 0
 --- !u!65 &1966794998
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5468,6 +5518,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b246fb891ad2de84b8205d83f6c9c140, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dir: 0
+  originalDir: 0
 --- !u!65 &2122312573
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5578,6 +5630,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b246fb891ad2de84b8205d83f6c9c140, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dir: 0
+  originalDir: 0
 --- !u!65 &2134329801
 BoxCollider:
   m_ObjectHideFlags: 0
