@@ -29,6 +29,11 @@ public class JoyconManagerMainMenu : MonoBehaviour
 	public Button RandomMinigameButton;
 	public Button SelectMinigameButton;
 
+	public event EventHandler OnUINavDown;
+	public event EventHandler OnUINavUp;
+
+	[SerializeField] public  EventSystem eventsystem;
+
 	public static JoyconManagerMainMenu Instance
 	{
 		get { return instance; }
@@ -123,6 +128,9 @@ public class JoyconManagerMainMenu : MonoBehaviour
 		{
 			j[i].Update();
 		}
+
+
+		
 	}
 
 	void OnApplicationQuit()
@@ -135,18 +143,21 @@ public class JoyconManagerMainMenu : MonoBehaviour
 
 	public void ButtonGoUp()
     {
-		//Navigation nav = SelectMinigameButton.navigation;
-		//nav.mode = Navigation.Mode.Explicit;
-		//nav.selectOnUp = SelectMinigameButton;
-		//SelectMinigameButton.navigation = nav;
+
+
+
+		eventsystem.SetSelectedGameObject(RandomMinigameButton.gameObject);
+		
 	}
 	public void ButtonGoDown()
 	{
-        //Navigation nav = RandomMinigameButton.navigation;
-        //nav.mode = Navigation.Mode.Explicit;
-        //nav.selectOnDown = RandomMinigameButton;
-        //RandomMinigameButton.navigation = nav;
+
+		eventsystem.SetSelectedGameObject(SelectMinigameButton.gameObject);
+		
 
 
-    }
+
+
+	}
+
 }
