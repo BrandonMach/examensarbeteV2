@@ -7,7 +7,7 @@ using System;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class JoyconManagerMainMenu : MonoBehaviour
+public class JoyconManagerSelectMenu : MonoBehaviour
 {
 	// Settings accessible via Unity
 	public bool EnableIMU = true;
@@ -20,27 +20,41 @@ public class JoyconManagerMainMenu : MonoBehaviour
 	private const ushort product_r = 0x2007;
 
 	public List<Joycon> j; // Array of all connected Joy-Cons
-	static JoyconManagerMainMenu instance;
 
-	//[SerializeField] GameObject[] MinigamePlayerPrefabs;
-	public GameObject PlayerPrefab;
 
-	
-	public Button RandomMinigameButton;
-	public Button SelectMinigameButton;
 
-	public event EventHandler OnUINavDown;
-	public event EventHandler OnUINavUp;
-
-	[SerializeField] public  EventSystem eventsystem;
-
-	public static JoyconManagerMainMenu Instance
+	static JoyconManagerSelectMenu instance;
+	public static JoyconManagerSelectMenu Instance
 	{
 		get { return instance; }
 	}
 
+
+
+	[Header("Select Menu Navigation")]
+
+	[SerializeField] public EventSystem eventsystem;
+	[SerializeField] SelectMinigameButton[] _selectMinigameButtons;
+	public  enum MoveDirection
+    {
+		up,
+		down,
+		left,
+		right
+    }
+
+	public bool canMoveUI;
+
+	public bool loading;
+
+
+
+
 	void Awake()
 	{
+		loading = true;
+		_selectMinigameButtons = FindObjectsOfType<SelectMinigameButton>();
+
 		if (instance != null) Destroy(gameObject);
 		instance = this;
 
@@ -97,9 +111,6 @@ public class JoyconManagerMainMenu : MonoBehaviour
 				HIDapi.hid_set_nonblocking(handle, 1);
 				j.Add(new Joycon(handle, EnableIMU, EnableLocalize & EnableIMU, 0.05f, isLeft));
 
-				//Template
-				//GameObject temp = Instantiate(PlayerPrefab);
-				//temp.GetComponent<JoyconPlayerBase>().AssignPlayerNumber(i);
 				++i;
 
 			}
@@ -120,6 +131,7 @@ public class JoyconManagerMainMenu : MonoBehaviour
 			jc.Begin();
 		}
 
+
 	}
 
 	void Update()
@@ -129,8 +141,6 @@ public class JoyconManagerMainMenu : MonoBehaviour
 			j[i].Update();
 		}
 
-
-		
 	}
 
 	void OnApplicationQuit()
@@ -141,23 +151,46 @@ public class JoyconManagerMainMenu : MonoBehaviour
 		}
 	}
 
-	public void ButtonGoUp()
+
+	public void MoveInUI(MoveDirection dir)
     {
+		canMoveUI = false;
+		var currentSlectedMinigame = eventsystem.currentSelectedGameObject.GetComponent<SelectMinigameButton>();
 
+		switch (dir)
+		{
+			case MoveDirection.up:
+				if (currentSlectedMinigame._upNeighbourButton != null)
+				{
+					Debug.Log("up");
+					eventsystem.SetSelectedGameObject(currentSlectedMinigame._upNeighbourButton.gameObject);
+				}
+				break;
+			case MoveDirection.down:
+				if (currentSlectedMinigame._downNeighbourButton != null)
+				{
+					Debug.Log("down");
+					eventsystem.SetSelectedGameObject(currentSlectedMinigame._downNeighbourButton.gameObject);
+				}
+				break;
+			case MoveDirection.left:
+				if (currentSlectedMinigame._leftNeighbourButton != null)
+				{
+					Debug.Log("left");
+					eventsystem.SetSelectedGameObject(currentSlectedMinigame._leftNeighbourButton.gameObject);
+				}
+				break;
+			case MoveDirection.right:
+				if (currentSlectedMinigame._rightNeighbourButton != null)
+				{
+					Debug.Log("right");
+					eventsystem.SetSelectedGameObject(currentSlectedMinigame._rightNeighbourButton.gameObject);
+				}
 
-
-		eventsystem.SetSelectedGameObject(RandomMinigameButton.gameObject);
-		
-	}
-	public void ButtonGoDown()
-	{
-
-		eventsystem.SetSelectedGameObject(SelectMinigameButton.gameObject);
-		
-
-
-
-
+				break;
+			default:
+				break;
+		}
 	}
 
 }

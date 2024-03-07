@@ -233,7 +233,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!328 &210479039
 VideoPlayer:
   m_ObjectHideFlags: 0
@@ -694,6 +694,55 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 387560566}
   m_CullTransparentMesh: 1
+--- !u!1 &483707796
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 483707797}
+  - component: {fileID: 483707798}
+  m_Layer: 0
+  m_Name: JoyconManager Select Menu
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &483707797
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 483707796}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1622.1906, y: 391.89438, z: 0.9351516}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &483707798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 483707796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9c6aa0191e2be6429b195e326264337, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EnableIMU: 1
+  EnableLocalize: 1
+  eventsystem: {fileID: 662163979}
+  _selectMinigameButtons: []
+  canMoveUI: 0
 --- !u!1 &500302466
 GameObject:
   m_ObjectHideFlags: 0
@@ -1393,6 +1442,55 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 803354991}
   m_CullTransparentMesh: 1
+--- !u!1 &857828147
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 857828149}
+  - component: {fileID: 857828150}
+  m_Layer: 0
+  m_Name: Player
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &857828149
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 857828147}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &857828150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 857828147}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d1bcfa68e450794fb01d97c635f6b2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stick: []
+  gyro: {x: 0, y: 0, z: 0}
+  accel: {x: 0, y: 0, z: 0}
+  jc_ind: 0
+  orientation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &912748485
 GameObject:
   m_ObjectHideFlags: 0
@@ -1409,7 +1507,7 @@ GameObject:
   - component: {fileID: 912748488}
   - component: {fileID: 912748487}
   m_Layer: 5
-  m_Name: Game 2 Button  (1)
+  m_Name: Game 3 Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1482,6 +1580,38 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+  - eventID: 9
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 912748488}
+          m_TargetAssemblyTypeName: SelectMinigameButton, Assembly-CSharp
+          m_MethodName: PlayVideo
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 10
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 912748488}
+          m_TargetAssemblyTypeName: SelectMinigameButton, Assembly-CSharp
+          m_MethodName: StopVideo
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!114 &912748488
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1499,6 +1629,10 @@ MonoBehaviour:
   _videoPlayer: {fileID: 912748489}
   _minigameName: {fileID: 274259272}
   _rawImage: {fileID: 912748490}
+  _upNeighbourButton: {fileID: 0}
+  _downNeighbourButton: {fileID: 0}
+  _leftNeighbourButton: {fileID: 2138833408}
+  _rightNeighbourButton: {fileID: 0}
 --- !u!328 &912748489
 VideoPlayer:
   m_ObjectHideFlags: 0
@@ -1971,6 +2105,10 @@ MonoBehaviour:
   _videoPlayer: {fileID: 1616176852}
   _minigameName: {fileID: 750863603}
   _rawImage: {fileID: 1616176848}
+  _upNeighbourButton: {fileID: 0}
+  _downNeighbourButton: {fileID: 0}
+  _leftNeighbourButton: {fileID: 0}
+  _rightNeighbourButton: {fileID: 2138833408}
 --- !u!114 &1616176850
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2403,6 +2541,10 @@ MonoBehaviour:
   _videoPlayer: {fileID: 0}
   _minigameName: {fileID: 0}
   _rawImage: {fileID: 0}
+  _upNeighbourButton: {fileID: 0}
+  _downNeighbourButton: {fileID: 0}
+  _leftNeighbourButton: {fileID: 0}
+  _rightNeighbourButton: {fileID: 0}
 --- !u!114 &1919455018
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2519,6 +2661,38 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+  - eventID: 9
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2138833405}
+          m_TargetAssemblyTypeName: SelectMinigameButton, Assembly-CSharp
+          m_MethodName: PlayVideo
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 10
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2138833405}
+          m_TargetAssemblyTypeName: SelectMinigameButton, Assembly-CSharp
+          m_MethodName: StopVideo
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!114 &2138833405
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2536,6 +2710,10 @@ MonoBehaviour:
   _videoPlayer: {fileID: 2138833406}
   _minigameName: {fileID: 1719793487}
   _rawImage: {fileID: 2138833407}
+  _upNeighbourButton: {fileID: 0}
+  _downNeighbourButton: {fileID: 0}
+  _leftNeighbourButton: {fileID: 1616176850}
+  _rightNeighbourButton: {fileID: 912748491}
 --- !u!328 &2138833406
 VideoPlayer:
   m_ObjectHideFlags: 0

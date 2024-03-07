@@ -16,6 +16,14 @@ public class SelectMinigameButton : MonoBehaviour
     [SerializeField] VideoPlayer _videoPlayer;
     [SerializeField] TextMeshProUGUI _minigameName;
     [SerializeField] RawImage _rawImage;
+
+
+    [SerializeField] public Button _upNeighbourButton;
+    [SerializeField] public Button _downNeighbourButton;
+    [SerializeField] public Button _leftNeighbourButton;
+    [SerializeField] public Button _rightNeighbourButton;
+
+    
     void Awake()
     {
         name = _minigameSO.MinigameName + " Button";
@@ -58,4 +66,7 @@ public class SelectMinigameButton : MonoBehaviour
         _videoPlayer.Stop();
         _thumbnail.SetActive(true);
     }
+
+
+
 }
