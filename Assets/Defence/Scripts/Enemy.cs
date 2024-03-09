@@ -14,14 +14,20 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        transform.Translate(Vector3.forward * speed);
+        if (!DefenceManager.Instance.gameOver)
+        {
+            transform.Translate(Vector3.forward * speed);
+        }
     }
-
     private void OnTriggerEnter(Collider other)
     {
+        if (other.CompareTag("Player"))
+        {
+            Destroy(this.gameObject);
+        }
         if (other.CompareTag("Finish"))
         {
-            //take damage
+            DefenceManager.Instance.TakeDamage();
             Destroy(this.gameObject);
         }
     }

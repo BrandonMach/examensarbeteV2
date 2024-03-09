@@ -14,6 +14,7 @@ public class DefenceManager : MonoBehaviour
     public bool gameOver;
     public TMPro.TextMeshProUGUI timerTxt;
     public TMPro.TextMeshProUGUI livestxt;
+    public GameObject gameOverPanel, VictoryPanel;
     private void Awake()
     {
         if (Instance != null)
@@ -33,7 +34,7 @@ public class DefenceManager : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (timer > 0)
+        if (timer > 0 && lives > 0)
         {
             timer -= Time.deltaTime;
         }
@@ -42,12 +43,20 @@ public class DefenceManager : MonoBehaviour
             EndGame();
         }
         timerTxt.SetText(timer.ToString("#.00"));
-        //livestxt.SetText(lives.ToString("#.00"));
+        livestxt.SetText(lives.ToString());
     }
 
     private void EndGame()
     {
         //Anything that should happen when the game ends
+        if (lives <= 0)
+        {
+            gameOverPanel.SetActive(true);
+        }
+        else if(timer <= 0)
+        {
+            VictoryPanel.SetActive(true);
+        }
         gameOver = true;
     }
 }
