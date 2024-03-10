@@ -48,14 +48,17 @@ public class EnemySpawner : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        delay -= Time.deltaTime;
-        if (delay <= 0)
+        if (DefenceManager.Instance.startGame)
         {
-            spawnX = Random.Range(lowX, highX);
-            spawnZ = Random.Range(lowZ, highZ);
-            spawnPos = new Vector3(spawnX, 2.5f, spawnZ);
-            Instantiate(EnemyPrefab, spawnPos, Quaternion.identity, this.transform);
-            delay = spawnSpeed;
+            delay -= Time.deltaTime;
+            if (delay <= 0)
+            {
+                spawnX = Random.Range(lowX, highX);
+                spawnZ = Random.Range(lowZ, highZ);
+                spawnPos = new Vector3(spawnX, 2.5f, spawnZ);
+                Instantiate(EnemyPrefab, spawnPos, Quaternion.identity, this.transform);
+                delay = spawnSpeed;
+            }
         }
     }
 }

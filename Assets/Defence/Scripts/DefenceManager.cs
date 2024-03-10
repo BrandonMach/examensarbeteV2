@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class DefenceManager : MonoBehaviour
@@ -9,9 +10,11 @@ public class DefenceManager : MonoBehaviour
     public static DefenceManager Instance { get => _instance; set => _instance = value; }
     #endregion
 
+    [SerializeField] DefenceJoyconPlayer[] _playerArray;
+
     public int lives;
     public float timer;
-    public bool gameOver;
+    public bool gameOver, startGame;
     public TMPro.TextMeshProUGUI timerTxt;
     public TMPro.TextMeshProUGUI livestxt;
     public GameObject gameOverPanel, VictoryPanel;
@@ -31,19 +34,36 @@ public class DefenceManager : MonoBehaviour
         lives--;
     }
 
+    public void UpdatePlayerArray()
+    {
+        _playerArray = FindObjectsOfType<DefenceJoyconPlayer>();
+    }
+
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (timer > 0 && lives > 0)
+        if (_playerArray.Length >= 2 && _playerArray.All(go => go.PlayerIsReady == true)) //Start the game once all player are ready 
         {
-            timer -= Time.deltaTime;
+            startGame = true;
+            foreach (var players in _playerArray)
+            {
+                StartCoroutine(players.ReadyUpUI.GetComponent<ReadyUpScript>().AllPlayersReady()); //Should be fade text instead of set active false
+
+            }
         }
-        else
+        if (startGame)
         {
-            EndGame();
+            if (timer > 0 && lives > 0)
+            {
+                timer -= Time.deltaTime;
+            }
+            else
+            {
+                EndGame();
+            }
+            timerTxt.SetText(timer.ToString("#.00"));
+            livestxt.SetText(lives.ToString());
         }
-        timerTxt.SetText(timer.ToString("#.00"));
-        livestxt.SetText(lives.ToString());
     }
 
     private void EndGame()
