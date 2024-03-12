@@ -43,9 +43,12 @@ public class StopwatchManager : MonoBehaviour
 
     public bool StartTheGame; //Only start the game when all player have joined
 
+
+    [Header("Game is finished")]
     bool _gameIsFinished = false;
     bool _announceWinner;
-
+    [SerializeField] GameObject _gameIsFinishedText;
+    [SerializeField] RectTransform _crownRectTransform;
 
     [SerializeField] Animator _textAnim;
     bool _startTextFade;
@@ -67,14 +70,10 @@ public class StopwatchManager : MonoBehaviour
     {
         _stopwatch = _startTime;
         _playerArray = FindObjectsOfType<JoyconStopwatchPlayer>();
-
+        _gameIsFinishedText.SetActive(false);
 
     }
 
-    //public void UpdatePlayerArray()
-    //{
-    //    _playerArray = FindObjectsOfType<JoyconStopwatchPlayer>();
-    //}
 
     // Update is called once per frame
     void Update()
@@ -103,7 +102,7 @@ public class StopwatchManager : MonoBehaviour
 
 
             // As long as Time hasn't run out reduce the stopwatch
-            if (!TimeRanOut)
+            if (!TimeRanOut && !_gameIsFinished)
             {
                 _stopwatch -= Time.deltaTime;
             }
@@ -132,6 +131,7 @@ public class StopwatchManager : MonoBehaviour
 
             if (_gameIsFinished && !_announceWinner)
             {
+                _gameIsFinishedText.SetActive(true);
                 _announceWinner = true;
                 CheckWinner();
             }
@@ -143,12 +143,15 @@ public class StopwatchManager : MonoBehaviour
 
     public void CheckWinner()
     {
-        System.Array.Sort(_playerArray, (a, b) => { return a.GetStoppedTime.CompareTo(b.GetStoppedTime); });
+        System.Array.Sort(_playerArray, (a, b) => { return a.GetStoppedTime.CompareTo(b.GetStoppedTime); }); //Fort player array so that the player with closest to 0 is number one in the array
         foreach (var item in _playerArray)
         {
             Debug.LogWarning(item.GetStoppedTime);
         }
         Debug.LogWarning(_playerArray[0].gameObject.name + " is the winner");
+        //Place crown over player 
+        _playerArray[0].IsWinner = true;
+        
     }
 
 

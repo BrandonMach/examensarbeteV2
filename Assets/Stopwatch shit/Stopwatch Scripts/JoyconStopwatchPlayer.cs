@@ -17,8 +17,9 @@ public class JoyconStopwatchPlayer : JoyconPlayerBase
 	float _stoppedTime = Mathf.Infinity;
 	public float GetStoppedTime { get => _stoppedTime; set => _stoppedTime = value; }
 
-	
 
+	[SerializeField] GameObject _winnersCrown;
+	public bool IsWinner;
 
 	void Start()
 	{
@@ -54,7 +55,9 @@ public class JoyconStopwatchPlayer : JoyconPlayerBase
 		}
 
 		_playerNameText.text = name;
- 
+
+		_winnersCrown.SetActive(false);
+
 	}
 
 	// Update is called once per frame
@@ -71,6 +74,8 @@ public class JoyconStopwatchPlayer : JoyconPlayerBase
 			StopwatchGameControls(j);
 
 		}
+
+		_winnersCrown.SetActive(IsWinner);
 	}
 
 	private void StopwatchGameControls(Joycon j)

@@ -48,22 +48,22 @@ public class JoyconSelectMenuControls : MonoBehaviour
                 JoyconManagerSelectMenu.Instance.canMoveUI = true;
             }
 
-            if (JoyconManagerSelectMenu.Instance.canMoveUI  && j.GetStick()[1] > 0.5f)
+            if (JoyconManagerSelectMenu.Instance.canMoveUI  && j.GetStick()[1] > 0.8f)
 			{
 				JoyconManagerSelectMenu.Instance.MoveInUI(JoyconManagerSelectMenu.MoveDirection.up);
 			}
 
-			if (JoyconManagerSelectMenu.Instance.canMoveUI  && j.GetStick()[1] < -0.5f)
+			if (JoyconManagerSelectMenu.Instance.canMoveUI  && j.GetStick()[1] < -0.8f)
 			{
 				JoyconManagerSelectMenu.Instance.MoveInUI(JoyconManagerSelectMenu.MoveDirection.down);
 			}
 
-			if (JoyconManagerSelectMenu.Instance.canMoveUI  && j.GetStick()[0] < -0.5f)
+			if (JoyconManagerSelectMenu.Instance.canMoveUI  && j.GetStick()[0] < -0.8f)
 			{
 				JoyconManagerSelectMenu.Instance.MoveInUI(JoyconManagerSelectMenu.MoveDirection.left);
 			}
 
-			if (JoyconManagerSelectMenu.Instance.canMoveUI  && j.GetStick()[0] > 0.5f)
+			if (JoyconManagerSelectMenu.Instance.canMoveUI  && j.GetStick()[0] > 0.8f)
 			{
 				JoyconManagerSelectMenu.Instance.MoveInUI(JoyconManagerSelectMenu.MoveDirection.right);
 			}

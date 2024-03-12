@@ -21,7 +21,8 @@ public class ShakeToRun : JoyconPlayerBase
 
     [SerializeField] bool _gotCought;
 
-
+    [SerializeField] GameObject _winnerCrown;
+    public bool HasWon;
 
     void Start()
     {
@@ -37,35 +38,45 @@ public class ShakeToRun : JoyconPlayerBase
     // Update is called once per frame
     void Update()
     {
-        
-
-
-        if (_gotCought)
+        if (!RLGLBananaManager.Instance.GameIsFinished)
         {
-            _gotCought = false;
-            _stepsTaken = 0; //Kanke mins 5 steg vi får playtest
+            if (_gotCought)
+            {
+                _gotCought = false;
+                _stepsTaken = 0; //Kanke mins 5 steg vi får playtest
+            }
+
+            if (joycons.Count > 0)
+            {
+                Joycon j = joycons[jc_ind];
+
+                base.ReadyUp(j);
+                //If game type så kan vi återanvända skriptet
+                stick = j.GetStick();
+
+                // Gyro values: x, y, z axis values (in radians per second)
+                gyro = j.GetGyro();
+
+                // Accel values:  x, y, z axis values (in Gs)
+                accel = j.GetAccel();
+
+            }
+
+
+
+            PlayerIsShakingJoyCon();
+            _stepsText.text = "Steps: " + _stepsTaken;
+
+            if (_stepsTaken >= 30)
+            {
+                HasWon = true;
+
+            }
+            _winnerCrown.SetActive(HasWon);
         }
 
-        if (joycons.Count > 0)
-        {
-            Joycon j = joycons[jc_ind];
-
-            base.ReadyUp(j);
-            //If game type så kan vi återanvända skriptet
-            stick = j.GetStick();
-
-            // Gyro values: x, y, z axis values (in radians per second)
-            gyro = j.GetGyro();
-
-            // Accel values:  x, y, z axis values (in Gs)
-            accel = j.GetAccel();
-
-        }
 
        
-
-        PlayerIsShakingJoyCon();
-        _stepsText.text = "Steps: " + _stepsTaken;
 
     }
 

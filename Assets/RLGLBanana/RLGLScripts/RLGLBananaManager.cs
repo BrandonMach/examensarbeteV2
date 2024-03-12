@@ -20,6 +20,7 @@ public class RLGLBananaManager : MonoBehaviour
 
     [SerializeField] ShakeToRun[] _playerArray;
     public bool StartTheGame; //Only start the game when all player have joined
+    public bool GameIsFinished;
 
     #region Red Light Green Light
     [SerializeField] TextMeshProUGUI _redLightGreenLIghtText;
@@ -56,10 +57,7 @@ public class RLGLBananaManager : MonoBehaviour
 
     }
 
-    //public void UpdatePlayerArray()
-    //{
-    //    _playerArray = FindObjectsOfType<ShakeToRun>();
-    //}
+
 
     // Update is called once per frame
     void Update()
@@ -80,7 +78,17 @@ public class RLGLBananaManager : MonoBehaviour
         }
 
 
-        if (StartTheGame)
+        if(_playerArray.Any(go => go.HasWon == true))
+        {
+            //Stop the game
+            GameIsFinished = true;
+            _redLightGreenLIghtText.color = Color.black;
+            _redLightGreenLIghtText.text = "Game Is Finished";
+
+        }
+
+
+        if (StartTheGame && !GameIsFinished)
         {
 
 
