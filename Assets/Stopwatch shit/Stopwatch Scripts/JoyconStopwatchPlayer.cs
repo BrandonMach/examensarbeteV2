@@ -36,25 +36,25 @@ public class JoyconStopwatchPlayer : JoyconPlayerBase
 		
 		_playerNameText.GetComponent<RectTransform>().position = new Vector3(250 + (500 * jc_ind), 260, this.transform.position.z);
 
-		switch (jc_ind)
-		{
-			case 0:
-				_playerNameText.color = Color.red;
-				break;
-			case 1:
-				_playerNameText.color = Color.blue;
-				break;
-			case 2:
-				_playerNameText.color = Color.yellow;
-				break;
-			case 3:
-				_playerNameText.color = Color.yellow;
-				break;
-			default:
-				break;
-		}
+		//switch (jc_ind)
+		//{
+		//	case 0:
+		//		_playerNameText.color = Color.red;
+		//		break;
+		//	case 1:
+		//		_playerNameText.color = Color.blue;
+		//		break;
+		//	case 2:
+		//		_playerNameText.color = Color.yellow;
+		//		break;
+		//	case 3:
+		//		_playerNameText.color = Color.yellow;
+		//		break;
+		//	default:
+		//		break;
+		//}
 
-		_playerNameText.text = name;
+		//_playerNameText.text = name;
 
 		_winnersCrown.SetActive(false);
 

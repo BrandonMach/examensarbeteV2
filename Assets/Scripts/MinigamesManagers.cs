@@ -19,7 +19,8 @@ public class MinigamesManagers : MonoBehaviour
         Stopwatch,
         Crossyroad,
         ShakeAndRun,
-        HoldBanana
+        Defence,
+        Balance
     }
     public  MiniGameType CurrentMinigame;
 

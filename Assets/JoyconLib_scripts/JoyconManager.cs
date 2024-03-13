@@ -67,10 +67,13 @@ public class JoyconManager: MonoBehaviour
             case MinigamesManagers.MiniGameType.ShakeAndRun:
 				PlayerPrefab = MinigamePlayerPrefabs[2];
 				break;
-			case MinigamesManagers.MiniGameType.HoldBanana:
+			case MinigamesManagers.MiniGameType.Defence:
 				PlayerPrefab = MinigamePlayerPrefabs[3];
 				break;
-            default:
+			case MinigamesManagers.MiniGameType.Balance:
+				PlayerPrefab = MinigamePlayerPrefabs[4];
+				break;
+			default:
                 break;
         }
 
