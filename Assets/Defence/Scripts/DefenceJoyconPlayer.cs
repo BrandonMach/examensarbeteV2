@@ -88,7 +88,33 @@ public class DefenceJoyconPlayer : JoyconPlayerBase
     {
         orientation = j.GetVector();
         var angles = orientation.eulerAngles;
-
-        transform.parent.rotation = Quaternion.Euler(0, angles.y + (90 * jc_ind), 0);
+        if (joycons.Count == 2)
+        {
+            if (angles.y > 270) { angles.y = 270; }
+            else if (angles.y < 90) { angles.y = 90; }
+            if (angles.y <= 270 && angles.y >= 90)
+            {
+               
+                transform.parent.rotation = Quaternion.Euler(0, angles.y + (180 * jc_ind), 0);
+            }
+        }
+        if (joycons.Count == 3)
+        {
+            if (angles.y > 240) { angles.y = 240; }
+            else if (angles.y < 160) { angles.y = 160; }
+            if (angles.y <= 240 && angles.y >= 160)
+            {
+                transform.parent.rotation = Quaternion.Euler(0, angles.y + (135 * jc_ind), 0);
+            }
+        }
+        if (joycons.Count == 4)
+        {
+            if (angles.y > 225) { angles.y = 225; }
+            else if (angles.y < 135) { angles.y = 135; }
+            if (angles.y <= 225 && angles.y >= 135)
+            {
+                transform.parent.rotation = Quaternion.Euler(0, angles.y + (90 * jc_ind), 0);
+            }
+        }
     }
 }
