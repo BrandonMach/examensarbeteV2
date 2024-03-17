@@ -16,7 +16,6 @@ public class RLGLBananaManager : MonoBehaviour
     public static RLGLBananaManager Instance { get => _instance; set => _instance = value; }
     #endregion
 
-    PlayerInputManager _playerInputManager;
 
     [SerializeField] ShakeToRun[] _playerArray;
     public bool StartTheGame; //Only start the game when all player have joined
@@ -37,7 +36,7 @@ public class RLGLBananaManager : MonoBehaviour
     {
         if (Instance != null)
         {
-            Debug.LogWarning("More than one instance of GameManager found");
+            Debug.LogWarning("More than one instance of RLGLBananaManager found");
             return;
         }
         Instance = this;
