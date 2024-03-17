@@ -25,6 +25,7 @@ public class BalanceGameManager : MonoBehaviour
 
 
     [SerializeField]  bool StartSpawn;
+    [SerializeField] float _balanceTimer;
 
     private void Awake()
     {
@@ -62,7 +63,7 @@ public class BalanceGameManager : MonoBehaviour
 
         if (StartTheGame )
         {
-
+            //Start Coroutine only once
             if (StartSpawn)
             {
                 StartSpawn = false;
@@ -75,13 +76,6 @@ public class BalanceGameManager : MonoBehaviour
 
 
 
-    void SpawnFallingItem()
-    {
-        _fallingItemsCount++;
-
-        Instantiate(_fallingItems[0], new Vector3(0, 4, 0), Quaternion.identity);
-
-    }
 
     IEnumerator SpawnFallingItems()
     {
