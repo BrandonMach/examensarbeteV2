@@ -13,11 +13,13 @@ public class DefenceManager : MonoBehaviour
     [SerializeField] DefenceJoyconPlayer[] _playerArray;
 
     public int lives;
-    public float timer;
-    public bool gameOver, startGame;
+    public float timer, interactTimer;
+    public bool gameOver, startGame, interaction;
     public TMPro.TextMeshProUGUI timerTxt;
     public TMPro.TextMeshProUGUI livestxt;
     public GameObject gameOverPanel, VictoryPanel;
+    public GameObject core;
+    float rotationValue;
     private void Awake()
     {
         if (Instance != null)
@@ -56,6 +58,21 @@ public class DefenceManager : MonoBehaviour
             if (timer > 0 && lives > 0)
             {
                 timer -= Time.deltaTime;
+                if (Input.GetKeyDown(KeyCode.R))
+                {
+                    interaction = true;
+                }
+                if (interaction)
+                {
+                    interactTimer += Time.deltaTime;
+                    rotationValue += 0.5f;
+                    core.transform.rotation = Quaternion.Euler(0, rotationValue, 0);
+                    if (interactTimer > 6)
+                    {
+                        interactTimer = 0;
+                        interaction = false;
+                    }
+                }
             }
             else
             {
