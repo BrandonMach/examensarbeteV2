@@ -57,6 +57,10 @@ public class BalanceGameManager : MonoBehaviour
             StartTheGame = true;
            
         }
+        else
+        {
+            StartTheGame = false;
+        }
 
 
 
