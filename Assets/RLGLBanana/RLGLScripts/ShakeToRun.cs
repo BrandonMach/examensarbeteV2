@@ -105,22 +105,17 @@ public class ShakeToRun : JoyconPlayerBase
                 _playerModel.transform.position = startPos;
             }
 
-            
+            //
             _stopWindow = 0.2f;
             _stoppedRunning = false;
-            Debug.LogError("Hej jag skakas");
             _shakeInput++;
 
 
             if (_shakeInput >= _shakeInputToStepThreshold)
-            {
-                
+            {              
                 _shakeInput = 0;
-                Debug.LogWarning("ta ett steg fram");
                 _stepsTaken++;
                 _playerModel.transform.position = new Vector3(_playerModel.transform.position.x, _playerModel.transform.position.y, (_playerModel.transform.position.z + 0.5f));
-
-
             }
             
         }

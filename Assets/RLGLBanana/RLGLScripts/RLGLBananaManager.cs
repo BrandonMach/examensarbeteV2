@@ -31,6 +31,8 @@ public class RLGLBananaManager : MonoBehaviour
     [SerializeField] Transform[] _spawnPoints;
     [SerializeField] GameObject[] _playerModels;
     [SerializeField] float StepGoal;
+
+    bool _spacePressed;
     #endregion
 
     
@@ -101,15 +103,25 @@ public class RLGLBananaManager : MonoBehaviour
 
 
 
-            //Warning sing when Guard will turn around
-            if (_CatchWaitTimer <= 1f) 
+            // Warning sing when Guard will turn around
+            if (_CatchWaitTimer <= 1f ) 
             {
                 _warningSign.SetActive(true);
 
             }
+
+            // If audience presses space activate stop
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                Debug.Log("Audience pressed space");
+                _spacePressed = true;
+                StartCoroutine(AudienceStop());
+
+                
+            }
             
-            //After Catch time is 
-            if (_CatchWaitTimer > 0 )
+            // Count down Catch time and after set it to green light
+            if (_CatchWaitTimer > 0 && !_spacePressed)
             {
                 _CatchWaitTimer -= Time.deltaTime;
 
@@ -121,6 +133,8 @@ public class RLGLBananaManager : MonoBehaviour
                 StartCoroutine(PlayersCanMove());
 
             }
+
+
 
 
 
@@ -148,6 +162,16 @@ public class RLGLBananaManager : MonoBehaviour
         yield return new WaitForSeconds(Random.Range(1.3f,3.5f));
         _CatchWaitTimer = Random.Range(3, 6);
         
+
+    }
+
+    IEnumerator AudienceStop()
+    {
+        GreenLight = false;
+        yield return new WaitForSeconds(Random.Range(1.3f, 3.5f));
+        _CatchWaitTimer = Random.Range(3, 6);
+        _spacePressed = false;
+
 
     }
 }

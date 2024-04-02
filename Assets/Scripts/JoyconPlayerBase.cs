@@ -60,7 +60,29 @@ public class JoyconPlayerBase : MonoBehaviour
     {
 		this.name = "Player " + (1 + jc_ind);
 
-		_playerNameText.GetComponent<RectTransform>().position = new Vector3(250 + (500 * jc_ind), 260, this.transform.position.z);
+		//Canvas ready up position
+        switch (MinigamesManagers.Instance.CurrentMinigame)
+        {
+            case MinigamesManagers.MiniGameType.Stopwatch:
+				_playerNameText.GetComponent<RectTransform>().position = new Vector3(250 + (500 * jc_ind), 260, this.transform.position.z);
+				break;
+            case MinigamesManagers.MiniGameType.Crossyroad:
+				_playerNameText.GetComponent<RectTransform>().position = new Vector3(250 + (500 * jc_ind), 260, this.transform.position.z);
+				break;
+            case MinigamesManagers.MiniGameType.ShakeAndRun:
+				_playerNameText.GetComponent<RectTransform>().position = new Vector3(250 + (500 * jc_ind), 160, this.transform.position.z);
+				break;
+            case MinigamesManagers.MiniGameType.Defence:
+				_playerNameText.GetComponent<RectTransform>().position = new Vector3(250 + (500 * jc_ind), 260, this.transform.position.z);
+				break;
+            case MinigamesManagers.MiniGameType.Balance:
+				_playerNameText.GetComponent<RectTransform>().position = new Vector3(250 + (500 * jc_ind), 260, this.transform.position.z);
+				break;
+            default:
+                break;
+        }
+
+       
 
 		switch (jc_ind)
 		{
