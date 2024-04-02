@@ -25,9 +25,12 @@ public class RLGLBananaManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI _redLightGreenLIghtText;
     [SerializeField] public  bool GreenLight;
 
-    [SerializeField] float _waitTimer;
+    [SerializeField] float _CatchWaitTimer;
 
     [SerializeField] GameObject _warningSign;
+    [SerializeField] Transform[] _spawnPoints;
+    [SerializeField] GameObject[] _playerModels;
+    [SerializeField] float StepGoal;
     #endregion
 
     
@@ -48,9 +51,18 @@ public class RLGLBananaManager : MonoBehaviour
 
     void Start()
     {
-        _waitTimer = Random.Range(3, 6);
+        _CatchWaitTimer = Random.Range(3, 6);
         
         _playerArray = FindObjectsOfType<ShakeToRun>();
+
+
+
+        for (int i = 0; i < _playerArray.Length; i++)
+        {
+            //The Findobjects finds the players highest number playe to lowers 4->1
+            _playerArray[_playerArray.Length-(1+i)].SetCharacterModel(Instantiate(_playerModels[i], _spawnPoints[i]));
+            _playerArray[i].SetStepGoal(StepGoal);
+        }
 
         _warningSign.SetActive(false);
 
@@ -62,11 +74,8 @@ public class RLGLBananaManager : MonoBehaviour
     void Update()
     {
 
-
-
-
-
-        if (_playerArray.Length >= 2 && _playerArray.All(go => go.PlayerIsReady == true)) //Start the game once all player are ready 
+        //Start the game once all player are ready 
+        if (_playerArray.Length >= 2 && _playerArray.All(go => go.PlayerIsReady == true)) 
         {
             StartTheGame = true;
             foreach (var players in _playerArray)
@@ -91,20 +100,18 @@ public class RLGLBananaManager : MonoBehaviour
         {
 
 
-         
 
-            if (_waitTimer <= 1f) //Warning sing when Guard will trun around
+            //Warning sing when Guard will turn around
+            if (_CatchWaitTimer <= 1f) 
             {
                 _warningSign.SetActive(true);
 
-
-
             }
             
-
-            if (_waitTimer > 0 )
+            //After Catch time is 
+            if (_CatchWaitTimer > 0 )
             {
-                _waitTimer -= Time.deltaTime;
+                _CatchWaitTimer -= Time.deltaTime;
 
                 GreenLight = true;
 
@@ -139,7 +146,7 @@ public class RLGLBananaManager : MonoBehaviour
         GreenLight = false;
         _warningSign.SetActive(false);
         yield return new WaitForSeconds(Random.Range(1.3f,3.5f));
-        _waitTimer = Random.Range(3, 6);
+        _CatchWaitTimer = Random.Range(3, 6);
         
 
     }

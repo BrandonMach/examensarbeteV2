@@ -21,8 +21,16 @@ public class ShakeToRun : JoyconPlayerBase
 
     [SerializeField] bool _gotCought;
 
+
+    [Header("Winner")]
     [SerializeField] GameObject _winnerCrown;
     public bool HasWon;
+    float _stepGoal;
+
+    [Header("Animation")]
+    [SerializeField] GameObject _playerModel;
+    [SerializeField] Animator _anim;
+    Vector3 startPos;
 
     void Start()
     {
@@ -63,11 +71,15 @@ public class ShakeToRun : JoyconPlayerBase
             }
 
 
-
+           
             PlayerIsShakingJoyCon();
-            _stepsText.text = "Steps: " + _stepsTaken;
 
-            if (_stepsTaken >= 30)
+            //Playe player model Moving animation
+            _anim.SetBool("Moving", !_stoppedRunning);
+            _stepsText.text = "Steps: " + _stepsTaken;
+            
+
+            if (_stepsTaken >= _stepGoal)
             {
                 HasWon = true;
 
@@ -76,20 +88,24 @@ public class ShakeToRun : JoyconPlayerBase
         }
 
 
-       
+      
 
     }
 
     private void PlayerIsShakingJoyCon()
     {
+
+       
         if (accel.x > _accelerometerThreshold)
         {
             if (!RLGLBananaManager.Instance.GreenLight)
             {
                 Debug.LogError(name + " have been cought. Go back");
                 _gotCought = true;
+                _playerModel.transform.position = startPos;
             }
 
+            
             _stopWindow = 0.2f;
             _stoppedRunning = false;
             Debug.LogError("Hej jag skakas");
@@ -98,14 +114,19 @@ public class ShakeToRun : JoyconPlayerBase
 
             if (_shakeInput >= _shakeInputToStepThreshold)
             {
+                
                 _shakeInput = 0;
                 Debug.LogWarning("ta ett steg fram");
                 _stepsTaken++;
+                _playerModel.transform.position = new Vector3(_playerModel.transform.position.x, _playerModel.transform.position.y, (_playerModel.transform.position.z + 0.5f));
+
 
             }
+            
         }
         else
         {
+           
             _stopWindow -= Time.deltaTime;
             if (_stopWindow <= 0)
             {
@@ -113,5 +134,18 @@ public class ShakeToRun : JoyconPlayerBase
                 _shakeInput = 0;
             }
         }
+    }
+
+
+    public void SetCharacterModel(GameObject go)
+    {
+        _playerModel = go;
+        startPos = new Vector3(_playerModel.transform.position.x, _playerModel.transform.position.y, _playerModel.transform.position.z);
+        _anim = _playerModel.GetComponent<Animator>();
+    }
+
+    public void SetStepGoal(float stepGoal)
+    {
+        _stepGoal = stepGoal;
     }
 }
