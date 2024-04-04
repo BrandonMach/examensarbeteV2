@@ -96,7 +96,7 @@ public class JoyconPlayerBase : MonoBehaviour
 				_playerNameText.color = Color.yellow;
 				break;
 			case 3:
-				_playerNameText.color = Color.yellow;
+				_playerNameText.color = Color.green;
 				break;
 			default:
 				break;

@@ -28,8 +28,9 @@ public class RLGLBananaManager : MonoBehaviour
     [SerializeField] float _CatchWaitTimer;
 
     [SerializeField] GameObject _warningSign;
-    [SerializeField] Transform[] _spawnPoints;
-    [SerializeField] GameObject[] _playerModels;
+    [SerializeField] Transform[] _spawnPoints = new Transform[4];
+    [SerializeField] GameObject[] _playerModels = new GameObject[4];
+    [SerializeField] GameObject[] _tilesIndicators = new GameObject[4];
     [SerializeField] float StepGoal;
 
     bool _spacePressed;
@@ -63,6 +64,10 @@ public class RLGLBananaManager : MonoBehaviour
         {
             //The Findobjects finds the players highest number playe to lowers 4->1
             _playerArray[_playerArray.Length-(1+i)].SetCharacterModel(Instantiate(_playerModels[i], _spawnPoints[i]));
+
+            //Activate player tile indicators
+            _tilesIndicators[i].SetActive(true);
+            //Set the players step goal
             _playerArray[i].SetStepGoal(StepGoal);
         }
 
