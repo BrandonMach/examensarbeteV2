@@ -147,7 +147,7 @@ public class RLGLBananaManager : MonoBehaviour
             if (GreenLight)
             {
                 _redLightGreenLIghtText.color = Color.green;
-                _redLightGreenLIghtText.text = "You can move now";
+                _redLightGreenLIghtText.text = "Move";
             }
             else
             {
