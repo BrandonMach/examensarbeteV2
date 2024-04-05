@@ -137,6 +137,7 @@ public class ShakeToRun : JoyconPlayerBase
         _playerModel = go;
         startPos = new Vector3(_playerModel.transform.position.x, _playerModel.transform.position.y, _playerModel.transform.position.z);
         _anim = _playerModel.GetComponent<Animator>();
+        
     }
 
     public void SetStepGoal(float stepGoal)
