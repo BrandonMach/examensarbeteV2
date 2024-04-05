@@ -6,36 +6,18 @@ public class CrossEnemies : MonoBehaviour
 {
     float lastDir;
     public float dir, originalDir;
+    GameObject parent1;
+    CrossEnemySpawner parent;
     // Start is called before the first frame update
     void Start()
     {
-        dir = Random.Range(-2, 3);
-        if (dir == 0)
-        {
-            dir = 1;
-        }
-        dir /= 4;
-        lastDir = dir;
-        originalDir = dir;
+        parent1 = transform.parent.parent.gameObject;
+        parent = parent1.GetComponent<CrossEnemySpawner>();
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (CrossyroadsManager.Instance.StartTheGame)
-        {
-            transform.Translate(new Vector3(dir, 0, 0));
-
-            if (transform.position.x >= (24))
-            {
-                lastDir = dir;
-                dir = -lastDir;
-            }
-            if (transform.position.x <= (-24))
-            {
-                lastDir = dir;
-                dir = -lastDir;
-            }
-        }
+        transform.RotateAround(parent.center.transform.position, parent.rot, parent.rotationDegree * Time.deltaTime);
     }
 }
