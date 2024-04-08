@@ -17,7 +17,7 @@ public class JoyconPlayerBase : MonoBehaviour
 	public Quaternion orientation;
 
 
-	[SerializeField] TextMeshProUGUI _playerNameText;
+	[SerializeField] protected TextMeshProUGUI _playerNameText;
 
 
 

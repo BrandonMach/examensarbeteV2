@@ -38,22 +38,6 @@ public class CrossyroadsPlayer : JoyconPlayerBase
 
 
     }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Respawn"))
-        {
-            transform.position = spawn;
-        }
-        if (other.CompareTag("Finish"))
-        {
-            winner = true;
-            CrossyroadsManager.Instance.DeclareWinner(this.name);
-            CrossyroadsManager.Instance.StartTheGame = false;
-            CrossyroadsManager.Instance.GameOver = true;
-        }
-    }
-
     public void OnPlayerIsReady(InputAction.CallbackContext context)
     {
         PlayerIsReady = true;
