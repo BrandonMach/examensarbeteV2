@@ -78,20 +78,27 @@ public class StopwatchManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        AllPlayersAreReadyCheck();
+        MainGameLoop();     
+    }
 
-        if(_playerArray.Length >= 2 && _playerArray.All(go => go.PlayerIsReady == true)) //Start the game once all player are ready 
+    private void AllPlayersAreReadyCheck()
+    {
+        if (_playerArray.Length >= 2 && _playerArray.All(go => go.PlayerIsReady == true)) //Start the game once all player are ready 
         {
             StartTheGame = true;
             foreach (var players in _playerArray)
             {
                 StartCoroutine(players.ReadyUpUI.GetComponent<ReadyUpScript>().AllPlayersReady()); //Should be fade text instead of set active false
-                
+
             }
         }
+    }
 
-        if (StartTheGame)     
+    private void MainGameLoop()
+    {
+        if (StartTheGame)
         {
-
             if (!_startTextFade)
             {
                 _startTextFade = true;
@@ -111,42 +118,63 @@ public class StopwatchManager : MonoBehaviour
             AddMoreTime();
 
             //Check if stopwatch time has run out
-            if (_stopwatch <= 0 && !TimeRanOut)
-            {
-                _gameIsFinished = true;
-                TimeRanOut = true;
-                Debug.Log("Timer is done");
-                Debug.Log("Stopwatch game is finished");
-
-            }
+            CheckIfTimeRanOut();
 
             //Check if all players have topped time
-            if (_playerArray.All(go => go.PlayerHasStoppedTime == true) && _playerArray.Length >= 2 && !_gameIsFinished) //Has to be atleast 2 players in the game
-            {
-                _gameIsFinished = true;
-            }
+            AllPlayersHasStoppedTime();
 
-
-
-
-            if (_gameIsFinished && !_announceWinner)
-            {
-                _gameIsFinishedText.SetActive(true);
-                _announceWinner = true;
-                CheckWinner();
-            }
-
-
+            GameIsFinnished();
         }
-
     }
 
-    public void CheckWinner()
+    void CheckIfTimeRanOut()
     {
-        System.Array.Sort(_playerArray, (a, b) => { return a.GetStoppedTime.CompareTo(b.GetStoppedTime); }); //Fort player array so that the player with closest to 0 is number one in the array
-        foreach (var item in _playerArray)
+        //Check if stopwatch time has run out
+        if (_stopwatch <= 0 && !TimeRanOut)
         {
-            Debug.LogWarning(item.GetStoppedTime);
+            _gameIsFinished = true;
+            TimeRanOut = true;
+            Debug.Log("Timer is done");
+            Debug.Log("Stopwatch game is finished");
+
+        }
+    }
+
+    void AllPlayersHasStoppedTime()
+    {
+        if (_playerArray.All(go => go.PlayerHasStoppedTime == true) && _playerArray.Length >= 2 && !_gameIsFinished) //Has to be atleast 2 players in the game
+        {
+            _gameIsFinished = true;
+        }
+    }
+
+    void GameIsFinnished()
+    {
+        if (_gameIsFinished && !_announceWinner)
+        {
+            _gameIsFinishedText.SetActive(true);
+            _announceWinner = true;
+            CheckWinner();
+        }
+    }
+
+    void CheckWinner()
+    {
+        System.Array.Sort(_playerArray, (a, b) => { return a._stoppedTime.CompareTo(b._stoppedTime); }); //Sort player array so that the player with closest to 0 is number one in the array
+        foreach (var players in _playerArray)
+        {
+            //Debug.LogWarning(players._stoppedTime);
+            if (players._stoppedTime != Mathf.Infinity)
+            {
+                players.PlayerTimeText.text = players._stoppedTime.ToString("0.00");
+            }
+            else
+            {
+                players.PlayerTimeText.text = "NULL";
+            }
+           
+            players.PlayerTimeText.gameObject.SetActive(true);
+
         }
         Debug.LogWarning(_playerArray[0].gameObject.name + " is the winner");
         //Place crown over player 
@@ -154,22 +182,14 @@ public class StopwatchManager : MonoBehaviour
         
     }
 
-
-
-    public void JoyconPlayerStopTime(TextMeshProUGUI playerText, JoyconStopwatchPlayer player)
+    public void JoyconPlayerStopTime( JoyconStopwatchPlayer player)
     {
         if (!TimeRanOut)
         {
-
-            float playerStopTime = _stopwatch;
-
-            playerText.text = playerStopTime.ToString("0.00");
-            player.GetStoppedTime = playerStopTime; //Assign the player with teh stopped time
+            float playerStopTime = _stopwatch;      
+            player._stoppedTime = playerStopTime; //Assign the player with the stopped time
         }
-
-
     }
-
 
     void AddMoreTime()
     {
@@ -204,8 +224,4 @@ public class StopwatchManager : MonoBehaviour
 
 
     }
-
-    
-
-    
 }
