@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MinigameName: Stopwatch Game
   Texture: {fileID: 8400000, guid: d57ac448a302c1d4287d5bea7eca1c13, type: 2}
-  VideoClip: {fileID: 32900000, guid: 2382535aea57d4f4ead97a695717ad73, type: 3}
+  VideoClip: {fileID: 32900000, guid: 975497280e84d0c48a5daafd672440ff, type: 3}

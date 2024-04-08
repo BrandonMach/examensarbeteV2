@@ -8,7 +8,7 @@ public class ShakeToRun : JoyconPlayerBase
 {
     [Header("Red Light Green Light Player")]
     [SerializeField] float _shakeInput = 0;
-    [SerializeField]private float _accelerometerThreshold = 2;
+    [SerializeField]private float _accelerometerThreshold;
 
     [SerializeField] float _stepsTaken = 0;
     private float _shakeInputToStepThreshold = 15;
@@ -39,7 +39,7 @@ public class ShakeToRun : JoyconPlayerBase
         gyro = new Vector3(0, 0, 0);
         accel = new Vector3(0, 0, 0);
 
-
+        _accelerometerThreshold = 3;
 
     }
 

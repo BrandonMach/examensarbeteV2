@@ -34,6 +34,8 @@ public class JoyconManagerSelectMenu : MonoBehaviour
 	[Header("Select Menu Navigation")]
 
 	[SerializeField] public EventSystem eventsystem;
+
+	[SerializeField] GameObject _currentMinigameButton;
 	[SerializeField] SelectMinigameButton[] _selectMinigameButtons;
 	public  enum MoveDirection
     {
@@ -48,12 +50,10 @@ public class JoyconManagerSelectMenu : MonoBehaviour
 	public bool loading;
 
 
-
-
 	void Awake()
 	{
 		loading = true;
-		_selectMinigameButtons = FindObjectsOfType<SelectMinigameButton>();
+		//_selectMinigameButtons = FindObjectsOfType<SelectMinigameButton>();
 
 		if (instance != null) Destroy(gameObject);
 		instance = this;
@@ -148,48 +148,6 @@ public class JoyconManagerSelectMenu : MonoBehaviour
 		for (int i = 0; i < j.Count; ++i)
 		{
 			j[i].Detach();
-		}
-	}
-
-
-	public void MoveInUI(MoveDirection dir)
-    {
-		canMoveUI = false;
-		var currentSlectedMinigame = eventsystem.currentSelectedGameObject.GetComponent<SelectMinigameButton>();
-
-		switch (dir)
-		{
-			case MoveDirection.up:
-				if (currentSlectedMinigame._upNeighbourButton != null)
-				{
-					Debug.Log("up");
-					eventsystem.SetSelectedGameObject(currentSlectedMinigame._upNeighbourButton.gameObject);
-				}
-				break;
-			case MoveDirection.down:
-				if (currentSlectedMinigame._downNeighbourButton != null)
-				{
-					Debug.Log("down");
-					eventsystem.SetSelectedGameObject(currentSlectedMinigame._downNeighbourButton.gameObject);
-				}
-				break;
-			case MoveDirection.left:
-				if (currentSlectedMinigame._leftNeighbourButton != null)
-				{
-					Debug.Log("left");
-					eventsystem.SetSelectedGameObject(currentSlectedMinigame._leftNeighbourButton.gameObject);
-				}
-				break;
-			case MoveDirection.right:
-				if (currentSlectedMinigame._rightNeighbourButton != null)
-				{
-					Debug.Log("right");
-					eventsystem.SetSelectedGameObject(currentSlectedMinigame._rightNeighbourButton.gameObject);
-				}
-
-				break;
-			default:
-				break;
 		}
 	}
 

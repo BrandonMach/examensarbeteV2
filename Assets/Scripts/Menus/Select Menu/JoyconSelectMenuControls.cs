@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class JoyconSelectMenuControls : MonoBehaviour
@@ -10,6 +11,8 @@ public class JoyconSelectMenuControls : MonoBehaviour
 	// Values made available via Unity
 	public float[] stick;
 	public int jc_ind = 0;
+
+	[SerializeField] bool canMoveUI;
 
 
 	void Start()
@@ -31,42 +34,90 @@ public class JoyconSelectMenuControls : MonoBehaviour
 		{
 			Joycon j = joycons[jc_ind];
 
-			if (!JoyconManagerSelectMenu.Instance.loading  && j.GetButtonDown(Joycon.Button.DPAD_DOWN))
+			//if (!JoyconManagerSelectMenu.Instance.loading  && j.GetButtonDown(Joycon.Button.DPAD_DOWN))
+			//{
+			//	JoyconManagerSelectMenu.Instance.eventsystem.currentSelectedGameObject.GetComponent<Button>().onClick.Invoke();
+			//}
+
+			if (!JoyconManagerSelectMenu.Instance.loading)
 			{
-				JoyconManagerSelectMenu.Instance.eventsystem.currentSelectedGameObject.GetComponent<Button>().onClick.Invoke();
+                if (j.GetButtonDown(Joycon.Button.PLUS)|| j.GetButtonDown(Joycon.Button.MINUS))
+                {
+					JoyconManagerSelectMenu.Instance.eventsystem.currentSelectedGameObject.GetComponent<Button>().onClick.Invoke();
+				}
+				
 			}
+			
 
 
 
 			#region Send Stick direction to joyconManager Select menu
 
-			stick = j.GetStick();
+			//	stick = j.GetStick();
+			var curentButton = EventSystem.current;
 
-			//Rmust go back to neutral before you can go next
-            if (j.GetStick()[0] == 0 && j.GetStick()[1] == 0 && !JoyconManagerSelectMenu.Instance.canMoveUI)
-            {
-                JoyconManagerSelectMenu.Instance.canMoveUI = true;
-            }
-
-            if (JoyconManagerSelectMenu.Instance.canMoveUI  && j.GetStick()[1] > 0.8f)
+			if (!JoyconManagerSelectMenu.Instance.loading)
 			{
-				JoyconManagerSelectMenu.Instance.MoveInUI(JoyconManagerSelectMenu.MoveDirection.up);
+				var currentButtonSelectMinigameButtonScript = curentButton.currentSelectedGameObject.gameObject.GetComponent<SelectMinigameButton>();
+
+                if (JoyconManagerSelectMenu.Instance.canMoveUI)
+                {
+					if (j.GetButtonDown(Joycon.Button.DPAD_UP))
+					{
+						JoyconManagerSelectMenu.Instance.canMoveUI = false;
+						if (currentButtonSelectMinigameButtonScript._upNeighbourButton != null)
+						{
+							curentButton.SetSelectedGameObject(currentButtonSelectMinigameButtonScript._upNeighbourButton.gameObject);
+						}
+					}
+
+					if (j.GetButtonDown(Joycon.Button.DPAD_RIGHT))
+					{
+						JoyconManagerSelectMenu.Instance.canMoveUI = false;
+						if (currentButtonSelectMinigameButtonScript._rightNeighbourButton != null)
+						{
+							curentButton.SetSelectedGameObject(currentButtonSelectMinigameButtonScript._rightNeighbourButton.gameObject);
+						}
+					}
+
+					if (j.GetButtonDown(Joycon.Button.DPAD_DOWN))
+					{
+						JoyconManagerSelectMenu.Instance.canMoveUI = false;
+						if (currentButtonSelectMinigameButtonScript._downNeighbourButton != null)
+						{
+							curentButton.SetSelectedGameObject(currentButtonSelectMinigameButtonScript._downNeighbourButton.gameObject);
+						}
+					}
+					if (j.GetButtonDown(Joycon.Button.DPAD_LEFT))
+					{
+						JoyconManagerSelectMenu.Instance.canMoveUI = false;
+						if (currentButtonSelectMinigameButtonScript._leftNeighbourButton != null)
+						{
+							curentButton.SetSelectedGameObject(currentButtonSelectMinigameButtonScript._leftNeighbourButton.gameObject);
+						}
+					}
+				}
+
+				
+
+
+				//Player must release button to press again
+				if (j.GetButtonUp(Joycon.Button.DPAD_UP) || j.GetButtonUp(Joycon.Button.DPAD_RIGHT) || j.GetButtonUp(Joycon.Button.DPAD_DOWN) || j.GetButtonUp(Joycon.Button.DPAD_LEFT))
+				{
+					JoyconManagerSelectMenu.Instance.canMoveUI = true;
+
+				}
+
+
+
+
+
+
 			}
 
-			if (JoyconManagerSelectMenu.Instance.canMoveUI  && j.GetStick()[1] < -0.8f)
-			{
-				JoyconManagerSelectMenu.Instance.MoveInUI(JoyconManagerSelectMenu.MoveDirection.down);
-			}
 
-			if (JoyconManagerSelectMenu.Instance.canMoveUI  && j.GetStick()[0] < -0.8f)
-			{
-				JoyconManagerSelectMenu.Instance.MoveInUI(JoyconManagerSelectMenu.MoveDirection.left);
-			}
+		
 
-			if (JoyconManagerSelectMenu.Instance.canMoveUI  && j.GetStick()[0] > 0.8f)
-			{
-				JoyconManagerSelectMenu.Instance.MoveInUI(JoyconManagerSelectMenu.MoveDirection.right);
-			}
 
 			#endregion
 

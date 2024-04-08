@@ -54,5 +54,6 @@ public class WooblyText : MonoBehaviour
     private void OnDestroy()
     {
         JoyconManagerSelectMenu.Instance.loading = false;
+       
     }
 }
