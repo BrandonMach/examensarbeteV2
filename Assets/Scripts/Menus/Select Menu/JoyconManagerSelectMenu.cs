@@ -35,8 +35,8 @@ public class JoyconManagerSelectMenu : MonoBehaviour
 
 	[SerializeField] public EventSystem eventsystem;
 
-	[SerializeField] GameObject _currentMinigameButton;
-	[SerializeField] SelectMinigameButton[] _selectMinigameButtons;
+	//[SerializeField] GameObject _currentMinigameButton;
+	//[SerializeField] SelectMinigameButton[] _selectMinigameButtons;
 	public  enum MoveDirection
     {
 		up,
