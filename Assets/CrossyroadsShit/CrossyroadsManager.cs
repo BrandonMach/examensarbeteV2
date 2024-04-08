@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.InputSystem;
 using System.Linq;
+using UnityEngine.Analytics;
 
 
 public class CrossyroadsManager : MonoBehaviour
@@ -23,7 +24,8 @@ public class CrossyroadsManager : MonoBehaviour
     public bool GameOver;
     public GameObject GOPanel;
     public GameObject readyUpPanel;
-    public TMP_Text winnerNameText;
+    public TMP_Text winnerNameText, timerTxt;
+    float timer;
 
     private void Awake()
     {
@@ -37,7 +39,8 @@ public class CrossyroadsManager : MonoBehaviour
     }
     void Start()
     {
-        
+        readyUpPanel.SetActive(true);
+        timer = 60;
     }
 
     public void UpdatePlayerArray()
@@ -46,16 +49,17 @@ public class CrossyroadsManager : MonoBehaviour
     }
 
 
-    void Update()
+    void FixedUpdate()
     {
         if (_playerArray.Length >= 2 && _playerArray.All(go => go.PlayerIsReady == true)) //Start the game once all player are ready 
         {
             StartTheGame = true;
-            foreach (var players in _playerArray)
-            {
-                StartCoroutine(players.ReadyUpUI.GetComponent<ReadyUpScript>().AllPlayersReady()); //Should be fade text instead of set active false
+            readyUpPanel.SetActive(false);
+            //foreach (var players in _playerArray)
+            //{
+            //    StartCoroutine(players.ReadyUpUI.GetComponent<ReadyUpScript>().AllPlayersReady()); //Should be fade text instead of set active false
 
-            }
+            //}
         }
 
         if (GameOver)
@@ -66,14 +70,23 @@ public class CrossyroadsManager : MonoBehaviour
         if (StartTheGame)
         {
             readyUpPanel.SetActive(false);
+            if (timer > 0)
+            {
+                timer -= Time.deltaTime;
+            }
+            else
+            {
+                EndGame();
+            }
+            timerTxt.SetText(timer.ToString("#.00"));
         }
+       
     }
 
-    public void DeclareWinner(string name)
+    private void EndGame()
     {
-        if (!declaredWinner)
-        {
-            winnerName = name;
-        }
+        //Anything that should happen when the game ends
+        GameOver = true;
+        GOPanel.SetActive(true);
     }
 }
