@@ -954,7 +954,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.9433962, g: 0.12904951, b: 0.12904951, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1030,7 +1030,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.9433962, g: 0.12904951, b: 0.12904951, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1189,14 +1189,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a97d0d3de458ad4f9a50334459a0843, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _minigameSO: {fileID: 11400000, guid: 0fb1f636964e9114d897984ab177eab5, type: 2}
+  _minigameSO: {fileID: 11400000, guid: 49dcd619f00059047bd106411e1688b9, type: 2}
   _thumbnail: {fileID: 570370863}
   _videoPlayer: {fileID: 588075815}
   _minigameName: {fileID: 878057164}
   _rawImage: {fileID: 588075816}
   BorderGO: {fileID: 1190264144}
-  _upNeighbourButton: {fileID: 0}
-  _downNeighbourButton: {fileID: 0}
+  _upNeighbourButton: {fileID: 912748491}
+  _downNeighbourButton: {fileID: 912748491}
   _leftNeighbourButton: {fileID: 2009044853}
   _rightNeighbourButton: {fileID: 2132324385}
 --- !u!328 &588075815
@@ -1627,7 +1627,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.9433962, g: 0.12904951, b: 0.12904951, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2398,8 +2398,8 @@ MonoBehaviour:
   _minigameName: {fileID: 274259272}
   _rawImage: {fileID: 912748490}
   BorderGO: {fileID: 467681308}
-  _upNeighbourButton: {fileID: 0}
-  _downNeighbourButton: {fileID: 0}
+  _upNeighbourButton: {fileID: 588075817}
+  _downNeighbourButton: {fileID: 588075817}
   _leftNeighbourButton: {fileID: 2138833408}
   _rightNeighbourButton: {fileID: 1616176850}
 --- !u!328 &912748489
@@ -2616,7 +2616,7 @@ GameObject:
   - component: {fileID: 1159500749}
   - component: {fileID: 1159500748}
   m_Layer: 5
-  m_Name: LoadPanel
+  m_Name: LoadPanel **(Must be active to work)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2864,7 +2864,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.9433962, g: 0.12904951, b: 0.12904951, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3314,8 +3314,8 @@ MonoBehaviour:
   _minigameName: {fileID: 750863603}
   _rawImage: {fileID: 1616176848}
   BorderGO: {fileID: 862377229}
-  _upNeighbourButton: {fileID: 0}
-  _downNeighbourButton: {fileID: 0}
+  _upNeighbourButton: {fileID: 2132324385}
+  _downNeighbourButton: {fileID: 2132324385}
   _leftNeighbourButton: {fileID: 912748491}
   _rightNeighbourButton: {fileID: 2138833408}
 --- !u!114 &1616176850
@@ -3935,14 +3935,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a97d0d3de458ad4f9a50334459a0843, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _minigameSO: {fileID: 11400000, guid: 05a9f3364eda73a4e85116978446eca2, type: 2}
+  _minigameSO: {fileID: 11400000, guid: f860f24693617e94f86e87da99b94835, type: 2}
   _thumbnail: {fileID: 1293727559}
   _videoPlayer: {fileID: 2009044855}
   _minigameName: {fileID: 1351114048}
   _rawImage: {fileID: 2009044856}
   BorderGO: {fileID: 1818178277}
-  _upNeighbourButton: {fileID: 0}
-  _downNeighbourButton: {fileID: 0}
+  _upNeighbourButton: {fileID: 2138833408}
+  _downNeighbourButton: {fileID: 2138833408}
   _leftNeighbourButton: {fileID: 2132324385}
   _rightNeighbourButton: {fileID: 588075817}
 --- !u!328 &2009044855
@@ -4205,14 +4205,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a97d0d3de458ad4f9a50334459a0843, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _minigameSO: {fileID: 11400000, guid: d736c049af204324da8503d79b556ee7, type: 2}
+  _minigameSO: {fileID: 11400000, guid: bb6c89de409a5a14289bd7da62f5b574, type: 2}
   _thumbnail: {fileID: 918911376}
   _videoPlayer: {fileID: 2132324387}
   _minigameName: {fileID: 841075033}
   _rawImage: {fileID: 2132324388}
   BorderGO: {fileID: 1784623471}
-  _upNeighbourButton: {fileID: 0}
-  _downNeighbourButton: {fileID: 0}
+  _upNeighbourButton: {fileID: 1616176850}
+  _downNeighbourButton: {fileID: 1616176850}
   _leftNeighbourButton: {fileID: 588075817}
   _rightNeighbourButton: {fileID: 2009044853}
 --- !u!328 &2132324387
@@ -4525,8 +4525,8 @@ MonoBehaviour:
   _minigameName: {fileID: 1719793487}
   _rawImage: {fileID: 2138833407}
   BorderGO: {fileID: 1433559357}
-  _upNeighbourButton: {fileID: 0}
-  _downNeighbourButton: {fileID: 0}
+  _upNeighbourButton: {fileID: 2009044853}
+  _downNeighbourButton: {fileID: 2009044853}
   _leftNeighbourButton: {fileID: 1616176850}
   _rightNeighbourButton: {fileID: 912748491}
 --- !u!328 &2138833406
