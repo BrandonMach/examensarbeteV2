@@ -15,3 +15,4 @@ MonoBehaviour:
   MinigameName: Stopwatch Game
   Texture: {fileID: 8400000, guid: d57ac448a302c1d4287d5bea7eca1c13, type: 2}
   VideoClip: {fileID: 32900000, guid: 975497280e84d0c48a5daafd672440ff, type: 3}
+  Thumbnail: {fileID: 21300000, guid: fcb347ffc98a126459b7e961085b6dcc, type: 3}

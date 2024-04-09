@@ -10,6 +10,7 @@ public class MinigameButtonSO : ScriptableObject
     public string MinigameName;
     public Texture Texture;
     public VideoClip VideoClip;
+    public Sprite Thumbnail;
     
 
 }

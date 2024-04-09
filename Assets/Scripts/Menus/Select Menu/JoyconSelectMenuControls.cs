@@ -67,6 +67,7 @@ public class JoyconSelectMenuControls : MonoBehaviour
 						JoyconManagerSelectMenu.Instance.canMoveUI = false;
 						if (currentButtonSelectMinigameButtonScript._upNeighbourButton != null)
 						{
+							Debug.Log("Hej");
 							curentButton.SetSelectedGameObject(currentButtonSelectMinigameButtonScript._upNeighbourButton.gameObject);
 						}
 					}
@@ -76,6 +77,7 @@ public class JoyconSelectMenuControls : MonoBehaviour
 						JoyconManagerSelectMenu.Instance.canMoveUI = false;
 						if (currentButtonSelectMinigameButtonScript._rightNeighbourButton != null)
 						{
+							Debug.Log("Hej");
 							curentButton.SetSelectedGameObject(currentButtonSelectMinigameButtonScript._rightNeighbourButton.gameObject);
 						}
 					}
@@ -85,6 +87,7 @@ public class JoyconSelectMenuControls : MonoBehaviour
 						JoyconManagerSelectMenu.Instance.canMoveUI = false;
 						if (currentButtonSelectMinigameButtonScript._downNeighbourButton != null)
 						{
+							Debug.Log("Hej");
 							curentButton.SetSelectedGameObject(currentButtonSelectMinigameButtonScript._downNeighbourButton.gameObject);
 						}
 					}
@@ -93,6 +96,7 @@ public class JoyconSelectMenuControls : MonoBehaviour
 						JoyconManagerSelectMenu.Instance.canMoveUI = false;
 						if (currentButtonSelectMinigameButtonScript._leftNeighbourButton != null)
 						{
+							Debug.Log("Hej");
 							curentButton.SetSelectedGameObject(currentButtonSelectMinigameButtonScript._leftNeighbourButton.gameObject);
 						}
 					}

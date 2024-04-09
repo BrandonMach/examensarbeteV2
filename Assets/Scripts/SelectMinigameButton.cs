@@ -16,7 +16,7 @@ public class SelectMinigameButton : MonoBehaviour
     [SerializeField] VideoPlayer _videoPlayer;
     [SerializeField] TextMeshProUGUI _minigameName;
     [SerializeField] RawImage _rawImage;
-
+    [SerializeField] GameObject BorderGO;
 
     [SerializeField] public Button _upNeighbourButton;
     [SerializeField] public Button _downNeighbourButton;
@@ -26,6 +26,7 @@ public class SelectMinigameButton : MonoBehaviour
     
     void Awake()
     {
+        BorderGO.SetActive(false);
         name = _minigameSO.MinigameName + " Button";
         _videoPlayer = GetComponent<VideoPlayer>();
         _rawImage = GetComponent<RawImage>();
@@ -37,8 +38,9 @@ public class SelectMinigameButton : MonoBehaviour
         _minigameName.text = _minigameSO.MinigameName;
         _rawImage.texture = (RenderTexture)_minigameSO.Texture;
 
-        
-        
+        _thumbnail.GetComponent<Image>().sprite = _minigameSO.Thumbnail;
+
+
 
     }
 
@@ -56,12 +58,14 @@ public class SelectMinigameButton : MonoBehaviour
 
     public void PlayVideo()
     {
+        Debug.LogWarning("Play video");
+        BorderGO.SetActive(true);
         _thumbnail.SetActive(false);
         _videoPlayer.Play();
     }
     public void StopVideo()
     {
-
+        BorderGO.SetActive(false);
         _videoPlayer.isLooping = true;
         _videoPlayer.Stop();
         _thumbnail.SetActive(true);
