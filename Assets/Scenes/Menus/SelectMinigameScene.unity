@@ -741,8 +741,6 @@ MonoBehaviour:
   EnableIMU: 1
   EnableLocalize: 1
   eventsystem: {fileID: 662163979}
-  _currentMinigameButton: {fileID: 0}
-  _selectMinigameButtons: []
   canMoveUI: 1
   loading: 0
 --- !u!1 &500302466
@@ -1508,7 +1506,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &862377230
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1852,7 +1850,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1159500747
 RectTransform:
   m_ObjectHideFlags: 0

@@ -8,7 +8,7 @@ public class JoyConCrossyroads : JoyconPlayerBase
 {
 
 	[Header("Cross the road Game")]
-	[SerializeField] GameObject playerInfoObj, playerIndicator;
+	[SerializeField] GameObject  playerIndicator;
 	[SerializeField] TextMeshProUGUI scoreValue;
     public int score;
     public bool winner;
@@ -39,48 +39,32 @@ public class JoyConCrossyroads : JoyconPlayerBase
 		direction = new Vector3(0,0,2);
 
 		this.name = "Player " + (1 + jc_ind);
-		_playerNameText.color = Color.red;
-		//_playerNameText.GetComponent<RectTransform>().position = new Vector3(250 + (500 * jc_ind), 260, this.transform.position.z);
 
-		switch (jc_ind)
-		{
-			case 0:
-				playerIndicator.GetComponent<Renderer>().material.SetColor("_Color", Color.red);
-				spawn = new Vector3(-11f, 0.03f, 15f);
-				transform.position = spawn;
-				break;
-			case 1:
-				this.name = "Player 2";
-				_playerNameText.color = Color.blue;
-				//_playerNameText.GetComponent<RectTransform>().position = new Vector3(750, 264, this.transform.position.z);
-				playerInfoObj.GetComponent<RectTransform>().localPosition = new Vector3(playerInfoObj.transform.localPosition.x + (400 * jc_ind), playerInfoObj.transform.localPosition.y, playerInfoObj.transform.localPosition.z);
-				playerIndicator.GetComponent<Renderer>().material.SetColor("_Color", Color.blue);
-				spawn = new Vector3(-4f, 0.03f, 15f);
-				transform.position = spawn;
-				break;
-			case 2:
-				this.name = "Player 3";
-                _playerNameText.color = Color.yellow;
-				playerInfoObj.GetComponent<RectTransform>().localPosition = new Vector3(playerInfoObj.transform.localPosition.x + (400 * jc_ind), playerInfoObj.transform.localPosition.y, playerInfoObj.transform.localPosition.z);
-				playerIndicator.GetComponent<Renderer>().material.SetColor("_Color", Color.yellow);
-				spawn = new Vector3(4f, 0.03f, 15f);
-				transform.position = spawn;
-				break;
-			case 3:
-				this.name = "Player 4";
-                _playerNameText.color = Color.magenta;
-				playerInfoObj.GetComponent<RectTransform>().localPosition = new Vector3(playerInfoObj.transform.localPosition.x + (400 * jc_ind), playerInfoObj.transform.localPosition.y, playerInfoObj.transform.localPosition.z);
-                playerIndicator.GetComponent<Renderer>().material.SetColor("_Color", Color.magenta);
-				spawn = new Vector3(11, 1, -5);
-                transform.position = spawn;
-				break;
-			default:
-				break;
-		}
+		base.Start();
 
-		_playerNameText.text = name;
+		playerIndicator.GetComponent<Renderer>().material.SetColor("_Color", _playerNameText.color);
 
-		CrossyroadsManager.Instance.UpdatePlayerArray();
+        switch (jc_ind)
+        {
+            case 0:
+                spawn = new Vector3(-11f, 0.03f, 15f);
+                break;
+            case 1:
+                spawn = new Vector3(-4f, 0.03f, 15f);
+                break;
+            case 2:           
+                spawn = new Vector3(4f, 0.03f, 15f);
+                break;
+            case 3:    
+                spawn = new Vector3(11, 1, -5);
+                break;
+            default:
+                break;
+        }
+        transform.position = spawn;
+
+
+        CrossyroadsManager.Instance.UpdatePlayerArray();
 		UpdateScoreText();
 
 	}

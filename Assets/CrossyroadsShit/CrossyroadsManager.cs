@@ -23,6 +23,7 @@ public class CrossyroadsManager : MonoBehaviour
     public bool StartTheGame; //Only start the game when all player have joined
     public bool GameOver;
     public GameObject GOPanel;
+    public GameObject PlayerInfoBackdropGO;
     public GameObject readyUpPanel;
     public TMP_Text winnerNameText, timerTxt;
     float timer;
@@ -40,6 +41,7 @@ public class CrossyroadsManager : MonoBehaviour
     void Start()
     {
         readyUpPanel.SetActive(true);
+        PlayerInfoBackdropGO.SetActive(false);
         timer = 60;
     }
 
@@ -55,11 +57,12 @@ public class CrossyroadsManager : MonoBehaviour
         {
             StartTheGame = true;
             readyUpPanel.SetActive(false);
-            //foreach (var players in _playerArray)
-            //{
-            //    StartCoroutine(players.ReadyUpUI.GetComponent<ReadyUpScript>().AllPlayersReady()); //Should be fade text instead of set active false
+            PlayerInfoBackdropGO.SetActive(true);
+            foreach (var players in _playerArray)
+            {
+                StartCoroutine(players.ReadyUpUI.GetComponent<ReadyUpScript>().AllPlayersReady()); //Should be fade text instead of set active false
 
-            //}
+            }
         }
 
         if (GameOver)

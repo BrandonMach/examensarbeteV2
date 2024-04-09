@@ -67,7 +67,7 @@ public class JoyconPlayerBase : MonoBehaviour
 				_playerNameText.GetComponent<RectTransform>().position = new Vector3(250 + (500 * jc_ind), 150, this.transform.position.z);
 				break;
             case MinigamesManagers.MiniGameType.Crossyroad:
-				_playerNameText.GetComponent<RectTransform>().position = new Vector3(250 + (500 * jc_ind), 260, this.transform.position.z);
+				_playerNameText.GetComponent<RectTransform>().position = new Vector3(250 + (500 * jc_ind), 120, this.transform.position.z);
 				break;
             case MinigamesManagers.MiniGameType.ShakeAndRun:
 				_playerNameText.GetComponent<RectTransform>().position = new Vector3(250 + (500 * jc_ind), 160, this.transform.position.z);

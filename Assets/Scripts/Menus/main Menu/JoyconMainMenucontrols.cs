@@ -44,7 +44,7 @@ public class JoyconMainMenucontrols : MonoBehaviour
 			Joycon j = joycons[jc_ind];
 			
 
-			if (j.GetButtonDown(Joycon.Button.DPAD_DOWN))
+			if (j.GetButtonDown(Joycon.Button.PLUS) || j.GetButtonDown(Joycon.Button.MINUS))
 			{
 
 				JoyconManagerMainMenu.Instance.eventsystem.currentSelectedGameObject.GetComponent<Button>().onClick.Invoke();
@@ -65,6 +65,17 @@ public class JoyconMainMenucontrols : MonoBehaviour
 				
 				Debug.Log("Stick ¨Down");
 
+				JoyconManagerMainMenu.Instance.ButtonGoDown();
+			}
+
+
+			if (j.GetButtonDown(Joycon.Button.DPAD_UP))
+			{
+				JoyconManagerMainMenu.Instance.ButtonGoUp();
+			}
+
+			if (j.GetButtonDown(Joycon.Button.DPAD_DOWN))
+            {
 				JoyconManagerMainMenu.Instance.ButtonGoDown();
 			}
 			
