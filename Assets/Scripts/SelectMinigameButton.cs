@@ -53,7 +53,8 @@ public class SelectMinigameButton : MonoBehaviour
     public void GameClicked()
     {
         Debug.Log("Minigame has been clicked");
-        SceneManager.LoadScene(_minigameSO.MinigameName);
+       // SceneManager.LoadScene(_minigameSO.MinigameName);
+        SceneManager.LoadScene(_minigameSO.SceneIndex, LoadSceneMode.Single);
     }
 
     public void PlayVideo()
@@ -62,6 +63,7 @@ public class SelectMinigameButton : MonoBehaviour
         BorderGO.SetActive(true);
         _thumbnail.SetActive(false);
         _videoPlayer.Play();
+        _minigameName.fontSize += 5;
     }
     public void StopVideo()
     {
@@ -69,6 +71,7 @@ public class SelectMinigameButton : MonoBehaviour
         _videoPlayer.isLooping = true;
         _videoPlayer.Stop();
         _thumbnail.SetActive(true);
+        _minigameName.fontSize -= 5;
     }
 
 

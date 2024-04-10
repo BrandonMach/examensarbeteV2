@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89a32505054e79c4aaccc498483c4fe8, type: 3}
   m_Name: Game 3
   m_EditorClassIdentifier: 
-  MinigameName: Minigame 3
+  MinigameName: Bounty Hunt
+  SceneIndex: 4
   Texture: {fileID: 8400000, guid: 78618bdcc339be54393e6a6d24f4f7b0, type: 2}
   VideoClip: {fileID: 32900000, guid: a16de5efca3292041a844204d3f51e2a, type: 3}
   Thumbnail: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}

@@ -21,6 +21,6 @@ public class MainMenuManager : MonoBehaviour
 
     public void SelectMinigame()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(1,LoadSceneMode.Single);
     }
 }

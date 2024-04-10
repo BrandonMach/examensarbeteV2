@@ -17,5 +17,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Red Light Green Light.unity
     guid: 47324e06ccd25ab49ac90fb09aa0f76e
+  - enabled: 1
+    path: Assets/Scenes/CrossRoad.unity
+    guid: 816112bb907a2c947940e0b14a21aa85
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: ba86d200c71cf7049b38b219fdf12982, type: 2}
