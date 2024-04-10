@@ -19,7 +19,7 @@ public class BalancePlayer : JoyconPlayerBase
         switch (jc_ind)
         {
             case 0:
-                gameObject.transform.position = new Vector3(-1f, -2, 0);
+                gameObject.transform.position = new Vector3(-1f, -2, 0-5);
                 _mainBody.GetComponent<MeshRenderer>().material.color = Color.red;
                 break;
             case 1:
@@ -46,23 +46,16 @@ public class BalancePlayer : JoyconPlayerBase
         if (joycons.Count > 0)
         {
             Joycon j = joycons[jc_ind];
-
-           
-          
-
-            gameObject.transform.rotation = orientation;
-           
-
-
-
-           
+    
 
             base.ReadyUp(j);
 
-
+            
+            gameObject.transform.rotation = orientation;
             orientation = j.GetVector();
-
             gameObject.transform.Rotate(90, 0, 0, Space.World);
+
+
             //// Gyro values: x, y, z axis values (in radians per second)
             //gyro = j.GetGyro();
 
