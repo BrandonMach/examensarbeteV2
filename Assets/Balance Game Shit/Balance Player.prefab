@@ -443,7 +443,7 @@ MonoBehaviour:
   PlayerIsReady: 0
   ReadyUpUI: {fileID: 5526254357308268192}
   _winnerCrown: {fileID: 7531311829561942237}
-  _mainBody: {fileID: 4980615965983689185}
+  _mainBody: {fileID: 1423904131008173251}
 --- !u!65 &6718665304806884285
 BoxCollider:
   m_ObjectHideFlags: 0

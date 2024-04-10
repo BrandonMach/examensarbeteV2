@@ -20,7 +20,7 @@ public class BalanceGameManager : MonoBehaviour
     public bool StartTheGame; //Only start the game when all player have joined
     public bool GameIsFinished;
 
-    [SerializeField] GameObject[] _fallingItems;
+    [SerializeField] FallingObjects[] _fallingItems;
     [SerializeField] int _fallingItemsCount;
 
 
@@ -79,7 +79,7 @@ public class BalanceGameManager : MonoBehaviour
     }
 
 
-
+    
 
     IEnumerator SpawnFallingItems()
     {
@@ -90,11 +90,29 @@ public class BalanceGameManager : MonoBehaviour
            
             yield return new WaitForSeconds(3f);
         
-            Instantiate(_fallingItems[Random.Range(0,_fallingItems.Length-1)], new Vector3(0, 4, 0), Quaternion.identity);
+            Instantiate(_fallingItems[Random.Range(0, _fallingItems.Length - 1)], new Vector3(-1, 4, -5), Quaternion.identity);
+            Instantiate(_fallingItems[Random.Range(0, _fallingItems.Length - 1)], new Vector3(1, 4, -5), Quaternion.identity);
 
 
-        }
+       }
 
        
+    }
+
+
+    private void GeneratePlayerRecipes()
+    {
+
+        List<FallingObjects> recipeList = new List<FallingObjects>();
+
+        for (int i = 0; i < 3; i++)
+        {
+            recipeList.Add(_fallingItems[Random.Range(0, _fallingItems.Length - 1)]);
+        }
+
+        foreach (var players in _playerArray)
+        {
+            //players.SetRecipe();
+        }
     }
 }

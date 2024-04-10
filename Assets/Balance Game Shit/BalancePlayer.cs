@@ -8,6 +8,8 @@ public class BalancePlayer : JoyconPlayerBase
     
     [SerializeField] GameObject _winnerCrown;
     [SerializeField] GameObject _mainBody;
+    [SerializeField] List<FallingObjects> _recipeList;
+
 
 
     void Start()
@@ -16,22 +18,25 @@ public class BalancePlayer : JoyconPlayerBase
         _winnerCrown.SetActive(false);
 
         //Place player relative to the middle of the screen
+
+        //Player 1 & 3
+        //Player 2 & 4
         switch (jc_ind)
         {
             case 0:
-                gameObject.transform.position = new Vector3(-1f, -2, 0-5);
+                gameObject.transform.position = new Vector3(-1f, -1, -5);
                 _mainBody.GetComponent<MeshRenderer>().material.color = Color.red;
                 break;
             case 1:
-                gameObject.transform.position = new Vector3(1f, -2, 0);
+                gameObject.transform.position = new Vector3(1f, -1, -5);
                 _mainBody.GetComponent<MeshRenderer>().material.color = Color.blue;
                 break;
             case 2:
-                gameObject.transform.position = new Vector3(0, 0, 0);
+                gameObject.transform.position = new Vector3(0, 0, -5);
                 _mainBody.GetComponent<MeshRenderer>().material.color = Color.yellow;
                 break;
             case 3:
-                gameObject.transform.position = new Vector3(0, 0, 0);
+                gameObject.transform.position = new Vector3(0, 0, -5);
                 _mainBody.GetComponent<MeshRenderer>().material.color = Color.green;
                 break;
             default:
@@ -70,5 +75,11 @@ public class BalancePlayer : JoyconPlayerBase
         }
 
         
+    }
+
+
+    public void SetRecipe(List<FallingObjects> setRecipeList)
+    {
+        _recipeList = setRecipeList;
     }
 }
