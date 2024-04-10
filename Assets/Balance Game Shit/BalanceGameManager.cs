@@ -27,6 +27,8 @@ public class BalanceGameManager : MonoBehaviour
     [SerializeField]  bool StartSpawn;
     [SerializeField] float _balanceTimer;
 
+    bool generatePlayerRecipe;
+
     private void Awake()
     {
         if(Instance != null)
@@ -55,7 +57,15 @@ public class BalanceGameManager : MonoBehaviour
         if (_playerArray.All(go => go.PlayerIsReady == true ))
         {
             StartTheGame = true;
-           
+
+            if (!generatePlayerRecipe)
+            {
+                GeneratePlayerRecipes();
+            }
+            
+
+
+
         }
         else
         {
@@ -102,6 +112,7 @@ public class BalanceGameManager : MonoBehaviour
 
     private void GeneratePlayerRecipes()
     {
+        generatePlayerRecipe = true;
 
         List<FallingObjects> recipeList = new List<FallingObjects>();
 
@@ -112,7 +123,18 @@ public class BalanceGameManager : MonoBehaviour
 
         foreach (var players in _playerArray)
         {
-            //players.SetRecipe();
+            players.SetRecipe(recipeList);
         }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Destroy(other);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        Destroy(collision.gameObject);
+
     }
 }
