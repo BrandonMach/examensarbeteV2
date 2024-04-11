@@ -184,7 +184,7 @@ public class StopwatchManager : MonoBehaviour
             players.PlayerTimeText.gameObject.SetActive(true);
 
         }
-        Debug.LogWarning(_playerArray[0].gameObject.name + " is the winner");
+        //Debug.LogWarning(_playerArray[0].gameObject.name + " is the winner");
         //Place crown over player 
         _playerArray[0].IsWinner = true;
         

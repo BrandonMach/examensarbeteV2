@@ -22,6 +22,8 @@ public class JoyConCrossyroads : JoyconPlayerBase
     bool tookCoin, reachedStartAgain;
     GameObject coin;
 
+    [SerializeField] Animator _anim;
+
     new void Start()
 	{
 		score = 0;
@@ -56,7 +58,7 @@ public class JoyConCrossyroads : JoyconPlayerBase
                 spawn = new Vector3(4f, 0.03f, 15f);
                 break;
             case 3:    
-                spawn = new Vector3(11, 1, -5);
+                spawn = new Vector3(11, 0.03f, 15f);
                 break;
             default:
                 break;
@@ -77,7 +79,7 @@ public class JoyConCrossyroads : JoyconPlayerBase
 			
 			Joycon j = joycons[jc_ind];
 
-			stick = j.GetStick();
+			//stick = j.GetStick();
 
             if (!CrossyroadsManager.Instance.StartTheGame)
             {
@@ -98,6 +100,7 @@ public class JoyConCrossyroads : JoyconPlayerBase
                 if (move != Vector3.zero)
                 {
                     gameObject.transform.forward = move;
+                    _anim.SetBool("Walking", true);
                 }
                 Physics.SyncTransforms();
                 controller.Move(move * Time.deltaTime * speed);

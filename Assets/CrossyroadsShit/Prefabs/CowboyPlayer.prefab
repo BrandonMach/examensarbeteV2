@@ -1466,7 +1466,7 @@ Transform:
   m_GameObject: {fileID: 919285990845458652}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: -6.010456, y: 0.22000003, z: 11.399637}
-  m_LocalScale: {x: 2.2463, y: 2.2463, z: 2.2463}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 919285990845166846}
@@ -1486,10 +1486,10 @@ Animator:
   m_GameObject: {fileID: 919285990845458652}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: ad52d12ad7e12c644a18f176d31a93bb, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 266f2881959a26f42a8b310ecf4c2f35, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 
@@ -1552,6 +1552,7 @@ MonoBehaviour:
   scoreValue: {fileID: 3483559519069456067}
   score: 0
   winner: 0
+  _anim: {fileID: 919285990852877086}
 --- !u!1 &919285990845458654
 GameObject:
   m_ObjectHideFlags: 0
