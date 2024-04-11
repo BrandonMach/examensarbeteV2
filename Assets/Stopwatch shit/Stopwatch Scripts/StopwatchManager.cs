@@ -27,6 +27,7 @@ public class StopwatchManager : MonoBehaviour
     bool _addMoreTime;
 
 
+    float _delayTime;
 
     #region Singelton
     static StopwatchManager _instance;
@@ -72,6 +73,8 @@ public class StopwatchManager : MonoBehaviour
         _playerArray = FindObjectsOfType<JoyconStopwatchPlayer>();
         _gameIsFinishedText.SetActive(false);
 
+        _delayTime = Random.Range(1.5f, 2.5f);
+
     }
 
 
@@ -115,7 +118,12 @@ public class StopwatchManager : MonoBehaviour
             }
 
 
-            AddMoreTime();
+
+            if (!_gameIsFinished)
+            {
+                AddMoreTime();
+            }
+          
 
             //Check if stopwatch time has run out
             CheckIfTimeRanOut();
@@ -194,13 +202,23 @@ public class StopwatchManager : MonoBehaviour
     void AddMoreTime()
     {
         // Multiply so that loudness easier to work with
-        loudness = _audioDetector.GetLoudnessFromMicrophone() * loudnessSensibility;
+        loudness = _audioDetector.GetLoudnessFromMicrophone() * loudnessSensibility * 5;
 
         //if loudness is negative set to 0 as mininum and prevent more time to be added until it has atleast reseted
         if(loudness < threshold)
         {
             loudness = 0;
-            _addMoreTime = false;
+        }
+
+
+        if (_addMoreTime)
+        {
+            _delayTime -= Time.deltaTime;
+            if (_delayTime < 0)
+            {
+                _addMoreTime = false;
+                _delayTime = Random.Range(1.5f, 2.5f);
+            }
         }
 
         //if loudness is more than threashold and hasn't added time => add extra time and spawn HUD element that shows how much time got added
@@ -212,11 +230,14 @@ public class StopwatchManager : MonoBehaviour
 
             #region Add Time HUD visual
 
-            Debug.LogError("Add " + _timeToAdd + " seconds");
+           // Debug.LogError("Add " + _timeToAdd + " seconds");
             GameObject tempAddTimePrefab = Instantiate(_timeToAddPrefab);
-            tempAddTimePrefab.transform.parent = _canvas.transform;
+            //tempAddTimePrefab.transform.parent = _canvas.transform;
+
+            tempAddTimePrefab.transform.SetParent(_canvas.transform);
             tempAddTimePrefab.transform.localScale = new Vector3(1, 1, 1);
-            tempAddTimePrefab.transform.localPosition = new Vector3(80, 140, 0);
+            //Position y is determinated by animation
+            tempAddTimePrefab.transform.localPosition = new Vector3(70, 0, 0);
 
             #endregion
         }
@@ -224,4 +245,7 @@ public class StopwatchManager : MonoBehaviour
 
 
     }
+
+
+   
 }

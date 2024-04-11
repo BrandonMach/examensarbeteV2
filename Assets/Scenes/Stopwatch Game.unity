@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028331, g: 0.2257133, b: 0.3069217, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1230,11 +1230,11 @@ MonoBehaviour:
   _startTime: 10
   _stopwatch: 0
   _audioDetector: {fileID: 974284706}
-  loudnessSensibility: 100
+  loudnessSensibility: 300
   threshold: 30
   loudness: 0
   _timeToAdd: 5
-  _canvas: {fileID: 1088266877}
+  _canvas: {fileID: 1712673943}
   _timeToAddPrefab: {fileID: 162290570579138067, guid: 35ac94c155267a2469b13478fa378cad, type: 3}
   _playerArray: []
   StartTheGame: 0

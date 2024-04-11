@@ -18,7 +18,7 @@ public class AudioLoudnessDetection : MonoBehaviour
     {
         // Get name of first plugged in mic
         string microphoneName = Microphone.devices[0];
-        _microphoneClip = Microphone.Start(microphoneName, true,20, AudioSettings.outputSampleRate); //True = loop
+        _microphoneClip = Microphone.Start(microphoneName, true,60, AudioSettings.outputSampleRate); //True = loop
     }
 
 
