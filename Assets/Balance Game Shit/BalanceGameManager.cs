@@ -15,8 +15,10 @@ public class BalanceGameManager : MonoBehaviour
     }
     #endregion
 
-
+    [SerializeField] bool _enoughPlayers;
     [SerializeField] BalancePlayer[] _playerArray;
+    public BalancePlayer[] GetPlayerArray { get { return _playerArray; } }
+
     public bool StartTheGame; //Only start the game when all player have joined
     public bool GameIsFinished;
 
@@ -28,6 +30,9 @@ public class BalanceGameManager : MonoBehaviour
     [SerializeField] float _balanceTimer;
 
     bool generatePlayerRecipe;
+
+
+    
 
     private void Awake()
     {
@@ -45,6 +50,41 @@ public class BalanceGameManager : MonoBehaviour
     void Start()
     {
         _playerArray = FindObjectsOfType<BalancePlayer>();
+
+
+        foreach (BalancePlayer player in _playerArray)
+        {
+            if(player.jc_ind == 0)
+            {
+                foreach (BalancePlayer otherPlayer in _playerArray)
+                {
+                    if(player != otherPlayer)
+                    {
+                        if(otherPlayer.jc_ind == 2)
+                        {
+                            player.PartnerPlayer = otherPlayer;
+                            otherPlayer.PartnerPlayer =player;
+                        }
+                    }
+                }
+            }
+            else if (player.jc_ind == 1)
+            {
+                foreach (BalancePlayer otherPlayer in _playerArray)
+                {
+                    if (player != otherPlayer)
+                    {
+                        if (otherPlayer.jc_ind == 3)
+                        {
+                            player.PartnerPlayer = otherPlayer;
+                            otherPlayer.PartnerPlayer = player;
+                        }
+                    }
+                }
+            }
+        }
+
+
         StartSpawn = true;
 
 
@@ -53,6 +93,12 @@ public class BalanceGameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if(_playerArray.Length == 4)
+        {
+            _enoughPlayers = true;
+        }
+
 
         if (_playerArray.All(go => go.PlayerIsReady == true ))
         {
@@ -95,13 +141,10 @@ public class BalanceGameManager : MonoBehaviour
     {
        while(true)
        {
-
-            
-           
             yield return new WaitForSeconds(3f);
         
-            Instantiate(_fallingItems[Random.Range(0, _fallingItems.Length - 1)], new Vector3(-1, 4, -5), Quaternion.identity);
-            Instantiate(_fallingItems[Random.Range(0, _fallingItems.Length - 1)], new Vector3(1, 4, -5), Quaternion.identity);
+            Instantiate(_fallingItems[Random.Range(0, _fallingItems.Length - 1)], new Vector3(-2, 4, -5), Quaternion.identity);
+            Instantiate(_fallingItems[Random.Range(0, _fallingItems.Length - 1)], new Vector3(2, 4, -5), Quaternion.identity);
 
 
        }

@@ -10,7 +10,13 @@ public class BalancePlayer : JoyconPlayerBase
     [SerializeField] GameObject _mainBody;
     [SerializeField] List<FallingObjects> _recipeList;
 
+    [SerializeField] Collider _inPotTriggerCollider;
 
+
+    public BalancePlayer PartnerPlayer;
+
+    List<FallingObjects> _listOfFoodInPot;
+    bool addFood;
 
     void Start()
     {
@@ -24,29 +30,30 @@ public class BalancePlayer : JoyconPlayerBase
         switch (jc_ind)
         {
             case 0:
-                gameObject.transform.position = new Vector3(-1f, -1, -5);
+                gameObject.transform.position = new Vector3(-2f, -1, -5);
                 _mainBody.GetComponent<MeshRenderer>().material.color = Color.red;
+                
                 break;
             case 1:
-                gameObject.transform.position = new Vector3(1f, -1, -5);
+                gameObject.transform.position = new Vector3(2f, -1, -5);
                 _mainBody.GetComponent<MeshRenderer>().material.color = Color.blue;
                 break;
-            case 2:
-                gameObject.transform.position = new Vector3(0, 0, -5);
-                _mainBody.GetComponent<MeshRenderer>().material.color = Color.yellow;
-                break;
-            case 3:
-                gameObject.transform.position = new Vector3(0, 0, -5);
-                _mainBody.GetComponent<MeshRenderer>().material.color = Color.green;
-                break;
+            
             default:
                 break;
         }
+
+        addFood = true;
     }
 
     // Update is called once per frame
     void Update()
     {
+
+        if(jc_ind == 2 || jc_ind == 3)
+        {
+            _mainBody.SetActive(false);
+        }
 
         if (joycons.Count > 0)
         {
@@ -82,4 +89,50 @@ public class BalancePlayer : JoyconPlayerBase
     {
         _recipeList = setRecipeList;
     }
+
+
+    private void OnTriggerEnter(Collider other)
+    {
+
+        if(_listOfFoodInPot != null)
+        {
+            foreach (var foodsInlist in _listOfFoodInPot)
+            {
+                if (other.GetComponent<FallingObjects>() != foodsInlist)
+                {
+                    addFood = true;
+                }
+                else
+                {
+                    addFood = false;
+                }
+            }
+        }
+        
+
+        if (addFood)
+        {
+
+            if (this.jc_ind == 0)
+            {
+                PartnerPlayer.RumbleController(joycons[PartnerPlayer.jc_ind]);
+            }
+            else if (this.jc_ind == 1)
+            {
+                PartnerPlayer.RumbleController(joycons[PartnerPlayer.jc_ind]);
+            }
+
+            //if (other.GetComponent<FallingObjects>() != null)
+            //{
+            //    _listOfFoodInPot.Add(other.GetComponent<FallingObjects>());
+            //}
+        }
+
+    }
+
+    private void RumbleController(Joycon j)
+    {
+        j.SetRumble(160, 220, 0.6f, 150);
+    }
+
 }
