@@ -13,6 +13,7 @@ public class StopwatchManager : MonoBehaviour
     [SerializeField] float _stopwatch;
     private bool TimeRanOut;
 
+    public GameObject PlayerInfoBackdropGO;
 
     [Header("Microphone")]
     [SerializeField] AudioLoudnessDetection _audioDetector;
@@ -74,6 +75,7 @@ public class StopwatchManager : MonoBehaviour
         _gameIsFinishedText.SetActive(false);
 
         _delayTime = Random.Range(1.5f, 2.5f);
+        PlayerInfoBackdropGO.GetComponent<RectTransform>().localScale = new Vector3(1, 2, 1);
 
     }
 
@@ -90,6 +92,9 @@ public class StopwatchManager : MonoBehaviour
         if (_playerArray.Length >= 2 && _playerArray.All(go => go.PlayerIsReady == true)) //Start the game once all player are ready 
         {
             StartTheGame = true;
+
+            StartCoroutine(ResizePlayerInfoBackdrop());
+
             foreach (var players in _playerArray)
             {
                 StartCoroutine(players.ReadyUpUI.GetComponent<ReadyUpScript>().AllPlayersReady()); //Should be fade text instead of set active false
@@ -184,7 +189,7 @@ public class StopwatchManager : MonoBehaviour
             players.PlayerTimeText.gameObject.SetActive(true);
 
         }
-        //Debug.LogWarning(_playerArray[0].gameObject.name + " is the winner");
+       
         //Place crown over player 
         _playerArray[0].IsWinner = true;
         
@@ -247,5 +252,12 @@ public class StopwatchManager : MonoBehaviour
     }
 
 
-   
+    public IEnumerator ResizePlayerInfoBackdrop()
+    {
+        yield return new WaitForSeconds(0.2f);
+        PlayerInfoBackdropGO.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
+    }
+
+
+
 }

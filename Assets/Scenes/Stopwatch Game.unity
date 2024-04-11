@@ -491,10 +491,10 @@ RectTransform:
   m_Father: {fileID: 1088266881}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.000061035156, y: -178.76332}
-  m_SizeDelta: {x: 0.00012207, y: -357.5267}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: 0, y: 39}
+  m_SizeDelta: {x: 800, y: 82.9539}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &691690629
 MonoBehaviour:
@@ -1229,6 +1229,7 @@ MonoBehaviour:
   _timerHUDElement: {fileID: 1160538411}
   _startTime: 10
   _stopwatch: 0
+  PlayerInfoBackdropGO: {fileID: 691690627}
   _audioDetector: {fileID: 974284706}
   loudnessSensibility: 300
   threshold: 30

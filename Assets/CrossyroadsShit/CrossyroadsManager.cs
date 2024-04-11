@@ -40,8 +40,8 @@ public class CrossyroadsManager : MonoBehaviour
     }
     void Start()
     {
-        readyUpPanel.SetActive(true);
-        PlayerInfoBackdropGO.SetActive(false);
+        // readyUpPanel.SetActive(true);
+        PlayerInfoBackdropGO.GetComponent<RectTransform>().localScale = new Vector3(1, 2, 1);
         timer = 60;
     }
 
@@ -56,13 +56,18 @@ public class CrossyroadsManager : MonoBehaviour
         if (_playerArray.Length >= 2 && _playerArray.All(go => go.PlayerIsReady == true)) //Start the game once all player are ready 
         {
             StartTheGame = true;
-            readyUpPanel.SetActive(false);
-            PlayerInfoBackdropGO.SetActive(true);
+            // readyUpPanel.SetActive(false);
+            //PlayerInfoBackdropGO.SetActive(true);
+
+            StartCoroutine(ResizePlayerInfoBackdrop());
+            
             foreach (var players in _playerArray)
             {
                 StartCoroutine(players.ReadyUpUI.GetComponent<ReadyUpScript>().AllPlayersReady()); //Should be fade text instead of set active false
 
             }
+
+            
         }
 
         if (GameOver)
@@ -72,7 +77,7 @@ public class CrossyroadsManager : MonoBehaviour
         }
         if (StartTheGame)
         {
-            readyUpPanel.SetActive(false);
+            //readyUpPanel.SetActive(false);
             if (timer > 0)
             {
                 timer -= Time.deltaTime;
@@ -91,5 +96,13 @@ public class CrossyroadsManager : MonoBehaviour
         //Anything that should happen when the game ends
         GameOver = true;
         GOPanel.SetActive(true);
+    }
+
+
+
+    public IEnumerator ResizePlayerInfoBackdrop()
+    {
+        yield return new WaitForSeconds(0.2f);
+        PlayerInfoBackdropGO.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
     }
 }
