@@ -55,6 +55,7 @@ public class SelectMinigameButton : MonoBehaviour
         Debug.Log("Minigame has been clicked");
        // SceneManager.LoadScene(_minigameSO.MinigameName);
         SceneManager.LoadScene(_minigameSO.SceneIndex, LoadSceneMode.Single);
+        
     }
 
     public void PlayVideo()

@@ -43,10 +43,26 @@ public class ShakeToRun : JoyconPlayerBase
 
     }
 
-    // Update is called once per frame
+
     void Update()
     {
-        if (!RLGLBananaManager.Instance.GameIsFinished)
+        if (joycons.Count > 0)
+        {
+            Joycon j = joycons[jc_ind];
+
+            base.ReadyUp(j);
+            //If game type så kan vi återanvända skriptet
+            stick = j.GetStick();
+
+            // Gyro values: x, y, z axis values (in radians per second)
+            gyro = j.GetGyro();
+
+            // Accel values:  x, y, z axis values (in Gs)
+            accel = j.GetAccel();
+
+        }
+
+        if (!RLGLBananaManager.Instance.GameIsFinished && RLGLBananaManager.Instance.StartTheGame)
         {
             if (_gotCought)
             {
@@ -54,25 +70,9 @@ public class ShakeToRun : JoyconPlayerBase
                 _stepsTaken = 0; //Kanke mins 5 steg vi får playtest
             }
 
-            if (joycons.Count > 0)
-            {
-                Joycon j = joycons[jc_ind];
 
-                base.ReadyUp(j);
-                //If game type så kan vi återanvända skriptet
-                stick = j.GetStick();
-
-                // Gyro values: x, y, z axis values (in radians per second)
-                gyro = j.GetGyro();
-
-                // Accel values:  x, y, z axis values (in Gs)
-                accel = j.GetAccel();
-
-            }
-
-
-           
             PlayerIsShakingJoyCon();
+
 
             //Playe player model Moving animation
             _anim.SetBool("Moving", !_stoppedRunning);
@@ -115,7 +115,7 @@ public class ShakeToRun : JoyconPlayerBase
             {              
                 _shakeInput = 0;
                 _stepsTaken++;
-                _playerModel.transform.position = new Vector3(_playerModel.transform.position.x, _playerModel.transform.position.y, (_playerModel.transform.position.z + 0.5f));
+                _playerModel.transform.position = new Vector3(_playerModel.transform.position.x, _playerModel.transform.position.y, (_playerModel.transform.position.z +(50/_stepGoal)));
             }
             
         }
