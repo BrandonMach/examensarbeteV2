@@ -34,6 +34,7 @@ public class RLGLBananaManager : MonoBehaviour
     [SerializeField] float StepGoal;
 
     bool _spacePressed;
+    bool _showWarningSign;
     #endregion
 
     
@@ -108,23 +109,28 @@ public class RLGLBananaManager : MonoBehaviour
 
 
 
-            // Warning sing when Guard will turn around
-            if (_CatchWaitTimer <= 1f ) 
-            {
-                _warningSign.SetActive(true);
+            // Warning sign when Guard will turn around
+            //if (_CatchWaitTimer <= 1f ) 
+            //{
+            //    _warningSign.SetActive(true);
 
-            }
+            //}
 
             // If audience presses space activate stop
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 Debug.Log("Audience pressed space");
                 _spacePressed = true;
-                StartCoroutine(AudienceStop());
 
+              //  StartCoroutine(ShowWarningSign());
                 
+
+
             }
-            
+
+            _warningSign.SetActive(_showWarningSign);
+
+
             // Count down Catch time and after set it to green light
             if (_CatchWaitTimer > 0 && !_spacePressed)
             {
@@ -133,14 +139,10 @@ public class RLGLBananaManager : MonoBehaviour
                 GreenLight = true;
 
             }
-            else
-            {
-                StartCoroutine(PlayersCanMove());
-
+            else if(!_showWarningSign)
+            {    
+                StartCoroutine(ShowWarningSign());
             }
-
-
-
 
 
 
@@ -160,23 +162,30 @@ public class RLGLBananaManager : MonoBehaviour
        
     }
 
-    IEnumerator PlayersCanMove()
+
+    IEnumerator Stop()
     {
         GreenLight = false;
-        _warningSign.SetActive(false);
-        yield return new WaitForSeconds(Random.Range(1.3f,3.5f));
-        _CatchWaitTimer = Random.Range(3, 6);
         
-
-    }
-
-    IEnumerator AudienceStop()
-    {
-        GreenLight = false;
         yield return new WaitForSeconds(Random.Range(1.3f, 3.5f));
-        _CatchWaitTimer = Random.Range(3, 6);
-        _spacePressed = false;
-
-
+        if (Input.GetKey(KeyCode.Space))
+        {
+            StartCoroutine(Stop());
+        }
+        else
+        {
+            _spacePressed = false;
+            _CatchWaitTimer = Random.Range(3, 6);
+            _showWarningSign = false;
+        }
+    }
+    IEnumerator ShowWarningSign()
+    {
+        _showWarningSign = true;
+       
+        Debug.LogError("Show Stop sign");
+        yield return new WaitForSeconds(1);
+        Debug.LogError("Apa");
+        StartCoroutine(Stop());
     }
 }

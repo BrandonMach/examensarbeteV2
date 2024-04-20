@@ -46,6 +46,7 @@ public class JoyConCrossyroads : JoyconPlayerBase
 
 		playerIndicator.GetComponent<Renderer>().material.SetColor("_Color", _playerNameText.color);
 
+        //Spawn Player game object representation
         switch (jc_ind)
         {
             case 0:

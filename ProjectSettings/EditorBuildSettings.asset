@@ -20,8 +20,5 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/CrossRoad.unity
     guid: 816112bb907a2c947940e0b14a21aa85
-  - enabled: 1
-    path: Assets/Scenes/Loading Screen.unity
-    guid: c1d3367efa7c5ba40b9dd33face1cf61
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: ba86d200c71cf7049b38b219fdf12982, type: 2}

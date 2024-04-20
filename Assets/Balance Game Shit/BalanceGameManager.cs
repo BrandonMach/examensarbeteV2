@@ -31,8 +31,8 @@ public class BalanceGameManager : MonoBehaviour
 
     bool generatePlayerRecipe;
 
-
     
+
 
     private void Awake()
     {
@@ -142,9 +142,11 @@ public class BalanceGameManager : MonoBehaviour
        while(true)
        {
             yield return new WaitForSeconds(3f);
-        
-            Instantiate(_fallingItems[Random.Range(0, _fallingItems.Length - 1)], new Vector3(-2, 4, -5), Quaternion.identity);
-            Instantiate(_fallingItems[Random.Range(0, _fallingItems.Length - 1)], new Vector3(2, 4, -5), Quaternion.identity);
+
+            var _spawnFallingFood = _fallingItems[Random.Range(0, _fallingItems.Length - 1)];
+
+            Instantiate(_spawnFallingFood, new Vector3(Random.Range(-4,-0.7f), 5, -5), _spawnFallingFood.transform.rotation);
+            Instantiate(_spawnFallingFood, new Vector3(Random.Range(4, 0.7f), 5, -5), _spawnFallingFood.transform.rotation);
 
 
        }

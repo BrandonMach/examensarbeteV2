@@ -30,6 +30,9 @@ public class DefenceManager : MonoBehaviour
         Instance = this;
 
     }
+
+  
+
     // Start is called before the first frame update
     public void TakeDamage()
     {
@@ -39,11 +42,19 @@ public class DefenceManager : MonoBehaviour
     public void UpdatePlayerArray()
     {
         _playerArray = FindObjectsOfType<DefenceJoyconPlayer>();
+        
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+        foreach (var players in _playerArray)
+        {
+            players.transform.parent.SetParent(core.transform);
+        }
+
+
+
         if (_playerArray.Length >= 2 && _playerArray.All(go => go.PlayerIsReady == true)) //Start the game once all player are ready 
         {
             startGame = true;
@@ -67,6 +78,8 @@ public class DefenceManager : MonoBehaviour
                     interactTimer += Time.deltaTime;
                     rotationValue += 0.5f;
                     core.transform.rotation = Quaternion.Euler(0, rotationValue, 0);
+
+                    //Rotate the Core for 6 seconds
                     if (interactTimer > 6)
                     {
                         interactTimer = 0;

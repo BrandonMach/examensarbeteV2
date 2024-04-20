@@ -18,6 +18,12 @@ public class BalancePlayer : JoyconPlayerBase
     List<FallingObjects> _listOfFoodInPot;
     bool addFood;
 
+
+    [Header("Pot Boundary")]
+    [SerializeField] float _maxRightBoundary;
+    [SerializeField] float _maxLeftBoundary;
+
+
     void Start()
     {
         base.Start();
@@ -32,11 +38,15 @@ public class BalancePlayer : JoyconPlayerBase
             case 0:
                 gameObject.transform.position = new Vector3(-2f, -1, -5);
                 _mainBody.GetComponent<MeshRenderer>().material.color = Color.red;
+                _maxLeftBoundary = -4;
+                _maxRightBoundary = -0.7f;
                 
                 break;
             case 1:
                 gameObject.transform.position = new Vector3(2f, -1, -5);
                 _mainBody.GetComponent<MeshRenderer>().material.color = Color.blue;
+                _maxLeftBoundary = 0.7f;
+                _maxRightBoundary = 4;
                 break;
             
             default:
@@ -50,10 +60,7 @@ public class BalancePlayer : JoyconPlayerBase
     void Update()
     {
 
-        if(jc_ind == 2 || jc_ind == 3)
-        {
-            _mainBody.SetActive(false);
-        }
+        
 
         if (joycons.Count > 0)
         {
@@ -62,7 +69,55 @@ public class BalancePlayer : JoyconPlayerBase
 
             base.ReadyUp(j);
 
-            
+
+
+
+
+
+            if (jc_ind == 2 || jc_ind == 3)
+            {
+                _mainBody.SetActive(false);
+
+                if (j.GetButtonDown(Joycon.Button.DPAD_DOWN))
+                {
+                    j.SetRumble(160, 220, 0.6f, 150);
+
+
+                   
+                }
+
+                var joyConAngles = j.GetVector().eulerAngles;
+
+                if (joyConAngles.y < 190 && joyConAngles.y > 170)
+                {
+                    Debug.Log("Not moving");
+                }
+                else if (joyConAngles.y < 360 && joyConAngles.y > 190)
+                {
+                    Debug.Log("Left");
+                    PartnerPlayer.transform.position += new Vector3(-0.02f, 0, 0);
+                }
+                else if (joyConAngles.y > 0 && joyConAngles.y < 170)
+                {
+                    Debug.Log("Right");
+                    PartnerPlayer.transform.position += new Vector3(0.02f, 0, 0);
+                }
+
+
+            }
+            else
+            {
+                if(transform.position.x >= _maxRightBoundary)
+                {
+                    transform.position = new Vector3(_maxRightBoundary, transform.position.y, transform.position.z);
+                }
+                if(transform.position.x <= _maxLeftBoundary)
+                {
+                    transform.position = new Vector3(_maxLeftBoundary, transform.position.y, transform.position.z);
+                }
+            }
+
+
             gameObject.transform.rotation = orientation;
             orientation = j.GetVector();
             gameObject.transform.Rotate(90, 0, 0, Space.World);

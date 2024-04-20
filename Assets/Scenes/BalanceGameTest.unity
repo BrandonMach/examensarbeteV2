@@ -378,6 +378,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b1a79b17881f73408503be6cd06ccfa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enoughPlayers: 0
   _playerArray: []
   StartTheGame: 0
   GameIsFinished: 0

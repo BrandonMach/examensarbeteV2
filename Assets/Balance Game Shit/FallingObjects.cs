@@ -35,6 +35,6 @@ public class FallingObjects : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //_rb.velocity = new Vector3(0, -4.91f, 0);
+        _rb.velocity = new Vector3(0, -2.91f, 0);
     }
 }
