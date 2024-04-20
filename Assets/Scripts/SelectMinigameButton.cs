@@ -53,7 +53,8 @@ public class SelectMinigameButton : MonoBehaviour
     public void GameClicked()
     {
         Debug.Log("Minigame has been clicked");
-       // SceneManager.LoadScene(_minigameSO.MinigameName);
+        // SceneManager.LoadScene(_minigameSO.MinigameName);
+
         SceneManager.LoadScene(_minigameSO.SceneIndex, LoadSceneMode.Single);
         
     }

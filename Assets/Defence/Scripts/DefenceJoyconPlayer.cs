@@ -3,12 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Net.Sockets;
 using TMPro;
-using Unity.PlasticSCM.Editor.WebApi;
 using UnityEngine;
 
 public class DefenceJoyconPlayer : JoyconPlayerBase
 {
-    [SerializeField] TextMeshProUGUI _playerNameText;
+    
     [SerializeField] GameObject playerInfoObj;
     // Start is called before the first frame update
     GameObject core;
