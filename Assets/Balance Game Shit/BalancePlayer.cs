@@ -57,7 +57,7 @@ public class BalancePlayer : JoyconPlayerBase
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
 
         
@@ -95,12 +95,12 @@ public class BalancePlayer : JoyconPlayerBase
                 else if (joyConAngles.y < 360 && joyConAngles.y > 190)
                 {
                     Debug.Log("Left");
-                    PartnerPlayer.transform.position += new Vector3(-0.02f, 0, 0);
+                    PartnerPlayer.transform.position += new Vector3(-0.1f, 0, 0);
                 }
                 else if (joyConAngles.y > 0 && joyConAngles.y < 170)
                 {
                     Debug.Log("Right");
-                    PartnerPlayer.transform.position += new Vector3(0.02f, 0, 0);
+                    PartnerPlayer.transform.position += new Vector3(0.1f, 0, 0);
                 }
 
 

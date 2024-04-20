@@ -46,7 +46,7 @@ public class DefenceManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         foreach (var players in _playerArray)
         {
@@ -76,7 +76,7 @@ public class DefenceManager : MonoBehaviour
                 if (interaction)
                 {
                     interactTimer += Time.deltaTime;
-                    rotationValue += 0.5f;
+                    rotationValue += 0.3f;
                     core.transform.rotation = Quaternion.Euler(0, rotationValue, 0);
 
                     //Rotate the Core for 6 seconds
