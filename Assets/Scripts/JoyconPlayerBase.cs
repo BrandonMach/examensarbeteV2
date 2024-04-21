@@ -78,7 +78,10 @@ public class JoyconPlayerBase : MonoBehaviour
             case MinigamesManagers.MiniGameType.Balance:
 				_playerNameText.GetComponent<RectTransform>().position = new Vector3(250 + (500 * jc_ind), 260, this.transform.position.z);
 				break;
-            default:
+			case MinigamesManagers.MiniGameType.Direction:
+				_playerNameText.GetComponent<RectTransform>().position = new Vector3(250 + (500 * jc_ind), 260, this.transform.position.z);
+				break;
+			default:
                 break;
         }
 

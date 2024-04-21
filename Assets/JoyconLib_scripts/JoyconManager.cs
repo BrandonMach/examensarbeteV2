@@ -73,6 +73,9 @@ public class JoyconManager: MonoBehaviour
 			case MinigamesManagers.MiniGameType.Balance:
 				PlayerPrefab = MinigamePlayerPrefabs[4];
 				break;
+			case MinigamesManagers.MiniGameType.Direction:
+				PlayerPrefab = MinigamePlayerPrefabs[5];
+				break;
 			default:
                 break;
         }

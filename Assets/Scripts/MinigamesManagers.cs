@@ -20,7 +20,8 @@ public class MinigamesManagers : MonoBehaviour
         Crossyroad,
         ShakeAndRun,
         Defence,
-        Balance
+        Balance,
+        Direction
     }
     public  MiniGameType CurrentMinigame;
 
