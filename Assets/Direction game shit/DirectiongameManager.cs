@@ -30,7 +30,9 @@ public class DirectiongameManager : MonoBehaviour
     [SerializeField] bool _followArrowDirection;
 
     [SerializeField] float chooseDirectionDelay = 3f;
-    [SerializeField] float countdown = 0;
+    [SerializeField] float countUp = 0;
+
+    [SerializeField] float healt = 0; //Should be double the amount of players connected
 
     public enum Direction
     {
@@ -45,7 +47,9 @@ public class DirectiongameManager : MonoBehaviour
     Direction _setTextDirection;
 
     [SerializeField] TextMeshProUGUI _directionText;
+    [SerializeField] TextMeshProUGUI _healthText;
 
+    bool _gameOver;
 
     private void Awake()
     {
@@ -56,6 +60,8 @@ public class DirectiongameManager : MonoBehaviour
     {
         _playerArray = FindObjectsOfType<DirectionPlayerScript>();
         ChooseRandomDirection();
+
+        healt = _playerArray.Length * 2;
     }
 
 
@@ -78,9 +84,9 @@ public class DirectiongameManager : MonoBehaviour
     void Update()
     {
         AllPlayersAreReadyCheck();
+        _healthText.text = healt.ToString() + "x";
 
-
-        if (StartTheGame)
+        if (StartTheGame && !_gameOver)
         {
             
             if (!_generateRandomDirection)
@@ -90,11 +96,12 @@ public class DirectiongameManager : MonoBehaviour
             }
             else
             {
-                countdown += Time.deltaTime;
-                if(countdown >= chooseDirectionDelay)
+                countUp += Time.deltaTime;
+                if(countUp >= chooseDirectionDelay)
                 {
                     _generateRandomDirection = false;
-                    countdown = 0;
+                    countUp = 0;
+                    CheckIfPlayerIsWrongDirection();
                 }
             }
 
@@ -110,53 +117,69 @@ public class DirectiongameManager : MonoBehaviour
 
             if (_followArrowDirection)
             {
-                _arrowImageRectTransform.GetComponent<Image>().color = Color.red;
+                _arrowImageRectTransform.GetComponent<Image>().color = Color.green;
                 _directionText.color = Color.white;
             }
             else
             {
-                _directionText.color = Color.red;
+                _directionText.color = Color.green;
                 _arrowImageRectTransform.GetComponent<Image>().color = Color.white;
             }
 
+            foreach (var player in _playerArray)
+            {
+                if(player.GetComponent<DirectionPlayerScript>().PlayerChoosenDirection == _currentSelectedDirection)
+                {
+                    player.GetComponent<DirectionPlayerScript>().CorrectDirection = true;
+                }
+                else
+                {
+                    player.GetComponent<DirectionPlayerScript>().CorrectDirection = false;
+                }
+            }
 
 
-           
+            if(healt <= 0)
+            {
+                _directionText.text = "Game Over!";
+                _gameOver = true;
+            }
+
         }
     }
 
 
     private void ChooseRandomDirection()
     {
+
         
+
+
         _arrowImageRectTransform.rotation = Quaternion.Euler(new Vector3(0, 0, _arrowAngleDirections[Random.Range(0, _arrowAngleDirections.Length)]));
         _setTextDirection = (Direction)Random.Range(0, 4);
 
+
+        switch (_setTextDirection)
+        {
+            case Direction.Up:
+                _directionText.text = "UP";
+                break;
+            case Direction.Down:
+                _directionText.text = "DOWN";
+                break;
+            case Direction.Left:
+                _directionText.text = "LEFT";
+                break;
+            case Direction.Right:
+                _directionText.text = "RIGHT";
+                break;
+            default:
+                break;
+        }
+
         if (!_followArrowDirection)
         {
-           
-
-
-            switch (_setTextDirection)
-            {
-                case Direction.Up:
-                    _directionText.text = "UP";
-                    break;
-                case Direction.Down:
-                    _directionText.text = "DOWN";
-                    break;
-                case Direction.Left:
-                    _directionText.text = "LEFT";
-                    break;
-                case Direction.Right:
-                    _directionText.text = "RIGHT";
-                    break;
-                default:
-                    break;
-            }
-
             _currentSelectedDirection = _setTextDirection;
-
         }
         else
         {
@@ -184,8 +207,23 @@ public class DirectiongameManager : MonoBehaviour
         }
 
 
+        
+
+
     }
 
+
+    void CheckIfPlayerIsWrongDirection()
+    {
+        foreach (var player in _playerArray)
+        {
+
+            if (player.GetComponent<DirectionPlayerScript>().PlayerChoosenDirection != _currentSelectedDirection)
+            {
+                healt--;
+            }
+        }
+    }
   
 
 

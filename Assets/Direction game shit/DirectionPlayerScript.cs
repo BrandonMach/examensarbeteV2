@@ -9,10 +9,20 @@ public class DirectionPlayerScript : JoyconPlayerBase
     [SerializeField] Vector3 eulerAngles;
     [SerializeField] Vector3 accelerometer;
 
-    [SerializeField] DirectiongameManager.Direction _playerChoosenDirection;
+    public DirectiongameManager.Direction PlayerChoosenDirection;
+
+    public bool CorrectDirection;
+    [SerializeField] GameObject _checkmark;
+
+    Joycon j;
+
+
     void Start()
     {
         base.Start();
+        j = joycons[jc_ind];
+        j.Recenter();
+        
         
     }
 
@@ -22,11 +32,12 @@ public class DirectionPlayerScript : JoyconPlayerBase
 
         if (joycons.Count > 0)
         {
-            Joycon j = joycons[jc_ind];
+           j = joycons[jc_ind];
 
 
             base.ReadyUp(j);
 
+            
 
             eulerAngles = j.GetVector().eulerAngles;
             accelerometer = j.GetAccel();
@@ -37,11 +48,11 @@ public class DirectionPlayerScript : JoyconPlayerBase
             {
                 if(accelerometer.x >= 0.5f)
                 {
-                    _playerChoosenDirection = DirectiongameManager.Direction.Up;
+                    PlayerChoosenDirection = DirectiongameManager.Direction.Up;
                 }
                 if(accelerometer.x <= -0.5f)
                 {
-                    _playerChoosenDirection = DirectiongameManager.Direction.Down;
+                    PlayerChoosenDirection = DirectiongameManager.Direction.Down;
 
                 }
                 
@@ -52,18 +63,18 @@ public class DirectionPlayerScript : JoyconPlayerBase
                 if(eulerAngles.z > 20 && eulerAngles.z < 120)
                 {
                     Debug.Log(this.name + "Right");
-                    _playerChoosenDirection = DirectiongameManager.Direction.Right;
+                    PlayerChoosenDirection = DirectiongameManager.Direction.Right;
                 }
                 if(eulerAngles.z > 200 && eulerAngles.z < 300)
                 {
                     Debug.Log(this.name + "Left");
-                    _playerChoosenDirection = DirectiongameManager.Direction.Left;
+                    PlayerChoosenDirection = DirectiongameManager.Direction.Left;
                 }
                 
             }
 
 
-
+            _checkmark.SetActive(CorrectDirection);
 
 
 
