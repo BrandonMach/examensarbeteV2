@@ -37,7 +37,17 @@ public class RLGLBananaManager : MonoBehaviour
     bool _showWarningSign;
     #endregion
 
-    
+
+    [Header("Microphone")]
+    [SerializeField] AudioLoudnessDetection _audioDetector;
+    public float loudnessSensibility = 100;
+    public float threshold = 0.5f;
+    [SerializeField] float loudness;
+
+    [SerializeField] bool isLoud;
+    [SerializeField] SpriteRenderer _audioSpriteRenderer;
+
+
 
     private void Awake()
     {
@@ -82,6 +92,7 @@ public class RLGLBananaManager : MonoBehaviour
     void Update()
     {
 
+        CheckLoudness();
         //Start the game once all player are ready 
         if (_playerArray.Length >= 2 && _playerArray.All(go => go.PlayerIsReady == true)) 
         {
@@ -117,7 +128,7 @@ public class RLGLBananaManager : MonoBehaviour
             //}
 
             // If audience presses space activate stop
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.Space) || AudienceIsLoud())
             {
                 Debug.Log("Audience pressed space");
                 _spacePressed = true;
@@ -168,7 +179,7 @@ public class RLGLBananaManager : MonoBehaviour
         GreenLight = false;
         
         yield return new WaitForSeconds(Random.Range(1.3f, 3.5f));
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space) || AudienceIsLoud())
         {
             StartCoroutine(Stop());
         }
@@ -187,5 +198,64 @@ public class RLGLBananaManager : MonoBehaviour
         yield return new WaitForSeconds(1);
         Debug.LogError("Apa");
         StartCoroutine(Stop());
+    }
+
+
+    void CheckLoudness()
+    {
+        // Multiply so that loudness easier to work with
+        loudness = _audioDetector.GetLoudnessFromMicrophone() * loudnessSensibility * 5;
+
+        if ((loudness * 2f) <= 80)
+        {
+            _audioSpriteRenderer.size = new Vector2(_audioSpriteRenderer.size.x, loudness * 2f);
+        }
+        else
+        {
+            _audioSpriteRenderer.size = new Vector2(_audioSpriteRenderer.size.x, 80);
+        }
+
+        //if loudness is negative set to 0 as mininum and prevent more time to be added until it has atleast reseted
+        if (loudness < threshold)
+        {
+            loudness = 0;
+            isLoud = false;
+        }
+        else
+        {
+            isLoud = true;
+        }
+
+
+    }
+
+    bool AudienceIsLoud()
+    {
+        // Multiply so that loudness easier to work with
+        loudness = _audioDetector.GetLoudnessFromMicrophone() * loudnessSensibility * 5;
+
+        //if loudness is negative set to 0 as mininum and prevent more time to be added until it has atleast reseted
+
+        if((loudness/5) <= 80)
+        {
+            _audioSpriteRenderer.size = new Vector2(_audioSpriteRenderer.size.x, loudness / 5);
+        }
+        else
+        {
+            _audioSpriteRenderer.size = new Vector2(_audioSpriteRenderer.size.x, 80);
+        }
+       
+
+        if (loudness < threshold)
+        {
+            loudness = 0;
+            isLoud = false;
+            return false;
+        }
+        else
+        {
+            isLoud = true;
+            return true;
+        }
     }
 }
