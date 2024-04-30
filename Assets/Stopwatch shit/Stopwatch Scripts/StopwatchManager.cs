@@ -229,6 +229,11 @@ public class StopwatchManager : MonoBehaviour
         if (loudness < threshold)
         {
             loudness = 0;
+            isLoud = false;
+        }
+        else
+        {
+            isLoud = true;
         }
 
 
