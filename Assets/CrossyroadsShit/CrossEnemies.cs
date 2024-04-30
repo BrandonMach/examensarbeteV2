@@ -7,6 +7,7 @@ public class CrossEnemies : MonoBehaviour
     float lastDir;
     public float dir, originalDir;
     GameObject parent1;
+    Vector3 selfRotate = new Vector3 (0, 90, 0);
     CrossEnemySpawner parent;
     // Start is called before the first frame update
     void Start()
@@ -16,8 +17,17 @@ public class CrossEnemies : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         transform.RotateAround(parent.center.transform.position, parent.rot, parent.rotationDegree * Time.deltaTime);
+
+        if (parent.miniTreshholdMet)
+        {
+
+            Debug.Log("WE BLKBLEKFPLKSJEFKL");
+
+
+            transform.Rotate(selfRotate * Time.deltaTime);
+        }
     }
 }

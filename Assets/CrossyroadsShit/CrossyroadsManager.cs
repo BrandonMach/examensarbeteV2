@@ -28,6 +28,8 @@ public class CrossyroadsManager : MonoBehaviour
     public TMP_Text winnerNameText, timerTxt;
     float timer;
 
+    
+
     private void Awake()
     {
         if (Instance != null)
@@ -105,4 +107,6 @@ public class CrossyroadsManager : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
         PlayerInfoBackdropGO.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
     }
+
+    
 }
