@@ -20,6 +20,9 @@ public class StopwatchManager : MonoBehaviour
     public float loudnessSensibility = 100;
     public float threshold = 0.5f;
     [SerializeField] float loudness;
+    [SerializeField] bool isLoud;
+    [SerializeField] SpriteRenderer _audioSpriteRenderer;
+
 
     [Header("Add more Time")]   
     [SerializeField] float _timeToAdd;
@@ -209,8 +212,21 @@ public class StopwatchManager : MonoBehaviour
         // Multiply so that loudness easier to work with
         loudness = _audioDetector.GetLoudnessFromMicrophone() * loudnessSensibility * 5;
 
+
+
+        if ((loudness) <= threshold)
+        {
+            _audioSpriteRenderer.size = new Vector2(_audioSpriteRenderer.size.x, loudness);
+        }
+        else
+        {
+            _audioSpriteRenderer.size = new Vector2(_audioSpriteRenderer.size.x, 80);
+        }
+
+
+
         //if loudness is negative set to 0 as mininum and prevent more time to be added until it has atleast reseted
-        if(loudness < threshold)
+        if (loudness < threshold)
         {
             loudness = 0;
         }

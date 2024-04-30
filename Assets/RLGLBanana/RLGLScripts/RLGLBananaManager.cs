@@ -128,7 +128,7 @@ public class RLGLBananaManager : MonoBehaviour
             //}
 
             // If audience presses space activate stop
-            if (Input.GetKeyDown(KeyCode.Space) || AudienceIsLoud())
+            if (/*Input.GetKeyDown(KeyCode.Space) ||*/ AudienceIsLoud())
             {
                 Debug.Log("Audience pressed space");
                 _spacePressed = true;
@@ -236,9 +236,9 @@ public class RLGLBananaManager : MonoBehaviour
 
         //if loudness is negative set to 0 as mininum and prevent more time to be added until it has atleast reseted
 
-        if((loudness/5) <= 80)
+        if((loudness) <= threshold)
         {
-            _audioSpriteRenderer.size = new Vector2(_audioSpriteRenderer.size.x, loudness / 5);
+            _audioSpriteRenderer.size = new Vector2(_audioSpriteRenderer.size.x, loudness );
         }
         else
         {
