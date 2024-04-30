@@ -489,7 +489,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1088266881}
-  m_RootOrder: 7
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
@@ -886,11 +886,11 @@ RectTransform:
   - {fileID: 1802922226}
   - {fileID: 748296645}
   - {fileID: 1712673944}
+  - {fileID: 691690628}
   - {fileID: 32453225}
   - {fileID: 206854775}
   - {fileID: 1849564915}
   - {fileID: 886389905}
-  - {fileID: 691690628}
   - {fileID: 807680243}
   m_Father: {fileID: 0}
   m_RootOrder: 6
@@ -1405,6 +1405,8 @@ MonoBehaviour:
   loudnessSensibility: 300
   threshold: 30
   loudness: 0
+  isLoud: 0
+  _audioSpriteRenderer: {fileID: 1518159386}
   _timeToAdd: 5
   _canvas: {fileID: 1712673943}
   _timeToAddPrefab: {fileID: 162290570579138067, guid: 35ac94c155267a2469b13478fa378cad, type: 3}
@@ -1428,6 +1430,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &1518159386 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 7478265683817566980, guid: 547b415281fe1c149a3ded4b5a8b4721, type: 3}
+  m_PrefabInstance: {fileID: 807680242}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1570619551
 GameObject:
   m_ObjectHideFlags: 0
