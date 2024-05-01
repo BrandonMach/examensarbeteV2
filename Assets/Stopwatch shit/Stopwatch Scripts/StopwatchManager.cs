@@ -33,6 +33,9 @@ public class StopwatchManager : MonoBehaviour
 
     float _delayTime;
 
+    [SerializeField] int _maxAddTime;
+    [SerializeField] GameObject[] _stopwatchImages;
+
     #region Singelton
     static StopwatchManager _instance;
     public static StopwatchManager Instance { get => _instance; set => _instance = value; }
@@ -140,6 +143,14 @@ public class StopwatchManager : MonoBehaviour
             AllPlayersHasStoppedTime();
 
             GameIsFinnished();
+
+            for (int i = 0; i < _stopwatchImages.Length; i++)
+            {
+                if((i+1) > _maxAddTime)
+                {
+                    _stopwatchImages[i].SetActive(false);
+                }
+            }
         }
     }
 
@@ -236,28 +247,33 @@ public class StopwatchManager : MonoBehaviour
             isLoud = true;
         }
 
-
+        //Prevent time to be added everytime peak is hit
         if (_addMoreTime)
         {
             _delayTime -= Time.deltaTime;
             if (_delayTime < 0)
             {
+                
                 _addMoreTime = false;
+                
                 _delayTime = Random.Range(1.5f, 2.5f);
             }
+            
         }
 
         //if loudness is more than threashold and hasn't added time => add extra time and spawn HUD element that shows how much time got added
-        if (loudness > threshold && !_addMoreTime)
+        if (loudness > threshold && !_addMoreTime && _maxAddTime > 0)
         {
+            _maxAddTime--;
             _addMoreTime = true;
-            _stopwatch += _timeToAdd;
+            _stopwatch += /*_timeToAdd*/ (int)loudness / 10;
 
 
             #region Add Time HUD visual
 
            // Debug.LogError("Add " + _timeToAdd + " seconds");
             GameObject tempAddTimePrefab = Instantiate(_timeToAddPrefab);
+            tempAddTimePrefab.GetComponent<TextMeshProUGUI>().text = "+"+ ((int)loudness / 10).ToString();
             //tempAddTimePrefab.transform.parent = _canvas.transform;
 
             tempAddTimePrefab.transform.SetParent(_canvas.transform);
