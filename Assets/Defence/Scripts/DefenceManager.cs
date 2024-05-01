@@ -20,6 +20,17 @@ public class DefenceManager : MonoBehaviour
     public GameObject gameOverPanel, VictoryPanel;
     public GameObject core;
     float rotationValue;
+
+    [Header("Microphone")]
+    [SerializeField] AudioLoudnessDetection _audioDetector;
+    public float loudnessSensibility = 100;
+    public float threshold = 0.5f;
+    public float miniTreshhold = 0.5f;
+    public bool miniTreshholdMet;
+    public float loudness;
+
+    [SerializeField] bool isLoud;
+    [SerializeField] SpriteRenderer _audioSpriteRenderer;
     private void Awake()
     {
         if (Instance != null)
@@ -48,6 +59,12 @@ public class DefenceManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        CheckLoudness();
+        if (AudienceIsLoud())
+        {
+            rotationValue += 0.3f;
+            core.transform.rotation = Quaternion.Euler(0, rotationValue, 0);
+        }
         foreach (var players in _playerArray)
         {
             players.transform.parent.SetParent(core.transform);
@@ -86,6 +103,11 @@ public class DefenceManager : MonoBehaviour
                         interaction = false;
                     }
                 }
+                if (AudienceIsLoud())
+                {
+                    rotationValue += 0.3f;
+                    core.transform.rotation = Quaternion.Euler(0, rotationValue, 0);
+                }
             }
             else
             {
@@ -108,5 +130,72 @@ public class DefenceManager : MonoBehaviour
             VictoryPanel.SetActive(true);
         }
         gameOver = true;
+    }
+
+    void CheckLoudness()
+    {
+        // Multiply so that loudness easier to work with
+        loudness = _audioDetector.GetLoudnessFromMicrophone() * loudnessSensibility * 5;
+
+        if ((loudness * 2f) <= 80)
+        {
+            _audioSpriteRenderer.size = new Vector2(_audioSpriteRenderer.size.x, loudness * 2f);
+        }
+        else
+        {
+            _audioSpriteRenderer.size = new Vector2(_audioSpriteRenderer.size.x, 80);
+        }
+
+        //if loudness is negative set to 0 as mininum and prevent more time to be added until it has atleast reseted
+        if (loudness < threshold)
+        {
+            if (loudness > miniTreshhold)
+            {
+                miniTreshholdMet = true;
+            }
+            else
+            {
+                miniTreshholdMet = false;
+            }
+            loudness = 0;
+            isLoud = false;
+        }
+        else
+        {
+
+            isLoud = true;
+        }
+
+
+    }
+
+    bool AudienceIsLoud()
+    {
+        // Multiply so that loudness easier to work with
+        loudness = _audioDetector.GetLoudnessFromMicrophone() * loudnessSensibility * 5;
+
+        //if loudness is negative set to 0 as mininum and prevent more time to be added until it has atleast reseted
+
+        if ((loudness) <= threshold)
+        {
+            _audioSpriteRenderer.size = new Vector2(_audioSpriteRenderer.size.x, loudness);
+        }
+        else
+        {
+            _audioSpriteRenderer.size = new Vector2(_audioSpriteRenderer.size.x, 80);
+        }
+
+
+        if (loudness < threshold)
+        {
+            loudness = 0;
+            isLoud = false;
+            return false;
+        }
+        else
+        {
+            isLoud = true;
+            return true;
+        }
     }
 }
