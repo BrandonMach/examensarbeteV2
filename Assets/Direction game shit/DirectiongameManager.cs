@@ -125,10 +125,7 @@ public class DirectiongameManager : MonoBehaviour
                 _followArrowDirection = !_followArrowDirection;
 
             }
-            //else
-            //{
-            //    _followArrowDirection = false;
-            //}
+          
 
 
             if (_followArrowDirection)
@@ -167,8 +164,6 @@ public class DirectiongameManager : MonoBehaviour
 
     private void ChooseRandomDirection()
     {
-
-        
 
 
         _arrowImageRectTransform.rotation = Quaternion.Euler(new Vector3(0, 0, _arrowAngleDirections[Random.Range(0, _arrowAngleDirections.Length)]));
