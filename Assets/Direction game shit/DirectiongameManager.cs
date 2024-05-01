@@ -51,6 +51,19 @@ public class DirectiongameManager : MonoBehaviour
 
     bool _gameOver;
 
+
+    [Header("Microphone")]
+    [SerializeField] AudioLoudnessDetection _audioDetector;
+    public float loudnessSensibility = 100;
+    public float threshold = 0.5f;
+    [SerializeField] float loudness;
+
+    [SerializeField] bool isLoud;
+    [SerializeField] SpriteRenderer _audioSpriteRenderer;
+
+    bool canSwitchFollow;
+
+
     private void Awake()
     {
         
@@ -58,6 +71,7 @@ public class DirectiongameManager : MonoBehaviour
 
     void Start()
     {
+        canSwitchFollow = true;
         _playerArray = FindObjectsOfType<DirectionPlayerScript>();
         ChooseRandomDirection();
 
@@ -105,14 +119,16 @@ public class DirectiongameManager : MonoBehaviour
                 }
             }
 
-            if (Input.GetKey(KeyCode.Space))
+            if (AudienceIsLoud() && canSwitchFollow)
             {
-                _followArrowDirection = true;
+                canSwitchFollow = false;
+                _followArrowDirection = !_followArrowDirection;
+
             }
-            else
-            {
-                _followArrowDirection = false;
-            }
+            //else
+            //{
+            //    _followArrowDirection = false;
+            //}
 
 
             if (_followArrowDirection)
@@ -206,7 +222,7 @@ public class DirectiongameManager : MonoBehaviour
    
         }
 
-
+        canSwitchFollow = true;
         
 
 
@@ -224,7 +240,46 @@ public class DirectiongameManager : MonoBehaviour
             }
         }
     }
-  
+
+
+    IEnumerator SwitchFollow()
+    {
+        
+
+        yield return new WaitForSeconds(0.5f);
+       
+    }
+
+    bool AudienceIsLoud()
+    {
+        // Multiply so that loudness easier to work with
+        loudness = _audioDetector.GetLoudnessFromMicrophone() * loudnessSensibility * 5;
+
+        //if loudness is negative set to 0 as mininum and prevent more time to be added until it has atleast reseted
+
+        if ((loudness) <= threshold)
+        {
+            _audioSpriteRenderer.size = new Vector2(_audioSpriteRenderer.size.x, loudness);
+        }
+        else
+        {
+            _audioSpriteRenderer.size = new Vector2(_audioSpriteRenderer.size.x, 80);
+        }
+
+
+        if (loudness < threshold)
+        {
+            loudness = 0;
+            isLoud = false;
+            return false;
+        }
+        else
+        {
+            isLoud = true;
+            return true;
+        }
+    }
+
 
 
 

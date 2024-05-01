@@ -194,8 +194,14 @@ public class DefenceManager : MonoBehaviour
         }
         else
         {
-            isLoud = true;
-            return true;
+
+            if (loudness > miniTreshhold)
+            {
+                isLoud = true;
+                return true;
+            }
+            return false;
+
         }
     }
 }
