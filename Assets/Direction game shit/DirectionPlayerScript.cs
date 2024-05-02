@@ -41,36 +41,67 @@ public class DirectionPlayerScript : JoyconPlayerBase
 
             eulerAngles = j.GetVector().eulerAngles;
             accelerometer = j.GetAccel();
-       
 
-            
-            if (accelerometer.x >= 0.5f || accelerometer.x <= -0.5f)
+
+            if (j.GetButtonDown(Joycon.Button.SHOULDER_2))
             {
-                if(accelerometer.x >= 0.5f)
+                j.Recenter();
+            }
+          
+           
+
+            ////if (j.GetButtonDown(Joycon.Button.DPAD_UP))
+            ////{
+            ////    PlayerChoosenDirection = DirectiongameManager.Direction.Button_Up;
+            ////}
+            ////else
+            ////{
+            ////    gyroCheck();
+            ////}
+            ////if (j.GetButtonDown(Joycon.Button.DPAD_DOWN))
+            ////{
+            ////    PlayerChoosenDirection = DirectiongameManager.Direction.Button_Down;
+            ////}
+            ////else
+            ////{
+            ////    gyroCheck();
+            ////}
+            ///
+
+
+
+            if (accelerometer.x >= 0.9f || accelerometer.x <= -0.9f)
+            {
+
+
+
+
+
+                if (accelerometer.x >= 0.9f)
                 {
                     PlayerChoosenDirection = DirectiongameManager.Direction.Up;
                 }
-                if(accelerometer.x <= -0.5f)
+                if (accelerometer.x <= -0.9f)
                 {
                     PlayerChoosenDirection = DirectiongameManager.Direction.Down;
 
                 }
-                
+
             }
-            else if ((eulerAngles.z > 20 && eulerAngles.z < 120) ||(eulerAngles.z > 200 && eulerAngles.z < 300))
+            else if ((eulerAngles.z > 20 && eulerAngles.z < 120) || (eulerAngles.z > 200 && eulerAngles.z < 300))
             {
 
-                if(eulerAngles.z > 20 && eulerAngles.z < 120)
+                if (eulerAngles.z > 20 && eulerAngles.z < 120)
                 {
                     Debug.Log(this.name + "Right");
                     PlayerChoosenDirection = DirectiongameManager.Direction.Right;
                 }
-                if(eulerAngles.z > 200 && eulerAngles.z < 300)
+                if (eulerAngles.z > 200 && eulerAngles.z < 300)
                 {
                     Debug.Log(this.name + "Left");
                     PlayerChoosenDirection = DirectiongameManager.Direction.Left;
                 }
-                
+
             }
 
 
@@ -81,6 +112,32 @@ public class DirectionPlayerScript : JoyconPlayerBase
 
 
 
+
+        }
+
+
+
+    }
+
+    void gyroCheck()
+    {
+
+        if (accelerometer.x >= 1f || accelerometer.x <= -1f)
+        {
+
+
+
+
+
+            if (accelerometer.x >= 1f)
+            {
+                PlayerChoosenDirection = DirectiongameManager.Direction.Up;
+            }
+            if (accelerometer.x <= -1f)
+            {
+                PlayerChoosenDirection = DirectiongameManager.Direction.Down;
+
+            }
 
         }
     }

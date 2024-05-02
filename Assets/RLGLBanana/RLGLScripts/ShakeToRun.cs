@@ -46,6 +46,9 @@ public class ShakeToRun : JoyconPlayerBase
 
     void Update()
     {
+
+        
+
         if (joycons.Count > 0)
         {
             Joycon j = joycons[jc_ind];
@@ -64,11 +67,11 @@ public class ShakeToRun : JoyconPlayerBase
 
         if (!RLGLBananaManager.Instance.GameIsFinished && RLGLBananaManager.Instance.StartTheGame)
         {
-            if (_gotCought)
-            {
-                _gotCought = false;
-                _stepsTaken = 0; //Kanke mins 5 steg vi får playtest
-            }
+            //if (_gotCought)
+            //{
+            //    _gotCought = false;
+            //    _stepsTaken = 0; //Kanke mins 5 steg vi får playtest
+            //}
 
 
             PlayerIsShakingJoyCon();
@@ -103,6 +106,7 @@ public class ShakeToRun : JoyconPlayerBase
                 Debug.LogError(name + " have been cought. Go back");
                 _gotCought = true;
                 _playerModel.transform.position = startPos;
+                _stepsTaken = 0;
             }
 
             //

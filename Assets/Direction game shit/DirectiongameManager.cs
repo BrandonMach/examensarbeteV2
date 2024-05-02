@@ -39,7 +39,10 @@ public class DirectiongameManager : MonoBehaviour
         Up,
         Down,
         Left,
-        Right
+        Right,
+
+        Button_Up,
+        Button_Down
     }
 
     [Header("Direction Gameloop Variables")] 
