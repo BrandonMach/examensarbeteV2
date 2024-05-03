@@ -116,6 +116,16 @@ public class DirectiongameManager : MonoBehaviour
         {
 
 
+            if(_generateRandomDirection && _playerArray.Any(go => go.HaveRecenter == false))
+            {
+                foreach (var player in _playerArray)
+                {
+                    if (player.HaveRecenter == false)
+                    {
+                        player.RecenterText.SetActive(true);
+                    }
+                }
+            }
 
             if (_playerArray.All(go => go.HaveRecenter == true) && _generateRandomDirection)
             {

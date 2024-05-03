@@ -17,14 +17,15 @@ public class DirectionPlayerScript : JoyconPlayerBase
     Joycon j;
 
     public bool HaveRecenter;
+    public GameObject RecenterText;
 
     void Start()
     {
         base.Start();
         j = joycons[jc_ind];
         j.Recenter();
-        
-        
+
+        RecenterText.SetActive(false);
     }
 
     // Update is called once per frame
@@ -48,6 +49,7 @@ public class DirectionPlayerScript : JoyconPlayerBase
             {
                 j.Recenter();
                 HaveRecenter = true;
+                RecenterText.SetActive(false);
 
             }
             
