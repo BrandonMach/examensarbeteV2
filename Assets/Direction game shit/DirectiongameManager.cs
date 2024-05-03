@@ -54,6 +54,13 @@ public class DirectiongameManager : MonoBehaviour
 
     bool _gameOver;
 
+   
+
+    [Header("Audio")]
+    [SerializeField] AudioSource _audioSource;
+    float _switchFollowTimeWindowCounter = 0f;
+
+
 
     [Header("Microphone")]
     [SerializeField] AudioLoudnessDetection _audioDetector;
@@ -74,11 +81,13 @@ public class DirectiongameManager : MonoBehaviour
 
     void Start()
     {
+        //_audioSource.clip = _countDownSoundClip;
         canSwitchFollow = true;
         _playerArray = FindObjectsOfType<DirectionPlayerScript>();
-        ChooseRandomDirection();
 
+        _generateRandomDirection = true;
         healt = _playerArray.Length * 2;
+        
     }
 
 
@@ -105,41 +114,90 @@ public class DirectiongameManager : MonoBehaviour
 
         if (StartTheGame && !_gameOver)
         {
-            
-            if (!_generateRandomDirection)
+
+
+
+            if (_playerArray.All(go => go.HaveRecenter == true) && _generateRandomDirection)
             {
-                _generateRandomDirection = true;
+                _audioSource.Play(0);
                 ChooseRandomDirection();
+                _generateRandomDirection = false;
+
+                
+            }
+
+            // Only check if players are pointing in the right direction if audio is playing
+            if(_audioSource.isPlaying == false && !_generateRandomDirection)
+            {
+                CheckIfPlayerIsWrongDirection();
+                //Bool prevents if statment to check multiple time, Only chek if players are in the right direction right after the beep
+                _generateRandomDirection = true;
+                _audioSource.pitch *= 1.07f;
+
+
+            }
+
+
+            //Count up the can switchFollow Counter
+            if (_audioSource.isPlaying)
+            {
+                _switchFollowTimeWindowCounter += Time.deltaTime;
             }
             else
             {
-                countUp += Time.deltaTime;
-                if(countUp >= chooseDirectionDelay)
+                _switchFollowTimeWindowCounter = 0;
+            }
+
+            if (AudienceIsLoud())
+            {
+                //Kan bli messed up när jag speed up audio, annar kör på att ma kan byta direction i sista sekunden
+                if (_switchFollowTimeWindowCounter <= 3f && canSwitchFollow)
                 {
-                    _generateRandomDirection = false;
-                    countUp = 0;
-                    CheckIfPlayerIsWrongDirection();
+                    canSwitchFollow = false;
+                    _followArrowDirection = !_followArrowDirection;
+
                 }
             }
 
-            if (AudienceIsLoud() && canSwitchFollow)
-            {
-                canSwitchFollow = false;
-                _followArrowDirection = !_followArrowDirection;
 
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                _audioSource.pitch *= 1.07f;
+               // _audioSource.outputAudioMixerGroup.audioMixer.SetFloat("Pitch", 1f / 1.2f);
             }
-          
 
 
             if (_followArrowDirection)
             {
                 _arrowImageRectTransform.GetComponent<Image>().color = Color.green;
                 _directionText.color = Color.white;
+
+                Debug.Log("_followArrowDirection = true");
+                if (_arrowImageRectTransform.rotation == Quaternion.Euler(0, 0, 0f))
+                {
+                    _currentSelectedDirection = Direction.Up;
+                }
+                if (_arrowImageRectTransform.rotation == Quaternion.Euler(0, 0, 90f))
+                {
+                    _currentSelectedDirection = Direction.Left;
+                    Debug.Log("Go left");
+                }
+                if (_arrowImageRectTransform.rotation == Quaternion.Euler(0, 0, 180f))
+                {
+                    _currentSelectedDirection = Direction.Down;
+                }
+                if (_arrowImageRectTransform.rotation == Quaternion.Euler(0, 0, 270f))
+                {
+                    _currentSelectedDirection = Direction.Right;
+                }
+
+
             }
             else
             {
                 _directionText.color = Color.green;
                 _arrowImageRectTransform.GetComponent<Image>().color = Color.white;
+                _currentSelectedDirection = _setTextDirection;
             }
 
             foreach (var player in _playerArray)
@@ -167,7 +225,7 @@ public class DirectiongameManager : MonoBehaviour
 
     private void ChooseRandomDirection()
     {
-
+        
 
         _arrowImageRectTransform.rotation = Quaternion.Euler(new Vector3(0, 0, _arrowAngleDirections[Random.Range(0, _arrowAngleDirections.Length)]));
         _setTextDirection = (Direction)Random.Range(0, 4);
@@ -191,38 +249,10 @@ public class DirectiongameManager : MonoBehaviour
                 break;
         }
 
-        if (!_followArrowDirection)
-        {
-            _currentSelectedDirection = _setTextDirection;
-        }
-        else
-        {
-
-            Debug.Log("_followArrowDirection = true");
-            if (_arrowImageRectTransform.rotation == Quaternion.Euler(0, 0, 0f))
-            {
-                _currentSelectedDirection = Direction.Up;
-            }
-            if (_arrowImageRectTransform.rotation == Quaternion.Euler(0,0, 90f))
-            {
-                _currentSelectedDirection = Direction.Left;
-                Debug.Log("Go left");
-            }
-            if (_arrowImageRectTransform.rotation == Quaternion.Euler(0, 0, 180f))
-            {
-                _currentSelectedDirection = Direction.Down;
-            }
-            if (_arrowImageRectTransform.rotation == Quaternion.Euler(0, 0, 270f))
-            {
-                _currentSelectedDirection = Direction.Right;
-            }
-
-   
-        }
+       
 
         canSwitchFollow = true;
-        
-
+  
 
     }
 
@@ -237,16 +267,13 @@ public class DirectiongameManager : MonoBehaviour
                 healt--;
             }
         }
+
+
+        _generateRandomDirection = false;
+
     }
 
 
-    IEnumerator SwitchFollow()
-    {
-        
-
-        yield return new WaitForSeconds(0.5f);
-       
-    }
 
     bool AudienceIsLoud()
     {
@@ -269,6 +296,7 @@ public class DirectiongameManager : MonoBehaviour
         {
             loudness = 0;
             isLoud = false;
+            canSwitchFollow = true;
             return false;
         }
         else

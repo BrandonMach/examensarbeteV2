@@ -16,6 +16,7 @@ public class DirectionPlayerScript : JoyconPlayerBase
 
     Joycon j;
 
+    public bool HaveRecenter;
 
     void Start()
     {
@@ -43,10 +44,13 @@ public class DirectionPlayerScript : JoyconPlayerBase
             accelerometer = j.GetAccel();
 
 
-            if (j.GetButtonDown(Joycon.Button.SHOULDER_2))
+            if (j.GetButtonDown(Joycon.Button.SHOULDER_2) || j.GetButtonDown(Joycon.Button.SHOULDER_1))
             {
                 j.Recenter();
+                HaveRecenter = true;
+
             }
+            
           
            
 
@@ -74,7 +78,7 @@ public class DirectionPlayerScript : JoyconPlayerBase
             {
 
 
-
+                HaveRecenter = false;
 
 
                 if (accelerometer.x >= 0.9f)
@@ -91,6 +95,7 @@ public class DirectionPlayerScript : JoyconPlayerBase
             else if ((eulerAngles.z > 20 && eulerAngles.z < 120) || (eulerAngles.z > 200 && eulerAngles.z < 300))
             {
 
+                HaveRecenter = false;
                 if (eulerAngles.z > 20 && eulerAngles.z < 120)
                 {
                     Debug.Log(this.name + "Right");

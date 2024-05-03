@@ -48,6 +48,7 @@ public class RLGLBananaManager : MonoBehaviour
 
     [SerializeField] bool isLoud;
     [SerializeField] SpriteRenderer _audioSpriteRenderer;
+    [SerializeField] float ambientThreashold;
 
 
 
@@ -226,15 +227,15 @@ public class RLGLBananaManager : MonoBehaviour
         }
 
         //if loudness is negative set to 0 as mininum and prevent more time to be added until it has atleast reseted
-        if (loudness < threshold)
-        {
-            loudness = 0;
-            isLoud = false;
-        }
-        else
-        {
-            isLoud = true;
-        }
+        //if (loudness < threshold)
+        //{
+        //    loudness = 0;
+        //    isLoud = false;
+        //}
+        //else
+        //{
+        //    isLoud = true;
+        //}
 
 
     }
