@@ -33,8 +33,10 @@ public class RLGLBananaManager : MonoBehaviour
     [SerializeField] GameObject[] _tilesIndicators = new GameObject[4];
     [SerializeField] float StepGoal;
 
-    bool _spacePressed;
+    bool _audienceInfluence;
     bool _showWarningSign;
+
+    [SerializeField] GameObject _spotLight;
     #endregion
 
 
@@ -127,14 +129,12 @@ public class RLGLBananaManager : MonoBehaviour
 
             //}
 
-            // If audience presses space activate stop
-            if (/*Input.GetKeyDown(KeyCode.Space) ||*/ AudienceIsLoud())
+            
+            if ( AudienceIsLoud())
             {
-                Debug.Log("Audience pressed space");
-                _spacePressed = true;
 
-              //  StartCoroutine(ShowWarningSign());
-                
+                _audienceInfluence = true;
+
 
 
             }
@@ -143,11 +143,12 @@ public class RLGLBananaManager : MonoBehaviour
 
 
             // Count down Catch time and after set it to green light
-            if (_CatchWaitTimer > 0 && !_spacePressed)
+            if (_CatchWaitTimer > 0 && !_audienceInfluence)
             {
                 _CatchWaitTimer -= Time.deltaTime;
 
                 GreenLight = true;
+                
 
             }
             else if(!_showWarningSign)
@@ -161,12 +162,21 @@ public class RLGLBananaManager : MonoBehaviour
             {
                 _redLightGreenLIghtText.color = Color.green;
                 _redLightGreenLIghtText.text = "Move";
+                foreach (var players in _playerArray)
+                {
+                    players.GotCought = false;
+                }
             }
             else
             {
                 _redLightGreenLIghtText.color = Color.red;
                 _redLightGreenLIghtText.text = "Stop! Don't Move";
+
+               
+                
             }
+
+            _spotLight.GetComponent<Animator>().SetBool("Scan", !GreenLight);
         }
 
 
@@ -179,13 +189,13 @@ public class RLGLBananaManager : MonoBehaviour
         GreenLight = false;
         
         yield return new WaitForSeconds(Random.Range(1.3f, 3.5f));
-        if (Input.GetKey(KeyCode.Space) || AudienceIsLoud())
+        if ( AudienceIsLoud())
         {
             StartCoroutine(Stop());
         }
         else
         {
-            _spacePressed = false;
+            _audienceInfluence = false;
             _CatchWaitTimer = Random.Range(3, 6);
             _showWarningSign = false;
         }

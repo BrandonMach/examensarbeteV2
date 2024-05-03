@@ -19,7 +19,9 @@ public class ShakeToRun : JoyconPlayerBase
     [SerializeField] bool _stoppedRunning;
     float _stopWindow = 0.2f;
 
-    [SerializeField] bool _gotCought;
+    [SerializeField] public  bool GotCought;
+
+    [SerializeField] int _stepsPunishemnt;
 
 
     [Header("Winner")]
@@ -40,6 +42,8 @@ public class ShakeToRun : JoyconPlayerBase
         accel = new Vector3(0, 0, 0);
 
         _accelerometerThreshold = 3;
+
+        _stepsPunishemnt = 7;
 
     }
 
@@ -101,26 +105,49 @@ public class ShakeToRun : JoyconPlayerBase
        
         if (accel.x > _accelerometerThreshold)
         {
-            if (!RLGLBananaManager.Instance.GreenLight)
+            //Players can only be gought § time each Stop state
+            if (!RLGLBananaManager.Instance.GreenLight )
             {
-                Debug.LogError(name + " have been cought. Go back");
-                _gotCought = true;
-                _playerModel.transform.position = startPos;
-                _stepsTaken = 0;
+                if (!GotCought)
+                {
+                    Debug.LogError(name + " have been cought. Go back");
+                    GotCought = true;
+                    if (_stepsTaken >= _stepsPunishemnt)
+                    {
+                        _playerModel.transform.position = new Vector3(_playerModel.transform.position.x, _playerModel.transform.position.y, (_playerModel.transform.position.z - (50 * 5 / _stepGoal)));
+                        _stepsTaken -= _stepsPunishemnt;
+                    }
+                    else
+                    {
+                        _playerModel.transform.position = startPos;
+                        _stepsTaken = 0;
+                    }
+                }
+                //else
+                //{
+                //    _playerModel.transform.position = _playerModel.transform.position;
+                //    _stepsTaken = _stepsTaken;
+                //}
+               
+               
+            }
+            else
+            {
+                //
+                _stopWindow = 0.2f;
+                _stoppedRunning = false;
+                _shakeInput++;
+
+
+                if (_shakeInput >= _shakeInputToStepThreshold)
+                {
+                    _shakeInput = 0;
+                    _stepsTaken++;
+                    _playerModel.transform.position = new Vector3(_playerModel.transform.position.x, _playerModel.transform.position.y, (_playerModel.transform.position.z + (50 / _stepGoal)));
+                }
             }
 
-            //
-            _stopWindow = 0.2f;
-            _stoppedRunning = false;
-            _shakeInput++;
-
-
-            if (_shakeInput >= _shakeInputToStepThreshold)
-            {              
-                _shakeInput = 0;
-                _stepsTaken++;
-                _playerModel.transform.position = new Vector3(_playerModel.transform.position.x, _playerModel.transform.position.y, (_playerModel.transform.position.z +(50/_stepGoal)));
-            }
+           
             
         }
         else
