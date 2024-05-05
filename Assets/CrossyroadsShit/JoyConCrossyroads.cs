@@ -117,24 +117,24 @@ public class JoyConCrossyroads : JoyconPlayerBase
 		{
 			verticalValue = 0f;
 		}
-		else if ((joyConAngles.x > 20 && joyConAngles.x < 180)) // 5 & 180
+		else if ((joyConAngles.x > 5 && joyConAngles.x < 180)) // 5 & 180
 		{
 			verticalValue = -1f;
 		}
-		else if (joyConAngles.x < 340 && joyConAngles.x > 180) // 355 & 180
+		else if (joyConAngles.x < 355 && joyConAngles.x > 180) // 355 & 180
 		{
 			verticalValue = 1f;
 		}
 
-		if (joyConAngles.y < 210 && joyConAngles.y > 150) // 190 & 170
+		if (joyConAngles.y < 190 && joyConAngles.y > 170) // 190 & 170
 		{
 			horizontalValue = 0f;
 		}
-		else if (joyConAngles.y < 360 && joyConAngles.y > 210) // 360 & 190
+		else if (joyConAngles.y < 360 && joyConAngles.y > 190) // 360 & 190
 		{
 			horizontalValue = -1f;
 		}
-		else if (joyConAngles.y > 0 && joyConAngles.y < 150) // 0 & 170
+		else if (joyConAngles.y > 0 && joyConAngles.y < 170) // 0 & 170
 		{
 			horizontalValue = 1f;
 		}

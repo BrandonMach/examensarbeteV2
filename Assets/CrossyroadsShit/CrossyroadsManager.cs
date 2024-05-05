@@ -26,7 +26,7 @@ public class CrossyroadsManager : MonoBehaviour
     public GameObject PlayerInfoBackdropGO;
     public GameObject readyUpPanel;
     public TMP_Text winnerNameText, timerTxt;
-    float timer;
+    public float timer;
 
     
 
@@ -44,7 +44,6 @@ public class CrossyroadsManager : MonoBehaviour
     {
         // readyUpPanel.SetActive(true);
         PlayerInfoBackdropGO.GetComponent<RectTransform>().localScale = new Vector3(1, 2, 1);
-        timer = 60;
     }
 
     public void UpdatePlayerArray()
@@ -66,7 +65,6 @@ public class CrossyroadsManager : MonoBehaviour
             foreach (var players in _playerArray)
             {
                 StartCoroutine(players.ReadyUpUI.GetComponent<ReadyUpScript>().AllPlayersReady()); //Should be fade text instead of set active false
-
             }
 
             
@@ -75,7 +73,7 @@ public class CrossyroadsManager : MonoBehaviour
         if (GameOver)
         {
             GOPanel.SetActive(true);
-            winnerNameText.SetText(winnerName);
+            winnerNameText.SetText(_playerArray[calculateWinner()].name);
         }
         if (StartTheGame)
         {
@@ -108,5 +106,19 @@ public class CrossyroadsManager : MonoBehaviour
         PlayerInfoBackdropGO.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
     }
 
+    private int calculateWinner()
+    {
+        float currentMaxScore = 0;
+        int winnerIndex = 0;
+        for (int i = 0; i < _playerArray.Length; i++)
+        {
+            if (_playerArray[i].score > currentMaxScore)
+            {
+                currentMaxScore = _playerArray[i].score;
+                winnerIndex = i;
+            }
+        }
+        return winnerIndex;
+    }
     
 }
