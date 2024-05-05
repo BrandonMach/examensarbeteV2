@@ -26,10 +26,10 @@ public class CrossyroadsManager : MonoBehaviour
     public GameObject PlayerInfoBackdropGO;
     public GameObject readyUpPanel;
     public TMP_Text winnerNameText, timerTxt;
-    float timer;
+    public float timer;
 
+    
 
-    [SerializeField] GameObject _controls;
     private void Awake()
     {
         if (Instance != null)
@@ -44,7 +44,6 @@ public class CrossyroadsManager : MonoBehaviour
     {
         // readyUpPanel.SetActive(true);
         PlayerInfoBackdropGO.GetComponent<RectTransform>().localScale = new Vector3(1, 2, 1);
-        timer = 60;
     }
 
     public void UpdatePlayerArray()
@@ -55,12 +54,9 @@ public class CrossyroadsManager : MonoBehaviour
 
     void FixedUpdate()
     {
-
-        _controls.SetActive(!StartTheGame);
-        if (_playerArray.Length >= 2 && _playerArray.All(go => go.PlayerIsReady == true) && !StartTheGame) //Start the game once all player are ready 
+        if (_playerArray.Length >= 2 && _playerArray.All(go => go.PlayerIsReady == true)) //Start the game once all player are ready 
         {
             StartTheGame = true;
-            
             // readyUpPanel.SetActive(false);
             //PlayerInfoBackdropGO.SetActive(true);
 
@@ -69,8 +65,6 @@ public class CrossyroadsManager : MonoBehaviour
             foreach (var players in _playerArray)
             {
                 StartCoroutine(players.ReadyUpUI.GetComponent<ReadyUpScript>().AllPlayersReady()); //Should be fade text instead of set active false
-                players.SetStartPos();
-
             }
 
             
@@ -79,7 +73,7 @@ public class CrossyroadsManager : MonoBehaviour
         if (GameOver)
         {
             GOPanel.SetActive(true);
-            winnerNameText.SetText(winnerName);
+            winnerNameText.SetText(_playerArray[calculateWinner()].name);
         }
         if (StartTheGame)
         {
@@ -112,5 +106,19 @@ public class CrossyroadsManager : MonoBehaviour
         PlayerInfoBackdropGO.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
     }
 
+    private int calculateWinner()
+    {
+        float currentMaxScore = 0;
+        int winnerIndex = 0;
+        for (int i = 0; i < _playerArray.Length; i++)
+        {
+            if (_playerArray[i].score > currentMaxScore)
+            {
+                currentMaxScore = _playerArray[i].score;
+                winnerIndex = i;
+            }
+        }
+        return winnerIndex;
+    }
     
 }
