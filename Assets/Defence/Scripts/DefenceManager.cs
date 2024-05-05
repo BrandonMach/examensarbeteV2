@@ -26,6 +26,7 @@ public class DefenceManager : MonoBehaviour
     public float loudnessSensibility = 100;
     public float threshold = 0.5f;
     public float miniTreshhold = 0.5f;
+    public float loudnessDivider = 120;
     public bool miniTreshholdMet;
     public float loudness;
 
@@ -60,11 +61,7 @@ public class DefenceManager : MonoBehaviour
     void Update()
     {
         CheckLoudness();
-        if (AudienceIsLoud())
-        {
-            rotationValue += 0.3f;
-            core.transform.rotation = Quaternion.Euler(0, rotationValue, 0);
-        }
+        
         foreach (var players in _playerArray)
         {
             players.transform.parent.SetParent(core.transform);
@@ -90,23 +87,28 @@ public class DefenceManager : MonoBehaviour
                 {
                     interaction = true;
                 }
+                if (loudness > miniTreshhold && !interaction)
+                {
+                    rotationValue += (loudness / 120);
+                    core.transform.rotation = Quaternion.Euler(0, rotationValue, 0);
+                }
+                if (AudienceIsLoud() && !interaction)
+                {
+                    rotationValue *= -1;
+                    interaction = true;
+                }
                 if (interaction)
                 {
                     interactTimer += Time.deltaTime;
-                    rotationValue += 0.3f;
+                    rotationValue += -0.5f;
                     core.transform.rotation = Quaternion.Euler(0, rotationValue, 0);
 
                     //Rotate the Core for 6 seconds
-                    if (interactTimer > 6)
+                    if (interactTimer > 3)
                     {
                         interactTimer = 0;
                         interaction = false;
                     }
-                }
-                if (AudienceIsLoud())
-                {
-                    rotationValue += 0.3f;
-                    core.transform.rotation = Quaternion.Euler(0, rotationValue, 0);
                 }
             }
             else
@@ -157,7 +159,7 @@ public class DefenceManager : MonoBehaviour
             {
                 miniTreshholdMet = false;
             }
-            loudness = 0;
+            //loudness = 0;
             isLoud = false;
         }
         else
