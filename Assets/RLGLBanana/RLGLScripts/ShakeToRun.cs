@@ -68,7 +68,9 @@ public class ShakeToRun : JoyconPlayerBase
             accel = j.GetAccel();
 
         }
-
+        PlayerIsShakingJoyCon();
+        _anim.SetBool("Moving", !_stoppedRunning);
+        _stepsText.text = "Steps: " + _stepsTaken;
         if (!RLGLBananaManager.Instance.GameIsFinished && RLGLBananaManager.Instance.StartTheGame)
         {
             //if (_gotCought)
