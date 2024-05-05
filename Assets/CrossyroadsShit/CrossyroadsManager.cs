@@ -54,7 +54,7 @@ public class CrossyroadsManager : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (_playerArray.Length >= 2 && _playerArray.All(go => go.PlayerIsReady == true)) //Start the game once all player are ready 
+        if (_playerArray.Length >= 2 && _playerArray.All(go => go.PlayerIsReady == true) && !StartTheGame) //Start the game once all player are ready 
         {
             StartTheGame = true;
             // readyUpPanel.SetActive(false);
@@ -65,6 +65,7 @@ public class CrossyroadsManager : MonoBehaviour
             foreach (var players in _playerArray)
             {
                 StartCoroutine(players.ReadyUpUI.GetComponent<ReadyUpScript>().AllPlayersReady()); //Should be fade text instead of set active false
+                players.SetStartPos();
             }
 
             

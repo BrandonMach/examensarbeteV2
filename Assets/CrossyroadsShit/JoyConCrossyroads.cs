@@ -93,12 +93,7 @@ public class JoyConCrossyroads : JoyconPlayerBase
                     j.SetRumble(160, 320, 0.6f, 200);
                 }
             }
-			//else
-			//{
-              
-   //             MoveCowboy(j);
 
-   //         }
 
         }
 	}
