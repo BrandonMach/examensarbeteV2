@@ -28,6 +28,7 @@ public class CrossyroadsManager : MonoBehaviour
     public TMP_Text winnerNameText, timerTxt;
     public float timer;
 
+    [SerializeField] GameObject _controls;
     
 
     private void Awake()
@@ -54,6 +55,7 @@ public class CrossyroadsManager : MonoBehaviour
 
     void FixedUpdate()
     {
+        _controls.SetActive(!StartTheGame);
         if (_playerArray.Length >= 2 && _playerArray.All(go => go.PlayerIsReady == true) && !StartTheGame) //Start the game once all player are ready 
         {
             StartTheGame = true;
