@@ -68,16 +68,16 @@ public class ShakeToRun : JoyconPlayerBase
             accel = j.GetAccel();
 
         }
+
+        //Tutorial
+
         PlayerIsShakingJoyCon();
         _anim.SetBool("Moving", !_stoppedRunning);
         _stepsText.text = "Steps: " + _stepsTaken;
+
+
         if (!RLGLBananaManager.Instance.GameIsFinished && RLGLBananaManager.Instance.StartTheGame)
         {
-            //if (_gotCought)
-            //{
-            //    _gotCought = false;
-            //    _stepsTaken = 0; //Kanke mins 5 steg vi får playtest
-            //}
 
 
             PlayerIsShakingJoyCon();
@@ -98,6 +98,13 @@ public class ShakeToRun : JoyconPlayerBase
 
 
       
+
+    }
+
+    public void EndTutorial()
+    {
+        _playerModel.transform.position = startPos;
+        _stepsTaken = 0;
 
     }
 

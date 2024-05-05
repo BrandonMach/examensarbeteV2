@@ -28,8 +28,8 @@ public class CrossyroadsManager : MonoBehaviour
     public TMP_Text winnerNameText, timerTxt;
     float timer;
 
-    
 
+    [SerializeField] GameObject _controls;
     private void Awake()
     {
         if (Instance != null)
@@ -55,9 +55,12 @@ public class CrossyroadsManager : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (_playerArray.Length >= 2 && _playerArray.All(go => go.PlayerIsReady == true)) //Start the game once all player are ready 
+
+        _controls.SetActive(!StartTheGame);
+        if (_playerArray.Length >= 2 && _playerArray.All(go => go.PlayerIsReady == true) && !StartTheGame) //Start the game once all player are ready 
         {
             StartTheGame = true;
+            
             // readyUpPanel.SetActive(false);
             //PlayerInfoBackdropGO.SetActive(true);
 
@@ -66,6 +69,7 @@ public class CrossyroadsManager : MonoBehaviour
             foreach (var players in _playerArray)
             {
                 StartCoroutine(players.ReadyUpUI.GetComponent<ReadyUpScript>().AllPlayersReady()); //Should be fade text instead of set active false
+                players.SetStartPos();
 
             }
 

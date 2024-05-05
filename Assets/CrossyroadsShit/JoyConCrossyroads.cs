@@ -80,7 +80,9 @@ public class JoyConCrossyroads : JoyconPlayerBase
 			
 			Joycon j = joycons[jc_ind];
 
-			//stick = j.GetStick();
+            //stick = j.GetStick();
+
+            MoveCowboy(j);
 
             if (!CrossyroadsManager.Instance.StartTheGame)
             {
@@ -91,24 +93,37 @@ public class JoyConCrossyroads : JoyconPlayerBase
                     j.SetRumble(160, 320, 0.6f, 200);
                 }
             }
-			else
-			{
-                gameObject.transform.rotation = orientation;
+			//else
+			//{
+              
+   //             MoveCowboy(j);
 
-                CalculateAngles(j);
-
-                Vector3 move = new Vector3(horizontalValue, 0, verticalValue);
-                if (move != Vector3.zero)
-                {
-                    gameObject.transform.forward = move;
-                    _anim.SetBool("Walking", true);
-                }
-                Physics.SyncTransforms();
-                controller.Move(move * Time.deltaTime * speed);
-            }
+   //         }
 
         }
 	}
+
+    void MoveCowboy(Joycon j)
+    {
+        gameObject.transform.rotation = orientation;
+        CalculateAngles(j);
+
+        Vector3 move = new Vector3(horizontalValue, 0, verticalValue);
+
+        if (move != Vector3.zero)
+        {
+            gameObject.transform.forward = move;
+            _anim.SetBool("Walking", true);
+        }
+        Physics.SyncTransforms();
+        controller.Move(move * Time.deltaTime * speed);
+    }
+
+    public void SetStartPos()
+    {
+        transform.position = spawn;
+    }
+
 	public void CalculateAngles(Joycon j)
 	{
         joyConAngles = j.GetVector().eulerAngles;

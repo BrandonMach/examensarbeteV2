@@ -37,6 +37,7 @@ public class RLGLBananaManager : MonoBehaviour
     bool _showWarningSign;
 
     [SerializeField] GameObject _spotLight;
+    [SerializeField] GameObject _tutorialStuff;
     #endregion
 
 
@@ -87,6 +88,8 @@ public class RLGLBananaManager : MonoBehaviour
 
         _warningSign.SetActive(false);
 
+        GreenLight = true;
+
     }
 
 
@@ -94,17 +97,22 @@ public class RLGLBananaManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        _tutorialStuff.SetActive(!StartTheGame);
         CheckLoudness();
         //Start the game once all player are ready 
-        if (_playerArray.Length >= 2 && _playerArray.All(go => go.PlayerIsReady == true)) 
+        if (_playerArray.Length >= 2 && _playerArray.All(go => go.PlayerIsReady == true) && !StartTheGame) 
         {
+            GreenLight = false;
             StartTheGame = true;
             foreach (var players in _playerArray)
             {
                 StartCoroutine(players.ReadyUpUI.GetComponent<ReadyUpScript>().AllPlayersReady()); //Should be fade text instead of set active false
 
+                players.EndTutorial();
+
             }
+
+
         }
 
 
