@@ -53,7 +53,7 @@ public class JoyconStopwatchPlayer : JoyconPlayerBase
 			if (!PlayerIsReady)
 			{
 				Debug.Log("Rumble because not ready");
-				j.SetRumble(160, 320, 0.6f, 200);
+				j.SetRumble(160, 220, 0.6f, 150);
 			}
 			else if (StopwatchManager.Instance.StartTheGame && !_hasStoppedTime)
 			{

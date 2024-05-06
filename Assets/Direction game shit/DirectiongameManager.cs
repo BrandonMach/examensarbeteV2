@@ -12,7 +12,7 @@ public class DirectiongameManager : MonoBehaviour
 
     static DirectiongameManager _instance;
 
-    public DirectiongameManager Instance
+    public static DirectiongameManager Instance
     {
         get => _instance;
         set => _instance = value;
@@ -22,7 +22,7 @@ public class DirectiongameManager : MonoBehaviour
 
 
     [SerializeField] DirectionPlayerScript[] _playerArray;
-    [SerializeField] bool StartTheGame;
+    public bool StartTheGame;
     [SerializeField] RectTransform _arrowImageRectTransform;
     float[] _arrowAngleDirections = { 0f, 90f, 180f, 270f };
 
@@ -73,10 +73,17 @@ public class DirectiongameManager : MonoBehaviour
 
     bool canSwitchFollow;
 
+    [SerializeField] GameObject _controls;
+
 
     private void Awake()
     {
-        
+        if (Instance != null)
+        {
+            Debug.LogWarning("More than one instance of Direcrion Manager found");
+            return;
+        }
+        Instance = this;
     }
 
     void Start()
@@ -109,6 +116,7 @@ public class DirectiongameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        _controls.SetActive(!StartTheGame);
         AllPlayersAreReadyCheck();
         _healthText.text = healt.ToString() + "x";
 

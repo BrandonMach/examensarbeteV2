@@ -14,6 +14,7 @@ public class StopwatchManager : MonoBehaviour
     private bool TimeRanOut;
 
     public GameObject PlayerInfoBackdropGO;
+    [SerializeField] GameObject _controls;
 
     [Header("Microphone")]
     [SerializeField] AudioLoudnessDetection _audioDetector;
@@ -89,13 +90,14 @@ public class StopwatchManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        _controls.SetActive(!StartTheGame);
         AllPlayersAreReadyCheck();
         MainGameLoop();     
     }
 
     private void AllPlayersAreReadyCheck()
     {
-        if (_playerArray.Length >= 2 && _playerArray.All(go => go.PlayerIsReady == true)) //Start the game once all player are ready 
+        if (_playerArray.Length >= 2 && _playerArray.All(go => go.PlayerIsReady == true) ) //Start the game once all player are ready 
         {
             StartTheGame = true;
 

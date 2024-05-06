@@ -24,6 +24,8 @@ public class JoyConCrossyroads : JoyconPlayerBase
 
     [SerializeField] Animator _anim;
 
+    Joycon j;
+
     new void Start()
 	{
 		score = 0;
@@ -70,7 +72,10 @@ public class JoyConCrossyroads : JoyconPlayerBase
         CrossyroadsManager.Instance.UpdatePlayerArray();
 		UpdateScoreText();
 
-	}
+        j = joycons[jc_ind];
+
+
+    }
 
 	void FixedUpdate()
 	{
@@ -78,7 +83,7 @@ public class JoyConCrossyroads : JoyconPlayerBase
 		if (joycons.Count > 0)
 		{
 			
-			Joycon j = joycons[jc_ind];
+			//Joycon j = joycons[jc_ind];
 
             //stick = j.GetStick();
 

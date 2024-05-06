@@ -20,6 +20,7 @@ public class DefenceManager : MonoBehaviour
     public GameObject gameOverPanel, VictoryPanel;
     public GameObject core;
     float rotationValue;
+    [SerializeField] GameObject _controls;
 
     [Header("Microphone")]
     [SerializeField] AudioLoudnessDetection _audioDetector;
@@ -60,6 +61,7 @@ public class DefenceManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        _controls.SetActive(!startGame);
         CheckLoudness();
         
         foreach (var players in _playerArray)

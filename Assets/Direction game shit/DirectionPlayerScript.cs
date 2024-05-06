@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class DirectionPlayerScript : JoyconPlayerBase
 {
@@ -18,6 +19,8 @@ public class DirectionPlayerScript : JoyconPlayerBase
 
     public bool HaveRecenter;
     public GameObject RecenterText;
+
+    [SerializeField] TextMeshProUGUI _tutorialText;
 
     void Start()
     {
@@ -52,27 +55,6 @@ public class DirectionPlayerScript : JoyconPlayerBase
                 RecenterText.SetActive(false);
 
             }
-            
-          
-           
-
-            ////if (j.GetButtonDown(Joycon.Button.DPAD_UP))
-            ////{
-            ////    PlayerChoosenDirection = DirectiongameManager.Direction.Button_Up;
-            ////}
-            ////else
-            ////{
-            ////    gyroCheck();
-            ////}
-            ////if (j.GetButtonDown(Joycon.Button.DPAD_DOWN))
-            ////{
-            ////    PlayerChoosenDirection = DirectiongameManager.Direction.Button_Down;
-            ////}
-            ////else
-            ////{
-            ////    gyroCheck();
-            ////}
-            ///
 
 
 
@@ -86,10 +68,12 @@ public class DirectionPlayerScript : JoyconPlayerBase
                 if (accelerometer.x >= 0.9f)
                 {
                     PlayerChoosenDirection = DirectiongameManager.Direction.Up;
+                    
                 }
                 if (accelerometer.x <= -0.9f)
                 {
                     PlayerChoosenDirection = DirectiongameManager.Direction.Down;
+                    
 
                 }
 
@@ -102,11 +86,13 @@ public class DirectionPlayerScript : JoyconPlayerBase
                 {
                     Debug.Log(this.name + "Right");
                     PlayerChoosenDirection = DirectiongameManager.Direction.Right;
+                    _tutorialText.text = "RIGHT";
                 }
                 if (eulerAngles.z > 200 && eulerAngles.z < 300)
                 {
                     Debug.Log(this.name + "Left");
                     PlayerChoosenDirection = DirectiongameManager.Direction.Left;
+                    _tutorialText.text = "LEFT";
                 }
 
             }
@@ -114,6 +100,31 @@ public class DirectionPlayerScript : JoyconPlayerBase
 
             _checkmark.SetActive(CorrectDirection);
 
+
+            if (!DirectiongameManager.Instance.StartTheGame)
+            {
+                switch (PlayerChoosenDirection)
+                {
+                    case DirectiongameManager.Direction.Up:
+                        _tutorialText.text = "UP";
+                        break;
+                    case DirectiongameManager.Direction.Down:
+                        _tutorialText.text = "DOWN";
+                        break;
+                    case DirectiongameManager.Direction.Left:
+                        _tutorialText.text = "LEFT";
+                        break;
+                    case DirectiongameManager.Direction.Right:
+                        _tutorialText.text = "RIGHT";
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else
+            {
+                _tutorialText.gameObject.SetActive(false);
+            }
 
 
 
