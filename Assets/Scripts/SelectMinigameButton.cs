@@ -68,19 +68,29 @@ public class SelectMinigameButton : MonoBehaviour
 
     public void PlayVideo()
     {
-        Debug.LogWarning("Play video");
+        // SceneManager.LoadScene(_minigameSO.MinigameName);
+        if (_minigameSO.MinigameName != "Random Game")
+        {
+            _thumbnail.SetActive(false);
+            _videoPlayer.Play(); 
+        }
+
         BorderGO.SetActive(true);
-        _thumbnail.SetActive(false);
-        _videoPlayer.Play();
         _minigameName.fontSize += 5;
+
     }
     public void StopVideo()
     {
+        if (_minigameSO.MinigameName != "Random Game")
+        {
+            _videoPlayer.isLooping = true;
+            _videoPlayer.Stop();    
+        }
+
         BorderGO.SetActive(false);
-        _videoPlayer.isLooping = true;
-        _videoPlayer.Stop();
         _thumbnail.SetActive(true);
         _minigameName.fontSize -= 5;
+
     }
 
 

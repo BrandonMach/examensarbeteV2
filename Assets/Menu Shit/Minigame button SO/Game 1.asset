@@ -16,4 +16,4 @@ MonoBehaviour:
   SceneIndex: 2
   Texture: {fileID: 8400000, guid: d57ac448a302c1d4287d5bea7eca1c13, type: 2}
   VideoClip: {fileID: 32900000, guid: 975497280e84d0c48a5daafd672440ff, type: 3}
-  Thumbnail: {fileID: 21300000, guid: fcb347ffc98a126459b7e961085b6dcc, type: 3}
+  Thumbnail: {fileID: 21300000, guid: 31157de93bfbac24a8a5af7f9b2680d2, type: 3}

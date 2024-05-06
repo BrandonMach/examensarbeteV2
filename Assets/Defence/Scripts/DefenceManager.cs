@@ -60,17 +60,16 @@ public class DefenceManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    private void Update()
+  
+
+    void Update()
     {
+
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Scene scene = SceneManager.GetActiveScene();
             SceneManager.LoadScene(scene.name);
         }
-    }
-
-    void FixedUpdate()
-    {
         _controls.SetActive(!startGame);
         CheckLoudness();
         
