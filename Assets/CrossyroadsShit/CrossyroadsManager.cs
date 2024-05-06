@@ -6,7 +6,7 @@ using TMPro;
 using UnityEngine.InputSystem;
 using System.Linq;
 using UnityEngine.Analytics;
-
+using UnityEngine.SceneManagement;
 
 public class CrossyroadsManager : MonoBehaviour
 {
@@ -50,6 +50,16 @@ public class CrossyroadsManager : MonoBehaviour
     public void UpdatePlayerArray()
     {
         _playerArray = FindObjectsOfType<JoyConCrossyroads>();
+    }
+
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Scene scene = SceneManager.GetActiveScene();
+            SceneManager.LoadScene(scene.name);
+        }
     }
 
 

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DefenceManager : MonoBehaviour
 {
@@ -59,7 +60,16 @@ public class DefenceManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Scene scene = SceneManager.GetActiveScene();
+            SceneManager.LoadScene(scene.name);
+        }
+    }
+
+    void FixedUpdate()
     {
         _controls.SetActive(!startGame);
         CheckLoudness();
