@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
 using System.Linq;
+using UnityEngine.SceneManagement;
 
 
 public class RLGLBananaManager : MonoBehaviour
@@ -92,10 +93,17 @@ public class RLGLBananaManager : MonoBehaviour
 
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Scene scene = SceneManager.GetActiveScene();
+            SceneManager.LoadScene(scene.name);
+        }
+    }
 
 
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         _tutorialStuff.SetActive(!StartTheGame);
         CheckLoudness();
@@ -120,7 +128,7 @@ public class RLGLBananaManager : MonoBehaviour
         {
             //Stop the game
             GameIsFinished = true;
-            _redLightGreenLIghtText.color = Color.black;
+            _redLightGreenLIghtText.color = Color.white;
             _redLightGreenLIghtText.text = "Game Is Finished";
 
         }
@@ -189,6 +197,7 @@ public class RLGLBananaManager : MonoBehaviour
         }
 
 
+        
        
     }
 

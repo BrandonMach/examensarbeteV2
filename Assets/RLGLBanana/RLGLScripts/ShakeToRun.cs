@@ -70,10 +70,17 @@ public class ShakeToRun : JoyconPlayerBase
         }
 
         //Tutorial
-
-        PlayerIsShakingJoyCon();
-        _anim.SetBool("Moving", !_stoppedRunning);
-        _stepsText.text = "Steps: " + _stepsTaken;
+        if (!RLGLBananaManager.Instance.GameIsFinished)
+        {
+            PlayerIsShakingJoyCon();
+            _anim.SetBool("Moving", !_stoppedRunning);
+            _stepsText.text = "Steps: " + _stepsTaken;
+        }
+        else
+        {
+            _anim.SetBool("Moving", false);
+        }
+        
 
 
         if (!RLGLBananaManager.Instance.GameIsFinished && RLGLBananaManager.Instance.StartTheGame)

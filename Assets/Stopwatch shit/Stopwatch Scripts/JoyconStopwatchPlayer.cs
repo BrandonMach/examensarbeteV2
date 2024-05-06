@@ -29,7 +29,7 @@ public class JoyconStopwatchPlayer : JoyconPlayerBase
 	}
 
 	// Update is called once per frame
-	void Update()
+	void FixedUpdate()
 	{
 		
 		// make sure the Joycon only gets checked if attached

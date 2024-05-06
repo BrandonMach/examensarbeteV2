@@ -5,6 +5,7 @@ using System.Linq;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class DirectiongameManager : MonoBehaviour
 {
@@ -114,7 +115,16 @@ public class DirectiongameManager : MonoBehaviour
 
 
     // Update is called once per frame
-    void Update()
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Scene scene = SceneManager.GetActiveScene();
+            SceneManager.LoadScene(scene.name);
+        }
+    }
+
+    void FixedUpdate()
     {
         _controls.SetActive(!StartTheGame);
         AllPlayersAreReadyCheck();

@@ -32,7 +32,7 @@ public class DirectionPlayerScript : JoyconPlayerBase
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
 
         if (joycons.Count > 0)

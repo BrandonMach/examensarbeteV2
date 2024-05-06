@@ -54,8 +54,15 @@ public class SelectMinigameButton : MonoBehaviour
     {
         Debug.Log("Minigame has been clicked");
         // SceneManager.LoadScene(_minigameSO.MinigameName);
-
-        SceneManager.LoadScene(_minigameSO.SceneIndex, LoadSceneMode.Single);
+        if(_minigameSO.MinigameName != "Random Game")
+        {
+            SceneManager.LoadScene(_minigameSO.SceneIndex, LoadSceneMode.Single);
+        }
+        else
+        {
+            SceneManager.LoadScene(Random.Range(2,7), LoadSceneMode.Single);
+        }
+       
         
     }
 

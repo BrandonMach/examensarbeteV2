@@ -15,10 +15,16 @@ EditorBuildSettings:
     path: Assets/Scenes/Minigames with mic/Stopwatch Game.unity
     guid: f1bb5c76c23403f4d9d22185ea7dabaf
   - enabled: 1
-    path: Assets/Scenes/Red Light Green Light.unity
-    guid: 47324e06ccd25ab49ac90fb09aa0f76e
+    path: Assets/Scenes/Minigames with mic/Red Light Green Light Mic.unity
+    guid: 82a1605ff6ec7514bbed9a5fc6b58961
   - enabled: 1
-    path: Assets/Scenes/CrossRoad.unity
-    guid: 816112bb907a2c947940e0b14a21aa85
+    path: Assets/Scenes/Minigames with mic/CrossRoad.unity
+    guid: 32c7f50f1ce96604b9aac4b94650ced6
+  - enabled: 1
+    path: Assets/Scenes/Minigames with mic/Defence.unity
+    guid: 1d946a5e3043ef3479d29f4b47beb89d
+  - enabled: 1
+    path: Assets/Scenes/Minigames with mic/DirectionGame.unity
+    guid: b234eea132bf34245877324e883665cc
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: ba86d200c71cf7049b38b219fdf12982, type: 2}

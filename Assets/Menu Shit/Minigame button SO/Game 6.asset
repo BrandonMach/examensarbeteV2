@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89a32505054e79c4aaccc498483c4fe8, type: 3}
   m_Name: Game 6
   m_EditorClassIdentifier: 
-  MinigameName: Minigame 6
+  MinigameName: Random Game
+  SceneIndex: 0
   Texture: {fileID: 8400000, guid: 303f086f970119c4a862b11cfd235fb1, type: 2}
   VideoClip: {fileID: 32900000, guid: dc5acc940c0a0ea419ca3bf19bdb860d, type: 3}
   Thumbnail: {fileID: 21300000, guid: 4b66f21097323d44ab40669b2fb9c53d, type: 3}

@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Linq;
+using UnityEngine.SceneManagement;
 
 public class StopwatchManager : MonoBehaviour
 {
@@ -86,9 +87,17 @@ public class StopwatchManager : MonoBehaviour
 
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Scene scene = SceneManager.GetActiveScene();
+            SceneManager.LoadScene(scene.name);
+        }
+    }
 
-    // Update is called once per frame
-    void Update()
+
+    void FixedUpdate()
     {
         _controls.SetActive(!StartTheGame);
         AllPlayersAreReadyCheck();
