@@ -26,7 +26,7 @@ public class JoyconSelectMenuControls : MonoBehaviour
 	}
 
 	// Update is called once per frame
-	void FixedUpdate()
+	void Update()
 	{
 
 		// make sure the Joycon only gets checked if attached

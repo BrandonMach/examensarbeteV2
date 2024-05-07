@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.InputSystem.XR;
+using System;
 
 public class JoyConCrossyroads : JoyconPlayerBase
 {
@@ -82,10 +83,7 @@ public class JoyConCrossyroads : JoyconPlayerBase
 		// make sure the Joycon only gets checked if attached
 		if (joycons.Count > 0)
 		{
-			
-			//Joycon j = joycons[jc_ind];
 
-            //stick = j.GetStick();
 
             MoveCowboy(j);
 
@@ -103,6 +101,14 @@ public class JoyConCrossyroads : JoyconPlayerBase
         }
 	}
 
+    private void Update()
+    {
+        if (j.GetButtonDown(Joycon.Button.SHOULDER_1) || j.GetButtonDown(Joycon.Button.SHOULDER_2))
+        {
+            j.Recenter();
+            //Debug.LogError("YOYOYOY");
+        }
+    }
     void MoveCowboy(Joycon j)
     {
         gameObject.transform.rotation = orientation;
