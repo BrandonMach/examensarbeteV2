@@ -89,6 +89,14 @@ public class DefenceJoyconPlayer : JoyconPlayerBase
         
     }
 
+    private void Update()
+    {
+        if (j.GetButtonDown(Joycon.Button.SHOULDER_1) || j.GetButtonDown(Joycon.Button.SHOULDER_2))
+        {
+            j.Recenter();
+            //Debug.LogError("YOYOYOY");
+        }
+    }
     private void updateRotation(Joycon j)
     {
         orientation = j.GetVector();
