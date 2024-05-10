@@ -67,8 +67,15 @@ public class DefenceManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            Scene scene = SceneManager.GetActiveScene();
-            SceneManager.LoadScene(scene.name);
+            if (gameOver)
+            {
+                SceneManager.LoadScene(1, LoadSceneMode.Single);
+            }
+            else
+            {
+                Scene scene = SceneManager.GetActiveScene();
+                SceneManager.LoadScene(scene.name);
+            }
         }
         _controls.SetActive(!startGame);
         CheckLoudness();

@@ -12,6 +12,7 @@ public class DefenceJoyconPlayer : JoyconPlayerBase
     // Start is called before the first frame update
     GameObject core;
     [SerializeField] GameObject playerRepresentation;
+    Joycon j;
     new public void Start()
     {
         gyro = new Vector3 (0, 0, 0);
@@ -26,6 +27,7 @@ public class DefenceJoyconPlayer : JoyconPlayerBase
         transform.parent = sphere.transform;
 
 
+        j = joycons[jc_ind];
 
         playerRepresentation.transform.SetParent(sphere.transform);
 

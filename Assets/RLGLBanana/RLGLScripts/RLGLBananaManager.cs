@@ -97,8 +97,15 @@ public class RLGLBananaManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            Scene scene = SceneManager.GetActiveScene();
-            SceneManager.LoadScene(scene.name);
+            if (GameIsFinished)
+            {
+                SceneManager.LoadScene(1, LoadSceneMode.Single);
+            }
+            else
+            {
+                Scene scene = SceneManager.GetActiveScene();
+                SceneManager.LoadScene(scene.name);
+            }
         }
     }
 

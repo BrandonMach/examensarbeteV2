@@ -15,5 +15,5 @@ MonoBehaviour:
   MinigameName: Gold and Goblins
   SceneIndex: 5
   Texture: {fileID: 8400000, guid: 2bca3512fc190014ca197247f3c26337, type: 2}
-  VideoClip: {fileID: 32900000, guid: dc5acc940c0a0ea419ca3bf19bdb860d, type: 3}
+  VideoClip: {fileID: 32900000, guid: 7122cb5ea9f5b364c9c693d6aef01d58, type: 3}
   Thumbnail: {fileID: 21300000, guid: 2b806bd90799aaf478a565f7f861bafd, type: 3}

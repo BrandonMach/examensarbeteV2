@@ -91,9 +91,20 @@ public class StopwatchManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            Scene scene = SceneManager.GetActiveScene();
-            SceneManager.LoadScene(scene.name);
+            if (_gameIsFinished)
+            {
+                SceneManager.LoadScene(1,LoadSceneMode.Single);
+            }
+            else
+            {
+                Scene scene = SceneManager.GetActiveScene();
+                SceneManager.LoadScene(scene.name);
+            }
+
+       
         }
+
+
     }
 
 

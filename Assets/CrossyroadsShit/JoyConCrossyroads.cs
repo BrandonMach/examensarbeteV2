@@ -134,7 +134,7 @@ public class JoyConCrossyroads : JoyconPlayerBase
 	{
         joyConAngles = j.GetVector().eulerAngles;
 
-		if ((joyConAngles.x < 20 && joyConAngles.x > 0) || (joyConAngles.x < 360 && joyConAngles.x > 340)) // 5 & 0, 360 & 355
+		if ((joyConAngles.x < 5 && joyConAngles.x > 0) || (joyConAngles.x < 360 && joyConAngles.x > 355)) // 5 & 0, 360 & 355
 		{
 			verticalValue = 0f;
 		}

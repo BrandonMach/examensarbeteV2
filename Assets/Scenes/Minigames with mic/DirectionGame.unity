@@ -1475,7 +1475,7 @@ MonoBehaviour:
   _audioSource: {fileID: 1558321966}
   _audioDetector: {fileID: 282231434}
   loudnessSensibility: 100
-  threshold: 50
+  threshold: 70
   loudness: 0
   isLoud: 0
   _audioSpriteRenderer: {fileID: 114364661}

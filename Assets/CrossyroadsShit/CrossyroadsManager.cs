@@ -55,10 +55,17 @@ public class CrossyroadsManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space))    
         {
-            Scene scene = SceneManager.GetActiveScene();
-            SceneManager.LoadScene(scene.name);
+            if (GameOver)
+            {
+                SceneManager.LoadScene(1, LoadSceneMode.Single);
+            }
+            else
+            {
+                Scene scene = SceneManager.GetActiveScene();
+                SceneManager.LoadScene(scene.name);
+            }
         }
     }
 

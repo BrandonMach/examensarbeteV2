@@ -15,5 +15,5 @@ MonoBehaviour:
   MinigameName: Directions
   SceneIndex: 6
   Texture: {fileID: 8400000, guid: b3ca0dfda39763e43a607a8977fade1e, type: 2}
-  VideoClip: {fileID: 32900000, guid: 8ebf6ee21b8819f43bafa2f4f824b8c9, type: 3}
+  VideoClip: {fileID: 32900000, guid: c69e2682bf11a874a920c42c39e0e9ed, type: 3}
   Thumbnail: {fileID: 21300000, guid: e710ffcbb6be42542bb34d165b44e616, type: 3}

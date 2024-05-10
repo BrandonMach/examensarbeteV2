@@ -33,7 +33,7 @@ public class JoyconMainMenucontrols : MonoBehaviour
 	}
 
 	// Update is called once per frame
-	void FixedUpdate()
+	void Update()
 	{
         
 
